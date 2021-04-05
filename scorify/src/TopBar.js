@@ -1,5 +1,5 @@
 import TopBarCSS from './TopBar.css';
-import {ReactComponent as Logo} from './scorifyLogo.svg';
+import {ReactComponent as Logo} from './assets/scorifyLogo.svg';
 import './index.css';
 
 function TopBar()
