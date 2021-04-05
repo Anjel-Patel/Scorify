@@ -1,0 +1,67 @@
+.bar-rect {
+  padding: 0px 64px;
+  height: 96px;
+  background-color: var(--neutral-800);
+  color: var(--neutral-100);
+  display: flex;
+}
+
+.empty-div {
+  flex: 1;
+}
+
+.side {
+  display: flex;
+  align-items: center;
+}
+
+.link {
+  font-weight: 600;
+  margin: 0px 8px;
+  padding: 8px;
+}
+
+.dashboard {
+  font-weight: bolder;
+}
+
+.profile {
+  width: 48px;
+  height: 48px;
+  margin-left: 16px;
+  border-radius: 24px;
+  border: 2px solid var(--neutral-100);
+}
+
+.link:hover,
+.profile:hover,
+.logo:hover {
+  cursor: pointer;
+  color: var(--neutral-300);
+}
+
+.scorify {
+  width: 0%;
+  color: var(--neutral-200);
+  overflow: hidden;
+  white-space: nowrap;
+  margin-left: 8px;
+  display: inline-block;
+  transition: 300ms;
+  overflow: hidden;
+}
+
+.logo:hover + .scorify {
+  -webkit-transition: width 300ms ease-in-out;
+  -moz-transition: width 300ms ease-in-out;
+  -o-transition: width 300ms ease-in-out;
+  transition: 300ms ease-in-out;
+  width: 70%;
+  margin-right: 32px;
+}
+
+.logo-with-text {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
