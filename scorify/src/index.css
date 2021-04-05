@@ -1,6 +1,10 @@
 /* IMPORTANT FILE. DO NOT REMOVE. */
 
-@import url("https://fonts.googleapis.com/css2?family=Inter");
+@font-face {
+  font-family: Inter;
+  src: local("Inter"),
+       url(./assets/Inter-VariableFont_slnt\,wght.ttf) format("truetype");
+}
 
 *{
   margin: 0px;
@@ -39,83 +43,77 @@
 .h1 {
   font-family: Inter;
   font-style: normal;
-  font-weight: 800;
+  font-variation-settings: 'wght' 800;
   font-size: 48px;
   line-height: 56px;
   /* identical to box height, or 117% */
-
-  letter-spacing: -0.04em;
 }
 
 .h2 {
   font-family: Inter;
   font-style: normal;
-  font-weight: 800;
+  font-variation-settings: 'wght' 800;
   font-size: 34px;
   line-height: 40px;
   /* identical to box height, or 118% */
-
-  letter-spacing: -0.04em;
 }
 
 .h3 {
   font-family: Inter;
   font-style: normal;
-  font-weight: bold;
+  font-variation-settings: 'wght' 500;
   font-size: 24px;
   line-height: 32px;
   /* identical to box height, or 133% */
-
-  letter-spacing: -0.02em;
+  letter-spacing: 0.02em;
 }
 
 .h4 {
   font-family: Inter;
   font-style: normal;
-  font-weight: bold;
+  font-variation-settings: 'wght' 500;
   font-size: 20px;
   line-height: 24px;
   /* identical to box height, or 120% */
-
-  letter-spacing: -0.02em;
+  letter-spacing: 0.02em;
 }
 
 .h5 {
   font-family: Inter;
   font-style: normal;
-  font-weight: bold;
+  font-variation-settings: 'wght' 500;
   font-size: 16px;
   line-height: 20px;
   /* identical to box height, or 125% */
-
-  letter-spacing: -0.02em;
+  letter-spacing: 0.02em;
 }
 
 .h6 {
   font-family: Inter;
   font-style: normal;
-  font-weight: bold;
+  font-variation-settings: 'wght' 500;
   font-size: 14px;
   line-height: 20px;
   /* identical to box height, or 143% */
-
-  letter-spacing: -0.02em;
+  letter-spacing: 0.02em;
 }
 
 .p1 {
   font-family: Inter;
   font-style: normal;
-  font-weight: normal;
+  font-variation-settings: 'wght' 400;
   font-size: 16px;
   line-height: 24px;
   /* identical to box height, or 150% */
+  letter-spacing: 0.02em;
 }
 
 .p2 {
   font-family: Inter;
   font-style: normal;
-  font-weight: normal;
+  font-variation-settings: 'wght' 400;
   font-size: 14px;
   line-height: 20px;
   /* identical to box height, or 143% */
+  letter-spacing: 0.02em;
 }

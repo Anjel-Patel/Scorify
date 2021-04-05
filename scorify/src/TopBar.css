@@ -2,7 +2,7 @@
   padding: 0px 64px;
   height: 96px;
   background-color: var(--neutral-800);
-  color: var(--neutral-100);
+  color: var(--neutral-400);
   display: flex;
 }
 
@@ -15,14 +15,32 @@
   align-items: center;
 }
 
-.link {
-  font-weight: 600;
-  margin: 0px 8px;
-  padding: 8px;
+.scorify {
+  width: 0%;
+  color: var(--neutral-200);
+  padding-left: 8px;
+  transition: 250ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  overflow: hidden;
 }
 
-.dashboard {
-  font-weight: bolder;
+.logo-with-text {
+  width: 144px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.scorify:hover,
+.logo:hover + .scorify {
+  width: 70%;
+  margin-right: 32px;
+  cursor: pointer;
+}
+
+.link {
+  margin: 0px 8px;
+  padding: 8px;
+  transition: 250ms cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
 .profile {
@@ -30,38 +48,22 @@
   height: 48px;
   margin-left: 16px;
   border-radius: 24px;
-  border: 2px solid var(--neutral-100);
+  border: 2px solid var(--neutral-400);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.profile-photo {
+  /* Change this later to 48 by 48 */
+  width: 32px;
+  height: 32px;
 }
 
 .link:hover,
 .profile:hover,
 .logo:hover {
   cursor: pointer;
-  color: var(--neutral-300);
-}
-
-.scorify {
-  width: 0%;
   color: var(--neutral-200);
-  overflow: hidden;
-  white-space: nowrap;
-  margin-left: 8px;
-  display: inline-block;
-  transition: 300ms;
-  overflow: hidden;
-}
-
-.logo:hover + .scorify {
-  -webkit-transition: width 300ms ease-in-out;
-  -moz-transition: width 300ms ease-in-out;
-  -o-transition: width 300ms ease-in-out;
-  transition: 300ms ease-in-out;
-  width: 70%;
-  margin-right: 32px;
-}
-
-.logo-with-text {
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
 }
