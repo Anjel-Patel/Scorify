@@ -6,7 +6,7 @@ import {ReactComponent as ProfileSVG} from "../assets/profile.svg";
 import {ReactComponent as AboutSVG} from "../assets/about.svg";
 import {ReactComponent as ContactSVG} from "../assets/contact.svg";
 
-function TopBar()
+function Sidebar()
 {
     return(
         <div className="bar-rect">
@@ -44,4 +44,4 @@ function TopBar()
     );
 }
 
-export default TopBar;
+export default Sidebar;

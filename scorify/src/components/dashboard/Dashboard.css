@@ -1,0 +1,10 @@
+.page-rect {
+    background: var(--neutral-100);
+    width: 1600px;
+}
+
+.hello-text{
+    margin-left: 48px;
+    margin-top: 64px;
+    color: var(--neutral-600);
+}
