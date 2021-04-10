@@ -19,3 +19,7 @@
     grid-template-columns: 560px 560px 320px; 
     gap: 24px;
 }
+
+.empty-div {
+    z-index: 0;
+}

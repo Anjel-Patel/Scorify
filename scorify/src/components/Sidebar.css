@@ -48,7 +48,6 @@
   border-radius: 8px;
   display: flex;
   align-items: center;
-  transition: 250ms cubic-bezier(0.215,0.61,0.355,1);
   cursor: pointer;
 }
 
@@ -69,4 +68,5 @@
 
 .link-text {
   user-select: none;
+  transition: var(--speed-fast) var(--tansition-function);
 }

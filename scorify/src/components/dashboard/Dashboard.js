@@ -13,6 +13,7 @@ function Dashboard(){
                 <ScoreCard/>
                 <Attendance/>
                 <Teammates/>
+                <div className="empty-div"></div>
             </div>
         </div>
     )
