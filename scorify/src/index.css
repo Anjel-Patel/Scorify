@@ -3,10 +3,10 @@
 @font-face {
   font-family: Inter;
   src: local("Inter"),
-       url(./assets/Inter-VariableFont_slnt\,wght.ttf) format("truetype");
+    url(./assets/Inter-VariableFont_slnt\,wght.ttf) format("truetype");
 }
 
-*{
+* {
   margin: 0px;
   padding: 0px;
   font-family: Inter;
@@ -43,7 +43,7 @@
 .h1 {
   font-family: Inter;
   font-style: normal;
-  font-variation-settings: 'wght' 800;
+  font-variation-settings: "wght" 800;
   font-size: 48px;
   line-height: 56px;
   /* identical to box height, or 117% */
@@ -52,7 +52,7 @@
 .h2 {
   font-family: Inter;
   font-style: normal;
-  font-variation-settings: 'wght' 800;
+  font-variation-settings: "wght" 800;
   font-size: 34px;
   line-height: 40px;
   /* identical to box height, or 118% */
@@ -61,7 +61,7 @@
 .h3 {
   font-family: Inter;
   font-style: normal;
-  font-variation-settings: 'wght' 500;
+  font-variation-settings: "wght" 500;
   font-size: 24px;
   line-height: 32px;
   /* identical to box height, or 133% */
@@ -71,7 +71,7 @@
 .h4 {
   font-family: Inter;
   font-style: normal;
-  font-variation-settings: 'wght' 500;
+  font-variation-settings: "wght" 500;
   font-size: 20px;
   line-height: 24px;
   /* identical to box height, or 120% */
@@ -81,7 +81,7 @@
 .h5 {
   font-family: Inter;
   font-style: normal;
-  font-variation-settings: 'wght' 500;
+  font-variation-settings: "wght" 500;
   font-size: 16px;
   line-height: 20px;
   /* identical to box height, or 125% */
@@ -91,7 +91,7 @@
 .h6 {
   font-family: Inter;
   font-style: normal;
-  font-variation-settings: 'wght' 500;
+  font-variation-settings: "wght" 500;
   font-size: 14px;
   line-height: 20px;
   /* identical to box height, or 143% */
@@ -101,7 +101,7 @@
 .p1 {
   font-family: Inter;
   font-style: normal;
-  font-variation-settings: 'wght' 400;
+  font-variation-settings: "wght" 400;
   font-size: 16px;
   line-height: 24px;
   /* identical to box height, or 150% */
@@ -111,9 +111,27 @@
 .p2 {
   font-family: Inter;
   font-style: normal;
-  font-variation-settings: 'wght' 400;
+  font-variation-settings: "wght" 400;
   font-size: 14px;
   line-height: 20px;
   /* identical to box height, or 143% */
   letter-spacing: 0.02em;
+}
+
+.shadow-small {
+  box-shadow: 0px 0px 1px rgba(15, 23, 42, 0.06),
+    0px 4px 6px -1px rgba(15, 23, 42, 0.1),
+    0px 2px 4px -1px rgba(15, 23, 42, 0.06);
+}
+
+.shadow-default {
+  box-shadow: 0px 0px 1px rgba(15, 23, 42, 0.06),
+    0px 10px 15px -3px rgba(15, 23, 42, 0.1),
+    0px 4px 6px -2px rgba(15, 23, 42, 0.05);
+}
+
+.shadow-large {
+  box-shadow: 0px 0px 1px rgba(15, 23, 42, 0.06),
+    0px 20px 25px -5px rgba(15, 23, 42, 0.1),
+    0px 10px 10px -5px rgba(15, 23, 42, 0.04);
 }

@@ -29,18 +29,20 @@
   color: var(--neutral-300);
   margin-left: 8px;
   cursor:default;
+  user-select: none;
 }
 
 .link-box{
   display: flex;
   flex-direction: column;
+  padding-top: 12px;;
 }
 
 .link-container {
   margin-left: 16px;
-  margin-top: 32px;
+  margin-top: 28px;
   width: 288px;
-  height: 40px;
+  height: 48px;
   background: var(--neutral-800);
   color: var(--neutral-300);
   border-radius: 8px;
@@ -63,4 +65,8 @@
 
 .link-container:hover{
   color: var(--neutral-100);
+}
+
+.link-text {
+  user-select: none;
 }

@@ -6,6 +6,7 @@ function App() {
   return (
     <div className="App">
       <Sidebar/>
+      {/* ROUTER and SWITCH HERE */}
       <Dashboard/>
     </div>
   );
