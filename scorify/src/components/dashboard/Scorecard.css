@@ -7,10 +7,15 @@
     flex-direction: column;
     align-items: center;
     color: var(--neutral-800);
+    box-shadow: var(--shadow-small);
 }
 
 .your-score-text {
     margin-top: 48px;
+}
+
+.score-text{
+    margin-top: 16px;
 }
 
 .empty-div {

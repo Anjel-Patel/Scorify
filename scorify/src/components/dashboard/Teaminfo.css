@@ -1,0 +1,11 @@
+.teaminfo-rect {
+    width: 560px;
+    height: 320px;
+    border-radius: 12px;
+    background: var(--neutral-50);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--neutral-800);
+    box-shadow: var(--shadow-small);
+}

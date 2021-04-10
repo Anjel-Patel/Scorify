@@ -3,7 +3,7 @@ import ScorecardCSS from "./Scorecard.css";
 function Scorecard()
 {
     return(
-        <div className="scorecard-rect shadow-default">
+        <div className="scorecard-rect">
             <h3 className="h3 your-score-text">Your score this week is</h3>
             <h1 className="h1 score-text">{"200"}</h1>
             <div className="empty-div"></div>
@@ -19,5 +19,4 @@ function Scorecard()
         </div>
     );
 }
-
 export default Scorecard;
