@@ -1,4 +1,4 @@
-import DashboardCSS from './Dashboard.css';
+import './Dashboard.css';
 import Teaminfo from './Teaminfo';
 import ScoreCard from './Scorecard';
 import Attendance from './Attendance';

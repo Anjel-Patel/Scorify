@@ -1,9 +1,9 @@
-import AttendanceCSS from "./Attendance.css";
+import  "./Attendance.css";
 import Chart from "react-google-charts";
 
+//Change these variables
 let present = 10;
 let absent = 2;
-
 
 function Attendance()
 {
@@ -22,7 +22,6 @@ function Attendance()
                         ['Task', 'Hours per Day'],
                         ['Absent', absent],
                         ['Present', present],        //Number of days directly
-                        
                     ]}
                     options={{
                         // Just add this option
@@ -45,8 +44,7 @@ function Attendance()
                     data={[
                         ['Task', 'Hours per Day'],
                         ['Absent', absent],
-                        ['Present', present],        //Number of days directly
-                        
+                        ['Present', present],        //Number of days directly 
                     ]}
                     options={{
                         // Just add this option

@@ -5,7 +5,41 @@
     background: var(--neutral-50);
     display: flex;
     flex-direction: column;
-    align-items: center;
     color: var(--neutral-800);
     box-shadow: var(--shadow-small);
+}
+
+.title {
+    margin-top: 24px;
+    margin-left: 32px;
+    color: var(--neutral-600);
+}
+
+.title-seperator {
+    width: 512px;
+    height: 1px;
+    background: var(--neutral-300);
+    margin-top: 8px;
+    margin-left: 24px;
+    margin-right: 24px;
+}
+
+.info-grid {
+    margin-top: 24px;
+    margin-left: 32px;
+    display: grid;
+    grid-template-columns: 127px 321px;
+    grid-template-rows: 1fr 1fr 1fr;
+    column-gap: 48px;
+    row-gap: 16px;
+}
+
+.details-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.description-container {
+    grid-row: span 3;
 }

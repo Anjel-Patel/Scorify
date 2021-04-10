@@ -1,4 +1,4 @@
-import ScorecardCSS from "./Scorecard.css";
+import "./Scorecard.css";
 
 function Scorecard()
 {
