@@ -9,3 +9,40 @@
     box-shadow: var(--shadow-small);
 }
 
+.header {
+    min-height: 56px;
+    width: 1096px;
+    background: var(--neutral-200);
+    box-shadow: var(--shadow-small);
+    position: relative;
+    border-radius: 12px;
+    margin-top: 8px;
+    margin-left: 24px;
+}
+
+.head {
+    position: absolute;
+    margin-top: 16px;
+}
+
+.chevron {
+    margin-top: 25px;
+    color: var(--neutral-500);
+}
+
+.inverted {
+    transform: rotateZ(180deg);
+}
+
+.no {
+    display: none;
+}
+
+.rows {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.rows::-webkit-scrollbar {
+    display: none;
+}

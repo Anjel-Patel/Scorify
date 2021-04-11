@@ -17,7 +17,7 @@ function Attendance()
                     width={"150px"}
                     height={"150px"}        
                     chartType="PieChart"
-                    loader={<div>Loading Chart</div>}
+                    loader={<div></div>}
                     data={[
                         ['Task', 'Hours per Day'],
                         ['Absent', absent],
@@ -40,7 +40,7 @@ function Attendance()
                     width={"150px"}
                     height={"150px"}        
                     chartType="PieChart"
-                    loader={<div>Loading Chart</div>}
+                    loader={<div></div>}
                     data={[
                         ['Task', 'Hours per Day'],
                         ['Absent', absent],

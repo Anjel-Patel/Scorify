@@ -1,0 +1,18 @@
+.row-rect {
+    height: 56px;
+    width: 1096px;
+    background: var(--neutral-100);
+    position: relative;
+    border-radius: 12px;
+    margin: 8px 24px;
+}
+
+.details {
+    position: absolute;
+    margin-top: 18px;
+}
+
+.details-chart {
+    position: absolute;
+    margin-top: 14px;
+}
