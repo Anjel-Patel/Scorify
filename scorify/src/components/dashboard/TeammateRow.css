@@ -9,7 +9,7 @@
 .details {
     position: absolute;
     margin-top: 18px;
-    color: var(--neutral-800);
+    color: var(--neutral-600);
 }
 
 .details-chart {

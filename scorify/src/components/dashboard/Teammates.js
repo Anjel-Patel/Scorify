@@ -26,7 +26,7 @@ function Teammates()
             <h5 className="h5 title">Teammates</h5>
             <div className="title-seperator"></div>
             <div className="header" style={{width:'1096px'}}>
-                <h5 className="p1 head" style={{left:'24px'}}>Name</h5>
+                <h5 className="h5 head" style={{left:'24px'}}>Name</h5>
                 {/* Add a "no" at the end of chevron classname to remove */}
                 <Chevron className="chevron head no" style={{left:'75px'}}/>
                 <h5 className="h5 head" style={{left:'209px'}}>Ph No.</h5>
