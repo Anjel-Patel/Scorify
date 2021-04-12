@@ -1,4 +1,5 @@
 import "./Scorecard.css";
+import History from "./History";
 import {ReactComponent as BackArrow} from "../../assets/back.svg";
 
 function Scorecard({hist, setHist})
@@ -24,7 +25,7 @@ function Scorecard({hist, setHist})
             <div className="back-btn" style={hist===0?{opacity:0}:{}} onClick={() => {setHist(0)}}>
                 <BackArrow/>
             </div>
-            
+            <History exist={hist}/>
         </div>
     );
 }

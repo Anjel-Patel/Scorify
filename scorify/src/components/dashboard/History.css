@@ -1,0 +1,37 @@
+.history-rect {
+    position: absolute;
+    width: 584px;
+    height: 320px;
+    background: var(--neutral-50);
+    margin-left: 12px;
+    display: flex;
+    flex-direction: column;
+    z-index: 0;
+    left: -264px;
+    color: var(--neutral-800);
+    transition: var(--speed-slow) var(--timing-function);
+}
+
+.header {
+    height: 48px;
+    min-height: 48px;
+    margin-left: 12px;
+    position: relative;
+    border-radius: 12px;
+    margin-top: 8px;
+}
+
+.head {
+    position: absolute;
+    margin-top: 12px;
+    color: var(--neutral-600);
+}
+
+.history-rows {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.history-rows::-webkit-scrollbar {
+    display: none;
+}

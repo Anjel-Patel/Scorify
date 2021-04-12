@@ -18,14 +18,14 @@ function Teammates()
         {name : 'Kelvin Gupta', phno : '9897277831', email : 'keving1986@gmail.com', role : 'Member', mate_score: 165, self_score: 200},
         {name : 'Jonas Sharma', phno : '6256265423', email : 'jsharma69@gmail.com', role : 'Member', mate_score: 250, self_score: 200},
         {name : 'Ligma Sinha', phno : '9855677831', email : 'ligmab420@gmail.com', role : 'Member', mate_score: 130, self_score: 200},
-        {name : 'Raju Sebastain', phno : '9898260328', email : 'rseb666@gmail.com', role : 'Member', mate_score: 400, self_score: 200}
+        {name : 'Raju Sebastain', phno : '9898260328', email : 'rseb666@gmail.com', role : 'Member', mate_score: 400, self_score: 200},
     ];
 
     return(
         <div className="teammates-rect">
             <h5 className="h5 title">Teammates</h5>
             <div className="title-seperator"></div>
-            <div className="header">
+            <div className="header" style={{width:'1096px'}}>
                 <h5 className="p1 head" style={{left:'24px'}}>Name</h5>
                 {/* Add a "no" at the end of chevron classname to remove */}
                 <Chevron className="chevron head no" style={{left:'75px'}}/>

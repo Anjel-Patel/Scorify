@@ -11,7 +11,7 @@ function TeammateRow({name, phno, email, role, mate_score, self_score}) {
         ((mate_score-self_score)*100/self_score):
         ((self_score-mate_score)*100/self_score)).toFixed(1);
     return(
-        <div className="row-rect">
+        <div className="row-rect" style={{width:'1096px'}}>
             <p className="p1 details" style={{left : '24px'}}>{name}</p>
             <p className="p1 details" style={{left : '209px'}}>{phno}</p>
             <p className="p1 details" style={{left : '367px'}}>{email}</p>
