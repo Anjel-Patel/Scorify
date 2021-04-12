@@ -1,3 +1,7 @@
+.attendance-wrapper {
+    transition: var(--speed-slow) var(--timing-function);
+}
+
 .attendance-rect {
     width: 320px;
     height: 320px;
@@ -7,6 +11,11 @@
     flex-direction: column;
     color: var(--neutral-800);
     box-shadow: var(--shadow-small);
+    transition: var(--speed-slow) var(--timing-function);
+}
+
+.low {
+    transform: translateY(344px);
 }
 
 .title {

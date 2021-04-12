@@ -54,7 +54,7 @@
   --speed-fast: 100ms;
   --speed-slow: 250ms;
   --delay: 50ms;
-  --tansition-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
 .h1 {

@@ -1,4 +1,4 @@
-import TeammatesCSS from "./Teammates.css";
+import  "./Teammates.css";
 import TeamRow from "./TeammateRow";
 import {ReactComponent as Chevron} from "../../assets/chevron.svg";
 
@@ -26,14 +26,14 @@ function Teammates()
             <h5 className="h5 title">Teammates</h5>
             <div className="title-seperator"></div>
             <div className="header">
-                <p className="p1 head" style={{left:'24px'}}>Name</p>
+                <h5 className="p1 head" style={{left:'24px'}}>Name</h5>
                 {/* Add a "no" at the end of chevron classname to remove */}
                 <Chevron className="chevron head no" style={{left:'75px'}}/>
-                <p className="p1 head" style={{left:'209px'}}>Ph No.</p>
-                <p className="p1 head" style={{left:'367px'}}>Email</p>
-                <p className="p1 head" style={{left:'615px'}}>Role</p>
-                <p className="p1 head" style={{left:'771px'}}>Score Analysis</p>
-                <p className="p1 head" style={{left:'1010px'}}>Score</p>
+                <h5 className="h5 head" style={{left:'209px'}}>Ph No.</h5>
+                <h5 className="h5 head" style={{left:'367px'}}>Email</h5>
+                <h5 className="h5 head" style={{left:'615px'}}>Role</h5>
+                <h5 className="h5 head" style={{left:'771px'}}>Score Analysis</h5>
+                <h5 className="h5 head" style={{left:'1010px'}}>Score</h5>
                 {/* Add an inverted at the end to show reverse sorting order */}
                 <Chevron className="chevron head inverted" style={{left:'1060px'}}/> 
             </div>

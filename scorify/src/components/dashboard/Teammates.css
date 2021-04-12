@@ -12,8 +12,8 @@
 .header {
     min-height: 56px;
     width: 1096px;
-    background: var(--neutral-200);
-    box-shadow: var(--shadow-small);
+    /* background: var(--neutral-200);
+    box-shadow: var(--shadow-small); */
     position: relative;
     border-radius: 12px;
     margin-top: 8px;
@@ -23,10 +23,11 @@
 .head {
     position: absolute;
     margin-top: 16px;
+    color: var(--neutral-600);
 }
 
 .chevron {
-    margin-top: 25px;
+    margin-top: 23px;
     color: var(--neutral-500);
 }
 

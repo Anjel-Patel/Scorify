@@ -12,11 +12,11 @@ function TeammateRow({name, phno, email, role, mate_score, self_score}) {
         ((self_score-mate_score)*100/self_score)).toFixed(1);
     return(
         <div className="row-rect">
-            <h5 className="h5 details" style={{left : '24px'}}>{name}</h5>
-            <h5 className="h5 details" style={{left : '209px'}}>{phno}</h5>
-            <h5 className="h5 details" style={{left : '367px'}}>{email}</h5>
-            <h5 className="h5 details" style={{left : '615px'}}>{role}</h5>
-            <h5 className="h5 details" style={{left : '1010px'}}>{mate_score}</h5> {/*Do not move this row*/}
+            <p className="p1 details" style={{left : '24px'}}>{name}</p>
+            <p className="p1 details" style={{left : '209px'}}>{phno}</p>
+            <p className="p1 details" style={{left : '367px'}}>{email}</p>
+            <p className="p1 details" style={{left : '615px'}}>{role}</p>
+            <p className="p1 details" style={{left : '1010px'}}>{mate_score}</p> {/*Do not move this row*/}
 
             <h5 className="h5 details" style={{right : '267px', color: bar_color}}>{sign+ratio+"%"}</h5>
 
@@ -40,7 +40,8 @@ function TeammateRow({name, phno, email, role, mate_score, self_score}) {
                 colors: ["#64748B", bar_color],
                 hAxis: {
                 minValue: 0,
-                gridlines:{color: 'transparent'}
+                gridlines:{color: 'transparent'},
+                baselineColor: {color: 'var(--neutral-500'},
                 },
                 vAxis: {
                 },

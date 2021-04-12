@@ -1,83 +1,126 @@
-.scorecard-rect {
-    width: 560px;
-    height: 320px;
-    border-radius: 12px;
-    background: var(--neutral-50);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: var(--neutral-800);
-    box-shadow: var(--shadow-small);
+.wrapper-rect {
+  width: 560px;
+  height: 320px;
+  border-radius: 12px;
+  background: var(--neutral-50);
+  display: flex;
+  align-items: center;
+  color: var(--neutral-800);
+  box-shadow: var(--shadow-small);
+  transition: var(--speed-slow) var(--timing-function);
 }
+.scorecard-rect {
+  width: 560px;
+  height: 320px;
+  border-radius: 12px;
+  background: var(--neutral-50);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--neutral-800);
+  transition: var(--speed-slow) var(--timing-function);
+}
+
+.expand {
+  width: 904px;
+}
+
+.contract {
+    width: 320px;
+}
+
+.seperate {
+    border-radius:12px 0px 0px 12px;
+    border-right: 1px dashed var(--neutral-300);
+}
+
 
 .your-score-text {
-    margin-top: 48px;
+  margin-top: 48px;
 }
 
-.score-text{
-    margin-top: 16px;
+.score-text {
+  margin-top: 16px;
 }
 
 .empty-div {
-    flex: 1;
+  flex: 1;
 }
 
 .history-btn {
-    width: 256px;
-    height: 50px;
-    border-radius: 25px;
-    border: 1px solid var(--neutral-700);
-    color: var(--neutral-700);
-    display: flex;
-    align-items: center;
-    margin-bottom: 36px;
-    transition: color var(--speed-slow) var(--tansition-function);
+  width: 256px;
+  height: 50px;
+  border-radius: 25px;
+  border: 1px solid var(--neutral-700);
+  color: var(--neutral-700);
+  display: flex;
+  align-items: center;
+  margin-bottom: 36px;
+  transition: var(--speed-slow) var(--timing-function);
 }
 
 .score-history-text {
-    margin-left: 56px;
-    margin-right: 12px;
-    user-select: none;
+  margin-left: 56px;
+  margin-right: 12px;
+  user-select: none;
 }
 
 .arrow {
-    overflow: hidden;
-    transition: transform var(--speed-slow) var(--tansition-function);
-    transition-delay: 100ms;
+  overflow: hidden;
+  transition: transform var(--speed-slow) var(--timing-function);
+  transition-delay: 100ms;
 }
 
 #arrowtail {
-    transform: rotateY(90deg);
-    transition: transform var(--speed-slow) var(--tansition-function);
-    transition-delay: 100ms;
-    transform-origin: right;
-    transform-box: fill-box;
+  transform: rotateY(90deg);
+  transition: transform var(--speed-slow) var(--timing-function);
+  transition-delay: 100ms;
+  transform-origin: right;
+  transform-box: fill-box;
 }
 
 .history-btn:hover {
-    cursor: pointer;
-    color: var(--neutral-600);
-    border-color: var(--neutral-600);
+  cursor: pointer;
+  color: var(--neutral-600);
+  border-color: var(--neutral-600);
 }
 
 .history-btn:hover #arrowtail {
-    cursor: pointer;
-    animation: taillong var(--speed-slow) var(--tansition-function) var(--delay);
-    transform: rotateY(0deg);
-    transform-box: fill-box;
-    transform-origin: right;
+  cursor: pointer;
+  animation: taillong var(--speed-slow) var(--timing-function) var(--delay);
+  transform: rotateY(0deg);
+  transform-box: fill-box;
+  transform-origin: right;
 }
 
 .history-btn:hover .arrow {
-    transform: translateX(8px);
-    transition-delay: var(--delay);
+  transform: translateX(8px);
+  transition-delay: var(--delay);
 }
 
-@keyframes taillong{
-    from {
-        transform: rotateY(90deg);
-    }
-    to {
-        transform: rotateY(0deg);
-    }
+@keyframes taillong {
+  from {
+    transform: rotateY(90deg);
+  }
+  to {
+    transform: rotateY(0deg);
+  }
+}
+
+.flipped {
+  transform: rotateZ(180deg);
+}
+
+.back-btn {
+  background: var(--neutral-50);
+  color: var(--neutral-600);
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--neutral-600);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-left: 12px;
 }
