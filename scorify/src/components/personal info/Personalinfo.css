@@ -1,0 +1,98 @@
+.personal-page-rect {
+  background: var(--neutral-100);
+  width: 1600px;
+  height: 100vh;
+  position: absolute;
+  left: 320px;
+  overflow: hidden;
+  color: var(--neutral-800);
+}
+
+.grid-right {
+  color: var(--neutral-300);
+  position: absolute;
+  width: 364px;
+  height: 496px;
+  left: 1220px;
+  top: 16px;
+}
+
+.grid-left {
+  color: var(--neutral-300);
+  position: absolute;
+  width: 320px;
+  height: 672px;
+  left: 23px;
+  top: 392px;
+}
+
+.profile-card {
+  width: 1158px;
+  height: 564px;
+  box-shadow: var(--shadow-large);
+  background: var(--neutral-50);
+  border-radius: 12px;
+  position: relative;
+  display: flex;
+  left: 221px;
+  top: 240px;
+}
+
+.left-side {
+    padding-left: 48px;
+    padding-top: 48px;
+    padding-right: 32px;
+    border-right: 1px dashed var(--neutral-300);
+}
+
+.name{
+    margin-bottom: 42px;
+    display: flex;
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, 56px);
+    row-gap: 28px;
+    column-gap: 108px;
+    width: 559px;
+}
+
+.detail-title {
+    color: var(--neutral-400);
+}
+
+.address-text{
+    width: 559px;
+}
+.address {
+    margin-top: 28px;
+}
+
+.right-side {
+    width: 519px;
+}
+
+.stats-top-wrapper {
+    display: flex;
+    flex-direction: row;
+    margin-top: 32px;
+    margin-left: 32px;
+    padding-bottom: 32px;
+    border-bottom: 1px dashed var(--neutral-300);
+}
+
+.department-div {
+    margin-left: 96px;
+}
+
+.stats-bottom-wrapper {
+    margin-top: 32px;
+    margin-left: 32px;
+    display: grid;
+    grid-template-columns: 176px 1fr;
+    grid-template-rows: repeat(2, 56px);
+    row-gap: 28px;
+    column-gap: 96px;
+}
