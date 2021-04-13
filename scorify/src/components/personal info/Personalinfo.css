@@ -45,6 +45,8 @@
   padding-right: 32px;
   border-right: 1px dashed var(--neutral-300);
   outline: none;
+  border-radius: 12px 0 0 12px;
+  transition: all var(--speed-fast) var(--timing-function) var(--delay);
 }
 
 .name {
@@ -71,6 +73,13 @@
 }
 .address {
   margin-top: 28px;
+}
+
+.cross {
+    color: var(--red-500);
+    margin-left: 48px;
+    cursor: pointer;
+    transition: all var(--speed-fast) var(--timing-function) var(--delay);
 }
 
 .right-side {

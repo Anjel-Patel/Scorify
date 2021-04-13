@@ -4,11 +4,18 @@ import {ReactComponent as Cross} from "../../assets/cross.svg";
 import {useState} from 'react';
 import "./Personalinfo.css";
 
+const crossStyle = {
+    color: 'var(--red-500)',
+    marginLeft: '48px',
+    cursor: 'pointer',
+    transition: 'all var(--speed-fast) var(--timing-function) var(--delay)'
+}
+
 function PhoneNumberGenerator(phoneNumbers, editMode){
     return phoneNumbers.map((phno, i) => (
         <div style={{display:'flex', alignItems:'center'}}>
             <h3 className="h3">{phno}</h3>
-            <Cross style={(i>=1 && editMode===1)?{color: 'var(--red-500)', marginLeft:'48px', cursor:'pointer'}:{opacity: '0', cursor: 'default'}}></Cross>
+            <Cross style={(i>=1 && editMode===1)?crossStyle:{opacity: '0', cursor: 'default'}}></Cross>
         </div>
     ));
 }
@@ -34,6 +41,8 @@ function Personalinfo(){
         attendance_perc: '92%'
     }
 
+    const editableStyle = {color: 'var(--neutral-900)', boxShadow:'var(--shadow-small)', transform: 'translateY(-1px)'};
+
     return(
         <div className="personal-page-rect" style={editMode===0?{cursor:'default'}:{}}>
             <GridRight className="grid-right"/>
@@ -42,7 +51,7 @@ function Personalinfo(){
 
                 {/* LEFT SIDE */}
 
-                <div contentEditable={editMode===1?true:false} style={editMode===1?{color: 'var(--neutral-900)'}:{}} className="left-side">
+                <div className="left-side" contentEditable={editMode===1?true:false} style={editMode===1?editableStyle:{}}>
                     <h1 className="h1 name">{details.self_name}</h1>
                     <div className="detail-grid"> 
                         <div className="id detail-div">
