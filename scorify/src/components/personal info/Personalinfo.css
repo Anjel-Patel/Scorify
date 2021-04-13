@@ -1,7 +1,7 @@
 .personal-page-rect {
   background: var(--neutral-100);
   width: 1600px;
-  height: 100vh;
+  height: 1080px;
   position: absolute;
   left: 320px;
   overflow: hidden;
@@ -35,7 +35,7 @@
   position: relative;
   display: flex;
   left: 221px;
-  top: 240px;
+  top: 258px;
 }
 
 .left-side {

@@ -1,3 +1,8 @@
 .App {
     display: flex;
+    overflow: hidden;
+}
+
+*::-webkit-scrollbar {
+    display: none;
 }
