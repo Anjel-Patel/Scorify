@@ -8,7 +8,7 @@
   position: relative;
   color: var(--neutral-800);
   box-shadow: var(--shadow-small);
-  transition: var(--speed-slow) var(--timing-function);
+  transition: var(--speed-slow) var(--timing-function) var(--speed-slow);
   overflow: hidden;
 }
 .scorecard-rect {
@@ -24,7 +24,7 @@
   right: 0px;
   z-index: 2;
   color: var(--neutral-800);
-  transition: var(--speed-slow) var(--timing-function);
+  transition: var(--speed-slow) var(--timing-function) var(--speed-slow);
 }
 
 .expand {
@@ -42,7 +42,19 @@
 
 
 .your-score-text {
+  width: 285px;
   margin-top: 48px;
+  transition: all var(--speed-slow) var(--timing-function) var(--speed-slow);
+  text-align: center;
+  overflow-wrap: break-word;
+  word-break: break-all;
+}
+
+.your-score-text-wrapper {
+  width: fit-content;
+  overflow-wrap: break-word;
+  word-break: break-all;
+
 }
 
 .score-text {

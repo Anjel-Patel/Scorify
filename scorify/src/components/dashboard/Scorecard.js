@@ -7,9 +7,9 @@ function Scorecard({hist, setHist})
     return(
         <div className={"wrapper-rect"+(hist===1?" expand":"")}>
             <div className={"scorecard-rect"+(hist===1?" contract seperate":"")}>
-                {/* Had no reason to make this so complicated, but it works. Change to a better technique if found.*/}
-                <h3 className="h3 your-score-text" style={hist===0?{display:'none'}:{}}>&nbsp;Your score <br></br>this week is</h3>
-                <h3 className="h3 your-score-text" style={hist===1?{display:'none'}:{}}>Your score this week is</h3>
+                <div className="your-score-text-wrapper">
+                    <h3 className="h3 your-score-text" style={hist===1?{width:'142px'}:{}}>Your score this week is</h3>
+                </div>
                 <h1 className="h1 score-text">{"200"}</h1>
                 <div className="empty-div"></div>
                 <div className="history-btn" style={hist===1?{opacity:0, cursor:'default'}:{}} onClick={() => {setHist(1)}}>
