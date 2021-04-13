@@ -31,6 +31,7 @@
   height: 564px;
   box-shadow: var(--shadow-large);
   background: var(--neutral-50);
+  color: var(--neutral-700);
   border-radius: 12px;
   position: relative;
   display: flex;
@@ -43,11 +44,13 @@
   padding-top: 48px;
   padding-right: 32px;
   border-right: 1px dashed var(--neutral-300);
+  outline: none;
 }
 
 .name {
   margin-bottom: 42px;
   display: flex;
+  outline: none;
 }
 
 .detail-grid {

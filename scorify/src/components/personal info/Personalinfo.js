@@ -42,7 +42,7 @@ function Personalinfo(){
 
                 {/* LEFT SIDE */}
 
-                <div className="left-side">
+                <div contentEditable={editMode===1?true:false} style={editMode===1?{color: 'var(--neutral-900)'}:{}} className="left-side">
                     <h1 className="h1 name">{details.self_name}</h1>
                     <div className="detail-grid"> 
                         <div className="id detail-div">
