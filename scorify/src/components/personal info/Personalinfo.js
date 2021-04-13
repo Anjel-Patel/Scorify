@@ -54,29 +54,29 @@ function Personalinfo(){
                 <div className="left-side" contentEditable={editMode===1?true:false} style={editMode===1?editableStyle:{}}>
                     <h1 className="h1 name">{details.self_name}</h1>
                     <div className="detail-grid"> 
-                        <div className="id detail-div">
-                            <p className="p1 detail-title">ID</p>
+                        <div className="id detail-div" contentEditable={false} style={{cursor: 'default'}}>
+                            <p className="p1 detail-title" contentEditable={false}>ID</p>
                             <h3 className="h3">{details.id}</h3>
                         </div>
                         <div>
-                            <p className="p1 detail-title">Email</p>
+                            <p className="p1 detail-title" contentEditable={false} style={{cursor: 'default'}}>Email</p>
                             <h3 className="h3">{details.email}</h3>
                         </div>
                         <div>
-                            <p className="p1 detail-title">DOB</p>
+                            <p className="p1 detail-title"  contentEditable={false} style={{cursor: 'default'}}>DOB</p>
                             <h3 className="h3">{details.dob}</h3>
                         </div>
                         <div>
-                            <p className="p1 detail-title">Phone Number</p>
+                            <p className="p1 detail-title"  contentEditable={false} style={{cursor: 'default'}}>Phone Number</p>
                             <div>{PhoneNumberGenerator(details.phoneNumbers, editMode)}</div>
                         </div>
                         <div>
-                            <p className="p1 detail-title">Gender</p>
+                            <p className="p1 detail-title"  contentEditable={false} style={{cursor: 'default'}}>Gender</p>
                             <h3 className="h3">{details.gender}</h3>
                         </div>
                     </div>
-                    <div className="address">
-                            <p className="p1 detail-title">Address</p>
+                    <div className="address" >
+                            <p className="p1 detail-title" contentEditable={false} style={{cursor: 'default'}}>Address</p>
                             <p className="p1 address-text">{details.address}</p>
                     </div>
                 </div>
