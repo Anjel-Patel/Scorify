@@ -1,0 +1,19 @@
+.about-rect {
+  background: var(--neutral-100);
+  width: 1600px;
+  height: 1080px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow: hidden;
+  color: var(--neutral-900);
+}
+
+.about-text-wrapper {
+    margin-left: 80px;
+}
+
+.about-tagline-wrapper {
+    display: flex;
+    flex-direction: row;
+}
