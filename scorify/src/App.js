@@ -10,8 +10,8 @@ function App() {
       <Sidebar/>
       {/* ROUTER and SWITCH HERE */}
       {/* <Dashboard/> */}
-      {/* <PersonalInfo/> */}
-      <About/>
+      <PersonalInfo/>
+      {/* <About/> */}
     </div>
   );
 }
