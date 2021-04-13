@@ -118,8 +118,8 @@ function Personalinfo(){
                         <div className="edit-details-btn" style={editMode===1?{display:'none', cursor:'default'}:{}} onClick={() => {setEditMode(1)}}>
                             <svg className="inverted-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g id="arrow-full">
-                                    <path id="inverted-arrowtail" d="M5 12H19" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path id="inverted-arrowhead" d="M12 5L19 12L12 19" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path id="inverted-arrowtail" d="M5 12H19" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                                    <path id="inverted-arrowhead" d="M12 5L19 12L12 19" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
                                 </g>
                             </svg>
                             <h4 className="h4 edit-details-text">Edit details</h4>
@@ -129,8 +129,8 @@ function Personalinfo(){
                         <div className="save-btn" style={editMode===0?{display:'none', cursor:'default'}:{}} onClick={() => {setEditMode(0)}}>
                             <svg className="arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g id="arrow-full">
-                                    <path id="arrowtail" d="M5 12H19" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path id="arrowhead" d="M12 5L19 12L12 19" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path id="arrowtail" d="M5 12H19" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                                    <path id="arrowhead" d="M12 5L19 12L12 19" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
                                 </g>
                             </svg>
                             <h4 className="h4 save-text">Save</h4>
