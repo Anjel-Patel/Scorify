@@ -9,7 +9,7 @@ import {useState} from "react";
 function App() {
   
   const [currPage, setPage] = useState(0);
-  const [isLeader, setLeader] = useState(1);
+  const [isLeader, setLeader] = useState(0);
 
   return (
     <div className="App">
