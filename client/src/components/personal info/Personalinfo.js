@@ -1,7 +1,7 @@
 import {ReactComponent as GridRight} from "../../assets/circle-grid1.svg";
 import {ReactComponent as GridLeft} from "../../assets/circle-grid2.svg";
 import {ReactComponent as Cross} from "../../assets/cross.svg";
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import "./Personalinfo.css";
 
 const crossStyle = {
@@ -20,14 +20,16 @@ function PhoneNumberGenerator(phoneNumbers, editMode){
     ));
 }
 
-function logger(e)
-{
-    console.log(e);
-}
+
 
 function Personalinfo(){
 
-    const [editMode, setEditMode] = useState(0);
+    function logger(e)
+    {
+        details.email = e.target.value;
+        setDetails({...details, ...details.email});
+    }
+    
 
     let details = {
         self_name: 'Ramirez Shah',
@@ -44,7 +46,12 @@ function Personalinfo(){
         total_ohours: '80',
         total_score: '3650',
         attendance_perc: '92%'
-    }
+    };
+
+    const [detailsState, setDetails] = useState(details);
+
+    const [editMode, setEditMode] = useState(0);
+
 
     const editableStyle = {color: 'var(--neutral-900)',
                             boxShadow:'var(--shadow-small)',
@@ -69,7 +76,7 @@ function Personalinfo(){
                         </div>
                         <div>
                             <p className="p1 detail-title">Email</p>
-                            <input className="h3 field email" value={details.email} readOnly={editMode===0?true:false}></input>
+                            <input className="h3 field email" value={detailsState.email} onChange={logger} readOnly={editMode===0?true:false}></input>
                         </div>
                         <div>
                             <p className="p1 detail-title">DOB</p>
