@@ -3,6 +3,7 @@ import Sidebar from './components/Sidebar';
 import Dashboard from './components/dashboard/Dashboard';
 import PersonalInfo from './components/personal info/Personalinfo';
 import About from './components/about/About';
+import Contact from './components/contact/Contact';
 
 function App() {
   return (
@@ -10,8 +11,9 @@ function App() {
       <Sidebar/>
       {/* ROUTER and SWITCH HERE */}
       {/* <Dashboard/> */}
-      <PersonalInfo/>
+      {/* <PersonalInfo/> */}
       {/* <About/> */}
+      <Contact/>
     </div>
   );
 }
