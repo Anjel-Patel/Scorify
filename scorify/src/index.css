@@ -3,7 +3,7 @@
 @font-face {
   font-family: Inter;
   src: local("Inter"),
-    url(./assets/Inter-VariableFont_slnt\,wght.ttf) format("truetype");
+    url(./client/assets/Inter-VariableFont_slnt\,wght.ttf) format("truetype");
 }
 
 * {

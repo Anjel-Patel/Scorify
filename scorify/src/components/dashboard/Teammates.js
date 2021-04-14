@@ -13,13 +13,13 @@ function Teammates()
 {
     //The variable where all rows go. Do note the format.
     //Name, phno, email, role, mate_score, self_score
-    const details = [
-        {name : 'Alex Prajapati', phno : '9898265423', email : 'alexp98@gmail.com', role : 'Leader', mate_score: 350, self_score: 200},
-        {name : 'Kelvin Gupta', phno : '9897277831', email : 'keving1986@gmail.com', role : 'Member', mate_score: 165, self_score: 200},
-        {name : 'Jonas Sharma', phno : '6256265423', email : 'jsharma69@gmail.com', role : 'Member', mate_score: 250, self_score: 200},
-        {name : 'Ligma Sinha', phno : '9855677831', email : 'ligmab420@gmail.com', role : 'Member', mate_score: 130, self_score: 200},
-        {name : 'Raju Sebastain', phno : '9898260328', email : 'rseb666@gmail.com', role : 'Member', mate_score: 400, self_score: 200},
-    ];
+    // const details = [
+    //     {name : 'Alex Prajapati', phno : '9898265423', email : 'alexp98@gmail.com', role : 'Leader', mate_score: 350, self_score: 200},
+    //     {name : 'Kelvin Gupta', phno : '9897277831', email : 'keving1986@gmail.com', role : 'Member', mate_score: 165, self_score: 200},
+    //     {name : 'Jonas Sharma', phno : '6256265423', email : 'jsharma69@gmail.com', role : 'Member', mate_score: 250, self_score: 200},
+    //     {name : 'Ligma Sinha', phno : '9855677831', email : 'ligmab420@gmail.com', role : 'Member', mate_score: 130, self_score: 200},
+    //     {name : 'Raju Sebastain', phno : '9898260328', email : 'rseb666@gmail.com', role : 'Member', mate_score: 400, self_score: 200},
+    // ];
 
     return(
         <div className="teammates-rect">

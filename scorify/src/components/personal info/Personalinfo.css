@@ -51,13 +51,43 @@
 
 .name {
   margin-bottom: 42px;
+  width: 420px;
   display: flex;
+}
+
+.field-name {
+  color: inherit;
+  background: var(--neutral-50);
   outline: none;
+  border: none;
+  cursor: text;
+  font-family: Inter;
+  font-style: normal;
+  font-variation-settings: "wght" 800;
+  font-size: 48px;
+  line-height: 56px;
+  /* identical to box height, or 117% */
+}
+
+.field{
+  color: inherit;
+  background: var(--neutral-50);
+  outline: none;
+  border: none;
+  cursor: text;
+
+  font-family: Inter;
+  font-style: normal;
+  font-variation-settings: "wght" 700;
+  font-size: 24px;
+  line-height: 32px;
+  /* identical to box height, or 133% */
+  letter-spacing: -0.02em;
 }
 
 .detail-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 140px 1fr;
   grid-template-rows: repeat(3, 56px);
   row-gap: 28px;
   column-gap: 108px;
@@ -70,14 +100,32 @@
 
 .address-text {
   width: 559px;
+  resize: none;
+
+  font-family: Inter;
+  font-style: normal;
+  font-variation-settings: "wght" 500;
+  font-size: 16px;
+  line-height: 24px;
+  /* identical to box height, or 150% */
+  letter-spacing: 0.02em;
 }
+
 .address {
   margin-top: 28px;
 }
 
+.phno {
+  width: 220px;
+}
+
+.email {
+  width: 314px;
+}
+
 .cross {
     color: var(--red-500);
-    margin-left: 48px;
+    margin-left: 32px;
     cursor: pointer;
     transition: all var(--speed-fast) var(--timing-function) var(--delay);
 }

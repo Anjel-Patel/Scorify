@@ -14,10 +14,15 @@ const crossStyle = {
 function PhoneNumberGenerator(phoneNumbers, editMode){
     return phoneNumbers.map((phno, i) => (
         <div style={{display:'flex', alignItems:'center'}}>
-            <h3 className="h3">{phno}</h3>
+            <input className="h3 field phno" value={phno} readOnly={editMode===0?true:false}></input>
             <Cross style={(i>=1 && editMode===1)?crossStyle:{opacity: '0', cursor: 'default'}}></Cross>
         </div>
     ));
+}
+
+function logger(e)
+{
+    console.log(e);
 }
 
 function Personalinfo(){
@@ -47,44 +52,47 @@ function Personalinfo(){
         attendance_perc: '92%'
     }
 
-    const editableStyle = {color: 'var(--neutral-900)', boxShadow:'var(--shadow-small)', transform: 'translateY(-1px)'};
+    const editableStyle = {color: 'var(--neutral-900)',
+                            boxShadow:'var(--shadow-small)',
+                            transform: 'translateY(-1px)',
+                            cursor:'text',
+                            caretColor:'default'};
 
     return(
-        <div className="personal-page-rect" style={editMode===0?{cursor:'default'}:{}}>
+        <div className="personal-page-rect" style={editMode===0?{cursor:'default', caretColor:'transparent'}:{}}>
             <GridRight className="grid-right"/>
             <GridLeft className="grid-left"/>
             <div className="profile-card">
 
                 {/* LEFT SIDE */}
 
-                <div className="left-side" contentEditable={editMode===1?true:false} style={editMode===1?editableStyle:{}}>
-                    <h1 className="h1 name" >{details.self_name}</h1>
-                    
+                <div className="left-side" style={editMode===1?editableStyle:{}}>
+                    <input className="h1 field-name name" value={details.self_name} readOnly={editMode===0?true:false}></input>
                     <div className="detail-grid"> 
-                        <div className="id detail-div" contentEditable={false} style={{cursor: 'default'}}>
-                            <p className="p1 detail-title" contentEditable={false}>ID</p>
-                            <h3 className="h3">{details.id}</h3>
+                        <div className="id detail-div">
+                            <p className="p1 detail-title">ID</p>
+                            <input className="h3 field" value={details.id} readOnly={true}></input>
                         </div>
                         <div>
-                            <p className="p1 detail-title" contentEditable={false} style={{cursor: 'default'}}>Email</p>
-                            <h3 className="h3">{details.email}</h3>
+                            <p className="p1 detail-title">Email</p>
+                            <input className="h3 field email" value={details.email} readOnly={editMode===0?true:false}></input>
                         </div>
                         <div>
-                            <p className="p1 detail-title"  contentEditable={false} style={{cursor: 'default'}}>DOB</p>
-                            <h3 className="h3">{details.dob}</h3>
+                            <p className="p1 detail-title">DOB</p>
+                            <input className="h3 field" value={details.dob} readOnly={editMode===0?true:false}></input>
                         </div>
                         <div>
-                            <p className="p1 detail-title"  contentEditable={false} style={{cursor: 'default'}}>Phone Number</p>
+                            <p className="p1 detail-title">Phone Number</p>
                             <div>{PhoneNumberGenerator(details.phoneNumbers, editMode)}</div>
                         </div>
                         <div>
-                            <p className="p1 detail-title"  contentEditable={false} style={{cursor: 'default'}}>Gender</p>
-                            <h3 className="h3">{details.gender}</h3>
+                            <p className="p1 detail-title">Gender</p>
+                            <input className="h3 field" value={details.gender} readOnly={editMode===0?true:false}></input>
                         </div>
                     </div>
                     <div className="address" >
-                            <p className="p1 detail-title" contentEditable={false} style={{cursor: 'default'}}>Address</p>
-                            <p className="p1 address-text">{details.address}</p>
+                            <p className="p1 detail-title">Address</p>
+                            <textarea rows={4} className="p1 address-text field" value={details.address} readOnly={editMode===0?true:false}></textarea>
                     </div>
                 </div>
 
