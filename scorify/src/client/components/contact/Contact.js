@@ -24,7 +24,7 @@ function Contact() {
                     <p className="p1 dev-details">+91-9167707691</p>
                     <p className="p1 dev-details">f20190151@hyderabad.bits-pilani.ac.in</p>
                 </div>
-                <div className="dev-wrapper">
+                <div className="dev-wrapper" style={{paddingRight:'0px'}}>
                     <h3 className="h3 dev-name">Mukund Varshney</h3>
                     <p className="p1 dev-details">+91-7340165221</p>
                     <p className="p1 dev-details">f20190113@hyderabad.bits-pilani.ac.in</p>
