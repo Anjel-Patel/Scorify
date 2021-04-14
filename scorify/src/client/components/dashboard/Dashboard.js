@@ -3,6 +3,7 @@ import Teaminfo from './Teaminfo';
 import ScoreCard from './Scorecard';
 import Attendance from './Attendance';
 import Teammates from './Teammates';
+import Revenue from './Revenue';
 import {useState} from "react";
 
 function Dashboard(){
@@ -16,6 +17,7 @@ function Dashboard(){
                 <Attendance hist={hist}/>
                 <Teammates/>
                 <div className="empty-div"></div>
+                <Revenue hist={hist}/>
             </div>
         </div>
     )
