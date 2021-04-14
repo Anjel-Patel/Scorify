@@ -5,7 +5,7 @@ import {ReactComponent as Chevron} from "../../assets/chevron.svg";
 function Rowmaker(details) {
     //Loops through the details array
     return details.map((info, i) => (
-        <TeamRow name= {info.name} phno= {info.phno} email= {info.email} role= {info.role} mate_score={info.mate_score} self_score={info.self_score}/>
+        <TeamRow  key = {i} name= {info.name} phno= {info.phno} email= {info.email} role= {info.role} mate_score={info.mate_score} self_score={info.self_score}/>
     ));
 }
 

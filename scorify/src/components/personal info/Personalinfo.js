@@ -24,6 +24,12 @@ function Personalinfo(){
 
     const [editMode, setEditMode] = useState(0);
 
+    // const [name, setName] = useState("gedia");
+    // const [id, setId] = useState(0);
+    // const [email, setEmail] = useState("");
+    // const [dob, setDob] = useState("");
+    // const [phoneNumbers, setPhoneNumbers] = useState(0);
+
     let details = {
         self_name: 'Ramirez Shah',
         id: '20190144',
@@ -52,7 +58,8 @@ function Personalinfo(){
                 {/* LEFT SIDE */}
 
                 <div className="left-side" contentEditable={editMode===1?true:false} style={editMode===1?editableStyle:{}}>
-                    <h1 className="h1 name">{details.self_name}</h1>
+                    <h1 className="h1 name" >{details.self_name}</h1>
+                    
                     <div className="detail-grid"> 
                         <div className="id detail-div" contentEditable={false} style={{cursor: 'default'}}>
                             <p className="p1 detail-title" contentEditable={false}>ID</p>

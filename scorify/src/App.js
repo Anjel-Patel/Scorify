@@ -8,7 +8,7 @@ function App() {
     <div className="App">
       <Sidebar/>
       {/* ROUTER and SWITCH HERE */}
-      <PersonalInfo/>
+      <Dashboard/>
     </div>
   );
 }

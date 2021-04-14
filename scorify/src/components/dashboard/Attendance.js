@@ -1,12 +1,23 @@
 import  "./Attendance.css";
 import Chart from "react-google-charts";
-
+import Axios from "axios";
+import { useState, useEffect } from 'react';
 //Change these variables
-let present = 10;
-let absent = 2;
+// let present = 10;
+// let absent = 2;
 
 function Attendance({hist})
-{
+{   
+    const [absent, setAbsent] = useState([]);
+    const [present, setPresent] = useState([]);
+
+    useEffect(() => {
+        Axios.get("http://localhost:8000/attendance").then((response) => {
+        let obj = JSON.parse(JSON.stringify(response.data));
+        setAbsent(obj.absent);
+        setPresent(obj.present);
+          });
+        },[]); 
     return(
         <div className="attendance-wrapper">
             <div className={"attendance-rect"+(hist===1?" low":"")}>
