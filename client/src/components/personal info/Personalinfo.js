@@ -11,10 +11,10 @@ const crossStyle = {
     transition: 'all var(--speed-fast) var(--timing-function) var(--delay)'
 }
 
-function PhoneNumberGenerator(phoneNumbers, editMode){
+function PhoneNumberGenerator(phoneNumbers, editMode, logger){
     return phoneNumbers.map((phno, i) => (
         <div style={{display:'flex', alignItems:'center'}}>
-            <input className="h3 field phno" value={phno} readOnly={editMode===0?true:false}></input>
+            <input className="phno h3 field" value={phno} onChange={logger} readOnly={editMode===0?true:false}></input>
             <Cross style={(i>=1 && editMode===1)?crossStyle:{opacity: '0', cursor: 'default'}}></Cross>
         </div>
     ));
@@ -26,13 +26,15 @@ function Personalinfo(){
 
     function logger(e)
     {
-        details.email = e.target.value;
-        setDetails({...details, ...details.email});
+        details[e.target.classList[0]] = e.target.value;
+        setDetails({...details, ...details[e.target.classList[0]]});
+        console.log(e);
+        console.log(details['phno']);
     }
     
 
     let details = {
-        self_name: 'Ramirez Shah',
+        name: 'Ramirez Shah',
         id: '20190144',
         email: 'ramirezshah42@gmail.com',
         dob: '24/05/1998',
@@ -49,7 +51,6 @@ function Personalinfo(){
     };
 
     const [detailsState, setDetails] = useState(details);
-
     const [editMode, setEditMode] = useState(0);
 
 
@@ -67,33 +68,33 @@ function Personalinfo(){
 
                 {/* LEFT SIDE */}
 
-                <div className="left-side" style={editMode===1?editableStyle:{}}>
-                    <input className="h1 field-name name" value={details.self_name} readOnly={editMode===0?true:false}></input>
-                    <div className="detail-grid"> 
+                <div className="left-side" style={editMode===1?editableStyle:{}}>                    
+                    <input className="name h1 field-name" value={detailsState.name} onChange={logger} readOnly={editMode===0?true:false}></input>
+                    <div className="detail-grid">
                         <div className="id detail-div">
                             <p className="p1 detail-title">ID</p>
-                            <input className="h3 field" value={details.id} readOnly={true}></input>
+                            <input className="h3 field" value={detailsState.id} readOnly={true}></input>
                         </div>
                         <div>
                             <p className="p1 detail-title">Email</p>
-                            <input className="h3 field email" value={detailsState.email} onChange={logger} readOnly={editMode===0?true:false}></input>
+                            <input className="email h3 field" value={detailsState.email} onChange={logger} readOnly={editMode===0?true:false}></input>
                         </div>
                         <div>
                             <p className="p1 detail-title">DOB</p>
-                            <input className="h3 field" value={details.dob} readOnly={editMode===0?true:false}></input>
+                            <input className="dob h3 field" value={detailsState.dob} onChange={logger} readOnly={editMode===0?true:false}></input>
                         </div>
                         <div>
                             <p className="p1 detail-title">Phone Number</p>
-                            <div>{PhoneNumberGenerator(details.phoneNumbers, editMode)}</div>
+                            <div>{PhoneNumberGenerator(detailsState.phoneNumbers, editMode, logger)}</div>
                         </div>
                         <div>
                             <p className="p1 detail-title">Gender</p>
-                            <input className="h3 field" value={details.gender} readOnly={editMode===0?true:false}></input>
+                            <input className="gender h3 field" value={detailsState.gender} onChange={logger} readOnly={editMode===0?true:false}></input>
                         </div>
                     </div>
                     <div className="address" >
                             <p className="p1 detail-title">Address</p>
-                            <textarea rows={4} className="p1 address-text field" value={details.address} readOnly={editMode===0?true:false}></textarea>
+                            <textarea rows={4} className="address p1 address-text field" value={detailsState.address} onChange={logger} readOnly={editMode===0?true:false}></textarea>
                     </div>
                 </div>
 
