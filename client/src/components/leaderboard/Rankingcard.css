@@ -1,0 +1,23 @@
+.rank-card {
+  display: flex;
+  flex-direction: column;
+  /* border: solid; */
+  position: absolute;
+  width: 1504px;
+  height: 856px;
+  background: var(--neutral-50);
+  box-shadow: var(--shadow-default);
+  border-radius: 12px;
+}
+
+.title-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.tiny-dot {
+    height: 6px;
+    width: 6px;
+    border-radius: 3px;
+    background: var(--neutral-600);
+}
