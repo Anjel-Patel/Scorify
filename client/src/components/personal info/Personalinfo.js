@@ -1,7 +1,7 @@
 import {ReactComponent as GridRight} from "../../assets/circle-grid1.svg";
 import {ReactComponent as GridLeft} from "../../assets/circle-grid2.svg";
 import {ReactComponent as Cross} from "../../assets/cross.svg";
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import "./Personalinfo.css";
 
 const crossStyle = {

@@ -1,0 +1,13 @@
+.row-rect {
+    color: var(--neutral-800);
+}
+
+.dark {
+    color: var(--neutral-100);
+    background: var(--neutral-700);
+}
+
+.leader-board-details {
+    position: absolute;
+    margin-top: 18px;
+}
