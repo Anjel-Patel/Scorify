@@ -1,67 +1,46 @@
 import React from 'react';
 import './Rankingcard.css';
-import './PersonRow.css';
 import PersonRow from './PersonRow';
-function Rankingcard(props){
+
+function Rowmaker(details) {
+    //Loops through the details array
+    return details.map((info, i) => (
+        <PersonRow isSelf={info.isSelf} rank={i+1} name= {info.name} role= {info.role} normalHours={info.normalHours} overtimeHours={info.overtimeHours} score={info.score}/>
+    ));
+}
+
+function Rankingcard(){
+
+    const details = [
+        {name : 'Alex Prajapati', role : 'Leader', score: 450, normalHours: 32, overtimeHours: 12, isSelf:false},
+        {name : 'Kelvin Gupta', role : 'Member', score: 400, normalHours: 30, overtimeHours: 10, isSelf:false},
+        {name : 'Jonas Sharma', role : 'Member', score: 375, normalHours: 28, overtimeHours: 10, isSelf:false},
+        {name : 'Ligma Sinha', role : 'Member', score: 300, normalHours: 25, overtimeHours: 8, isSelf:false},
+        {name : 'Ramirez Shah', role : 'Leader', score: 280, normalHours: 22, overtimeHours: 9, isSelf:true},
+        {name : 'Raju Sebastain', role : 'Member', score: 250, normalHours: 20, overtimeHours: 5, isSelf:false},
+    ];
+
+    const department = "Parks";
+
     return(
         <div className="rank-card">
-            <div className="card-heading"> heading</div>
-            <div id="labels">
-                <div className="left">
-                    <h4 className='logoWrapper'></h4>
-                    <h4 className="eh4">Rank</h4>
-                    <h4 className="eh4">Name</h4>
-                </div>
-                <div className="right">
-                    <h4 className="eh4">Normal Hours</h4>
-                    <h4 className="eh4">Overtime Hours</h4>
-                    <h4 className="eh4">Role</h4>
-                    <h4 className="eh4">Score</h4>
-                </div>
+            <div className="title-wrapper">
+                <h5 className="h5 title">Leaderboard</h5>
+                <div className="tiny-dot title" style={{marginLeft:'8px'}}></div>
+                <h5 className="h5 title" style={{marginLeft:'8px'}}>{department}</h5>
             </div>
-            <br/><br/>
-            <PersonRow 
-            rank="1" 
-            name="Alex"
-            normalHours="40"
-            overtimeHours="6"
-            role="leader"
-            score="30"
-            />
-            <PersonRow
-            rank="2" 
-            name="Parth Gedia"
-            normalHours="100"
-            overtimeHours="100"
-            role="member"
-            score="120"
-            />
-            <PersonRow
-            rank="3" 
-            name="AnIsH KaChAm"
-            normalHours="100"
-            overtimeHours="100"
-            role="member"
-            score="120"
-            />
-            <PersonRow 
-            rank="5" 
-            name="Ramirez Shah"
-            normalHours="20"
-            overtimeHours="8"
-            role="member"
-            score="90"
-            />
-            <PersonRow
-            rank="6" 
-            name="Anjel Patel"
-            normalHours="18"
-            overtimeHours="56"
-            role="leader"
-            score="105"
-            />
-            <PersonRow/>
-            <PersonRow/>        
+            <div className="title-seperator"></div>
+
+            <div className="header" style={{width:'1440px', marginLeft:'0px'}}>
+                <h5 className="h5 head" style={{left:'56px'}}>Rank</h5>
+                <h5 className="h5 head" style={{left:'154px'}}>Name</h5>
+                <h5 className="h5 head" style={{left:'922px'}}>Normal hours</h5>
+                <h5 className="h5 head" style={{left:'1088px'}}>overtime hours</h5>
+                <h5 className="h5 head" style={{left:'1270px'}}>Role</h5>
+                <h5 className="h5 head" style={{left:'1395px'}}>Score</h5>
+            </div>
+
+            <div className="rows">{Rowmaker(details)}</div>
         </div>
     );
 }
