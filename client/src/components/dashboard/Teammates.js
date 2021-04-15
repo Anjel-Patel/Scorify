@@ -29,8 +29,6 @@ function Teammates()
         Axios.get("http://localhost:8000/teammates").then((response) => {
             setTeamMateInfo(response.data);
           });
-        },[]); 
-    useEffect(() => {
         Axios.get("http://localhost:8000/totalscore").then((response) => {
             setTotalScore(response.data.total_score);
           });

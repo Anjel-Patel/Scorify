@@ -8,8 +8,8 @@ import { useState, useEffect } from 'react';
 
 function Attendance({hist})
 {   
-    const [absent, setAbsent] = useState([]);
-    const [present, setPresent] = useState([]);
+    const [absent, setAbsent] = useState(0);
+    const [present, setPresent] = useState(0);
 
     useEffect(() => {
         Axios.get("http://localhost:8000/attendance").then((response) => {

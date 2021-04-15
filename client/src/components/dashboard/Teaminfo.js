@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 // let teamname = "AlphaZero";
 // let description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu mi pellentesque, pulvinar sem in, blandit tellus. Maecenas sollicitudin pulvinar maximus. Fusce facilisis felis varius nisl euismod gravida. Quisque elementum cursus nisi eget iaculis...";
 // let teamID = "69";
-let department = "Parks";
+// let department = "Parks";
 
 function Teaminfo()
 {
