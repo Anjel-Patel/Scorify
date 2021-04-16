@@ -5,7 +5,7 @@ import PersonRow from './PersonRow';
 function Rowmaker(details) {
     //Loops through the details array
     return details.map((info, i) => (
-        <PersonRow isSelf={info.isSelf} rank={i+1} name= {info.fullname} role= {info.role} normalHours={info.totaltime} overtimeHours={info.totalovertime} score={info.totalscore}/>
+        <PersonRow key ={i} isSelf={info.isSelf} rank={i+1} name= {info.fullname} role= {info.role} normalHours={info.totaltime} overtimeHours={info.totalovertime} score={info.totalscore}/>
     ));
 }
 

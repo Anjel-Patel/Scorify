@@ -32,7 +32,7 @@ function App() {
        path= "/"
        render={()=>{
          setPage(0)
-         return(<Dashboard/>);}}/>
+         return(<Dashboard isLeader={isLeader}/>);}}/>
        <Route exact
        path= "/leaderboard"
        render={()=>{

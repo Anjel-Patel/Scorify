@@ -17,10 +17,10 @@ function Leaderborad(props){
         // console.log((JSON.parse(res2)).FullName);
           });
         },[]); 
-        var [fname,lname]=(name).split(" ",2);
+        var fname=((name).split(" ",2))[0];
     return(
         <div className="page-rect">
-            <h1 className="h1 hello-text">Hello, {fname}!</h1>
+            <h1 className="h1 hello-text">Hello {fname}</h1>
             <div className="cards">
                 <Rankingcard name ={name} leaderBoardInfo = {leaderBoardInfo} department = {department} />
             </div>
