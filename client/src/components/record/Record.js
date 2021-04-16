@@ -3,16 +3,22 @@ import RecordRow from  "./RecordRow";
 import {useState} from "react";
 import {ReactComponent as InfoSVG} from "../../assets/info.svg";
 
-function Rowmaker(details) {
+function somefunc(detailsState){
+    console.log(detailsState[0].name);
+}
+
+function Rowmaker(detailsState, setDetails) {
     //Loops through the details array
-    return details.map((info, i) => (
+    return detailsState.map((info, i) => (
         <RecordRow name= {info.name}
+        key={i}
         role= {info.role}
         prev_score={info.prev_score} 
         prev_normalHours={info.prev_normalHours} 
         prev_overtimeHours={info.prev_overtimeHours} 
         attendance={info.attendance} 
-        overtimeHours={info.overtimeHours>=0?info.overtimeHours:"-"}/>
+        overtimeHours={(info.overtimeHours>=0 && info.attendance===1)?info.overtimeHours:"-"}
+        setDetails={setDetails}/>
     ));
 }
 
@@ -41,6 +47,8 @@ function Record() {
     return(
         <div className="page-rect">
             <h1 className="h1 hello-text">Hello {"Ramirez"}</h1>
+
+            {/* LEFT SIDE */}
             <div className="record-sat-wrapper">
                 <div className="vertical-seperator" style={{left:'430px'}}></div>
                 <div className="vertical-seperator" style={{left:'887px'}}></div>
@@ -69,7 +77,7 @@ function Record() {
                     <div className="title-seperator" style={{marginTop:'14px'}}></div>
 
                     {/* Sub Header */}
-                    <div className="header" style={{width:'1440px', marginLeft:'0px', marginTop:'12px', marginBottom:'12px'}}>
+                    <div className="header" style={{width:'1262px', marginLeft:'0px', marginTop:'12px', marginBottom:'12px'}}>
                         <h5 className="h5 head" style={{left:'48px'}}>Name</h5>
                         <h5 className="h5 head" style={{left:'235px'}}>Role</h5>
                         <h5 className="h5 head" style={{left:'478px', color:'var(--neutral-400)'}}>Normal hours</h5>
@@ -80,8 +88,16 @@ function Record() {
                     </div>
 
                     {/* Rows */}
-                    <div className="rows">{Rowmaker(details)}</div>
+                    <div className="rows">{Rowmaker(detailsState, setDetails)}</div>
+                    <div className="empty-div"></div>
+
+                    {/* SAVE BUTTON */}
+                    <div className="record-save-btn">
+                        <h4 className="h4 record-save-text" style={{userSelect:'none'}} onClick={somefunc(detailsState)}>Save</h4>
+                    </div>
                 </div>
+
+                {/* RIGHT SIDE */}
                 <div className="sat-wrapper">
                     <h4 className="h4" style={{marginTop:'24px'}}>Current Week</h4>
                     <h5 className="h5" style={{color: "var(--neutral-600)", marginBottom:'24px'}}>{current_week}</h5>

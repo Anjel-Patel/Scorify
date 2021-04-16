@@ -93,3 +93,27 @@ optgroup {
   align-items: center;
   justify-content: center;
 }
+
+.record-save-btn {
+  width: 255px;
+  height: 50px;
+  border-radius: 25px;
+  border: 1px solid var(--neutral-800);
+  color: var(--neutral-800);
+  display: flex;
+  align-self:flex-end;
+  justify-self: left;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 36px;
+  transition: var(--speed-fast) var(--timing-function);
+  padding: 16px;
+  margin-bottom: 36px;
+  margin-right: 60px;
+}
+
+.record-save-btn:hover {
+  cursor: pointer;
+  color: var(--neutral-600);
+  border-color: var(--neutral-600);
+}
