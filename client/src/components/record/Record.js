@@ -25,7 +25,7 @@ function Rowmaker(detailsState, setDetails) {
 function SatRowmaker(details) {
     return details.map((info, i) => (
         <div className="sat-details-wrapper" style={{marginBottom:'12px'}}>
-            <h5 className="h5">{info.satisfaction}</h5>
+            <input className="h5 record-field" value={info.satisfaction} style={{textAlign:"center"}}></input>
         </div>
     ));
 }

@@ -90,7 +90,7 @@ function Personalinfo(){
                     </div>
                     <div className="address" >
                             <p className="p1 detail-title">Address</p>
-                            <textarea rows={4} className="address p1 address-text field" value={detailsState.address} onChange={logger} readOnly={editMode===0?true:false}></textarea>
+                            <textarea rows={4} className="address p1 address-text field" style={{marginTop:'0px'}} value={detailsState.address} onChange={logger} readOnly={editMode===0?true:false}></textarea>
                     </div>
                 </div>
 
