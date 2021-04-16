@@ -20,8 +20,6 @@ function PhoneNumberGenerator(phoneNumbers, editMode, logger){
     ));
 }
 
-
-
 function Personalinfo(){
 
     function logger(e)
@@ -31,7 +29,6 @@ function Personalinfo(){
         console.log(e);
         console.log(details['phno']);
     }
-    
 
     let details = {
         name: 'Ramirez Shah',
@@ -52,7 +49,6 @@ function Personalinfo(){
 
     const [detailsState, setDetails] = useState(details);
     const [editMode, setEditMode] = useState(0);
-
 
     const editableStyle = {color: 'var(--neutral-900)',
                             boxShadow:'var(--shadow-small)',

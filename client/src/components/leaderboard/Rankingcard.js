@@ -35,7 +35,7 @@ function Rankingcard(){
                 <h5 className="h5 head" style={{left:'56px'}}>Rank</h5>
                 <h5 className="h5 head" style={{left:'154px'}}>Name</h5>
                 <h5 className="h5 head" style={{left:'922px'}}>Normal hours</h5>
-                <h5 className="h5 head" style={{left:'1088px'}}>overtime hours</h5>
+                <h5 className="h5 head" style={{left:'1088px'}}>Overtime hours</h5>
                 <h5 className="h5 head" style={{left:'1270px'}}>Role</h5>
                 <h5 className="h5 head" style={{left:'1395px'}}>Score</h5>
             </div>

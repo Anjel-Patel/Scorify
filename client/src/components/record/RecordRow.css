@@ -1,0 +1,50 @@
+.record-attendance-rect {
+    margin-top: 11px;
+    width: 100px;
+    height: 34px;
+    border-radius: 8px;
+    overflow: hidden;
+    position: absolute;
+    display: flex;
+    transition: all var(--speed-slow) var(--timing-function);
+}
+.record-attendance-present-rect {
+    width: 50px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--green-200);
+    color: var(--neutral-50);
+    transition: all var(--speed-slow) var(--timing-function);
+}
+.record-attendance-absent-rect {
+    width: 50px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--red-200);
+    color: var(--neutral-50);
+    transition: all var(--speed-slow) var(--timing-function);
+}
+.record-attendance-present-rect:hover {
+    cursor: pointer;
+    color: var(--green-500);
+}
+.record-attendance-absent-rect:hover {
+    cursor: pointer;
+    color: var(--red-500);
+}
+.present-selected{
+    color: var(--neutral-50);
+    background: var(--green-500);
+}
+.absent-selected {
+    color: var(--neutral-50);
+    background: var(--red-500);
+}
+.present-selected:hover, .absent-selected:hover{
+    cursor: default;
+    color: var(--neutral-50);
+}
