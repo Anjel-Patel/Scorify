@@ -52,7 +52,7 @@ function Personalinfo(){
 
     const updateInfo = () => {
         setEditMode(0);
-        Axios.put("http://localhost:8000/updatedinfo", info);
+        Axios.put("http://localhost:8000/updatedinfo", {infohalf :info,phno : phoneNumbers});
       };
     
 
