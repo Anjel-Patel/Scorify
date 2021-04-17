@@ -36,7 +36,7 @@ function RecordRow({name,details,date,empID, role, prev_score, prev_normalHours,
             <h5 className="p1 leader-board-details" style={{left : '495px', color:'var(--neutral-500)'}}>{prev_normalHours}</h5>
             <h5 className="p1 leader-board-details" style={{left : '654px', color:'var(--neutral-500)'}}>{prev_overtimeHours}</h5>
             <h5 className="p1 leader-board-details" style={{left : '777px', color:'var(--neutral-500)'}}>{prev_score}</h5>
-            <h5 className="p1 leader-board-details" style={{left : '973px'}}>{overtimeHours}</h5>
+            <input className="p1 leader-board-details record-field" style={{left : '973px'}} value={overtimeHours}></input>
             <div className="record-attendance-rect" style={{left : '1088px'}}>
                 <div id="present" className={"record-attendance-present-rect" + (attendance===1?" present-selected":"" )} onClick={(e)=>{attendanceLogger(attendance, details,date,empID, setDetails)}} >
                     <h5 style={{userSelect:'none'}}>P</h5>
