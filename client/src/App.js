@@ -21,7 +21,7 @@ function renderSidebar(currPage, isLeader){
 function App() {
   
   const [currPage, setPage] = useState(0);
-  const [isLeader, setLeader] = useState(1);
+  const [isLeader, setLeader] = useState(0);
 
   return (
     <Router>
