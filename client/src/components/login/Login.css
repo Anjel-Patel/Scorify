@@ -1,0 +1,81 @@
+.login-page-rect {
+    width: 1920px;
+    height: 1080px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--neutral-50);
+    color: var(--neutral-900);
+    cursor: default;
+}
+
+.scorify-text {
+    align-self: flex-start;
+    margin-top: 40px;
+    margin-left: 50px;
+}
+
+.scorify-logo {
+    min-width: 64px;
+    min-height: 64px;
+    color: var(--blue-600);
+    margin-top: 77px;
+}
+
+.login-card {
+    width: 605px;
+    height: 450px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-default);
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+    margin-top: 64px;
+    padding: 55px 56px;
+}
+
+.input-field {
+    width: 495px;
+    height: 50px;
+    vertical-align: center;
+    padding: 0px 16px;
+    margin-top: 8px;
+    outline: none;
+    border: 1px solid var(--neutral-300);
+    border-radius: 8px;
+    box-shadow: var(--shadow-small);
+    cursor: text;
+    transition: var(--speed-slow) var(--timing-function);
+}
+
+.forgot-pass {
+    color: var(--blue-600);
+    align-self: flex-end;
+    cursor: pointer;
+    transition: var(--speed-slow) var(--timing-function) var(--delay);
+}
+
+.login-btn {
+    max-width: 495px;
+    height: 50px;
+    color: var(--white);
+    background: var(--blue-600);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: var(--speed-fast) var(--timing-function) var(--delay);
+}
+
+.login-btn:hover, .forgot-pass:hover {
+    cursor: pointer;
+    opacity: 0.95;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-small);
+}
+
+.input-field:focus {
+    border: 1px solid transparent;
+    box-shadow: 0 0 3pt 2pt var(--blue-200);
+}

@@ -1,4 +1,5 @@
 import './App.css';
+import Login from './components/login/Login';
 import Sidebar from './components/Sidebar';
 import Dashboard from './components/dashboard/Dashboard';
 import PersonalInfo from './components/personal info/Personalinfo';
@@ -17,7 +18,10 @@ function App() {
   return (
     // <Router>
     <div className="App">
-      <Sidebar currPage={currPage} isLeader={isLeader}/>
+
+      <Login></Login>
+
+      {/* <Sidebar currPage={currPage} isLeader={isLeader}/> */}
       {/* ROUTER and SWITCH HERE */}
       {/* Page IDs start from 0. So currPage=0 if user is on dashboard, currPage=1 if user is on Leaderboard and so on */}
       {/* Page IDs are Dashboard=0, Leaderboard=1, Personal Info=2, Record Page is number 5 tho */}
@@ -42,7 +46,7 @@ function App() {
          setPage(1);
          return(<Leaderboard/>);}}/> */}
          {/* <PersonalInfo/> */}
-      <Record></Record>
+      {/* <Record></Record> */}
       {/* <About/> */}
       {/* <Contact/> */}
     </div>
