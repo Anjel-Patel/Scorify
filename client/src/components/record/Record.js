@@ -49,20 +49,26 @@ function Rowmaker(currentDetails,xyz,setxyz,curDate) {
         />
     ));}
 };
-function SatRowmaker(details) {
-    return details.map((info, i) => (
-        <div className="sat-details-wrapper" style={{marginBottom:'12px'}}>
-            <input className="h5 record-field" value={info.satisfaction} style={{textAlign:"center"}}></input>
+function SatRowmaker(scoreDict,setScoreDict) {
+    if( typeof(scoreDict) !== 'undefined')
+    {
+    const empID = Object.keys(scoreDict);
+    return empID.map((id, i) => (
+        <div key = {i} className="sat-details-wrapper" style={{marginBottom:'12px'}}>
+            <input key = {id} className="h5 record-field" value={scoreDict[id]} readOnly= {true} style={{textAlign:"center"}}></input>
         </div>
     ));
 }
+};
 function Record() {
 
     const [currentDetails, setCurrentDetails] = useState([]);
     const [dates,setDates] = useState([]);
     const [curDate,setCurDate] = useState(''); 
     const [xyz,setxyz] = useState({});
+    const [scoreDict,setScoreDict] = useState([]);
     var dict ={};
+    var sdict = {};
     useEffect(() => {
         Axios.get("http://localhost:8000/currentrecords").then((response) => {
             const [res1,res2]=(response.data).split("   ",2);
@@ -78,12 +84,15 @@ function Record() {
                 {   if(i!==4){//nosunday
                     var e = {};
                     for(let j=0;j<cd.length;j++)
-                        e[cd[j].empID] ={ attendance: 1, overtimeHours : '-'};
+                        e[cd[j].empID] ={ attendance: 1, overtimeHours : '0'};
                     dict[d[i]]=e;
                     }
                 };
-                // console.log(dict);
+                for(let i=0;i<cd.length;i++)
+                    sdict[cd[i].empID] ='-';
             setxyz(dict);
+
+            setScoreDict(sdict);
             
           });
         },[]);
@@ -174,7 +183,7 @@ function Record() {
                         <h5 className="h5 sat-header">Satisfaction</h5>
                         <InfoSVG className="info-svg"></InfoSVG>
                     </div>
-                    <div style={{marginTop:'28px', display:'flex', flexDirection:'column'}}>{SatRowmaker(details)}</div>
+                    <div style={{marginTop:'28px', display:'flex', flexDirection:'column'}}>{SatRowmaker(scoreDict,setScoreDict)}</div>
                 </div>
             </div>
         </div>
