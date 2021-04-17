@@ -5,47 +5,31 @@ import { useState, useEffect } from 'react';
 import {ReactComponent as InfoSVG} from "../../assets/info.svg";
 
 
-// function somefunc(detailsState){
-//     console.log(detailsState[0].name);
-// }
+ const logger=(e,scoreDict,setScoreDict) => {
+    let temp = {...scoreDict};
+    temp[e.target.name]=e.target.value;
+    setScoreDict(temp);
+}
 
-// function Rowmaker(detailsState, setDetails) {
-//     //Loops through the details array
-//     return detailsState.map((info, i) => (
-//         <RecordRow name= {info.name}
-//         key={i}
-//         role= {info.role}
-//         prev_score={info.prev_score} 
-//         prev_normalHours={info.prev_normalHours} 
-//         prev_overtimeHours={info.prev_overtimeHours} 
-//         attendance={info.attendance} 
-//         overtimeHours={(info.overtimeHours>=0 && info.attendance===1)?info.overtimeHours:"-"}
-//         setDetails={setDetails}/>
-//     ));
-// }
-//     // {  console.log(xyz && curDate);
-//     console.log(xyz[curDate][1003]['attendance']);
-//     console.log(curDate);
-// }
 
-function Rowmaker(currentDetails,xyz,setxyz,curDate) {
-    // console.log(curDate);
+
+function Rowmaker(currentDetails,recordDict,setRecordDict,curDate) {
     //Loops through the details array
-    if( typeof(xyz[curDate]) !== 'undefined')
+    if( typeof(recordDict[curDate]) !== 'undefined')
     {return currentDetails.map((info, i) => (
         
         <RecordRow name= {info.fullname}
         key={i}
-        details = {xyz}
+        details = {recordDict}
         date = {curDate}
         empID={info.empID}
         role= {'Member'}
         prev_score={info.score} 
         prev_normalHours={info.normalhours} 
         prev_overtimeHours={info.overtime} 
-        attendance={xyz[curDate][info.empID]['attendance']} 
-        overtimeHours={xyz[curDate][info.empID]['overtimeHours']}
-        setDetails={setxyz}
+        attendance={recordDict[curDate][info.empID]['attendance']} 
+        overtimeHours={recordDict[curDate][info.empID]['overtimeHours']}
+        setDetails={setRecordDict}
         />
     ));}
 };
@@ -55,17 +39,19 @@ function SatRowmaker(scoreDict,setScoreDict) {
     const empID = Object.keys(scoreDict);
     return empID.map((id, i) => (
         <div key = {i} className="sat-details-wrapper" style={{marginBottom:'12px'}}>
-            <input key = {id} className="h5 record-field" value={scoreDict[id]} readOnly= {true} style={{textAlign:"center"}}></input>
+            <input key = {id} className="h5 record-field" name = {id} value={scoreDict[id]}  onChange={(e)=>{logger(e,scoreDict,setScoreDict)}} style={{textAlign:"center"}}></input>
         </div>
     ));
 }
 };
+
+
 function Record() {
 
     const [currentDetails, setCurrentDetails] = useState([]);
     const [dates,setDates] = useState([]);
     const [curDate,setCurDate] = useState(''); 
-    const [xyz,setxyz] = useState({});
+    const [recordDict,setRecordDict] = useState({});
     const [scoreDict,setScoreDict] = useState([]);
     var dict ={};
     var sdict = {};
@@ -90,7 +76,7 @@ function Record() {
                 };
                 for(let i=0;i<cd.length;i++)
                     sdict[cd[i].empID] ='-';
-            setxyz(dict);
+            setRecordDict(dict);
 
             setScoreDict(sdict);
             
@@ -98,27 +84,14 @@ function Record() {
         },[]);
 
     
-    
-    
-        // setxyz(dict);
-// console.log(dict); 
-
-    
-    
-    
-    
-    const details = [
-        {name : 'Kelvin Gupta', role : 'Member', prev_score: 400, prev_normalHours: 30, prev_overtimeHours: 10, overtimeHours: 2, attendance: 1, satisfaction: 7},
-        {name : 'Jonas Sharma', role : 'Member', prev_score: 375, prev_normalHours: 28, prev_overtimeHours: 10, overtimeHours: 4, attendance: 0, satisfaction: 9},
-        {name : 'Ligma Sinha', role : 'Member', prev_score: 300, prev_normalHours: 25, prev_overtimeHours: 8, overtimeHours: -1, attendance: 0, satisfaction: 4},
-        {name : 'Ramirez Shah', role : 'Leader', prev_score: 280, prev_normalHours: 22, prev_overtimeHours: 9, overtimeHours: 1, attendance: 1, satisfaction: 7},
-        {name : 'Raju Sebastain', role : 'Member', prev_score: 250, prev_normalHours: 20, prev_overtimeHours: 5, overtimeHours: -1, attendance: 0, satisfaction: 6},
-    ];
-
-    // const [detailsState, setDetails] = useState(details);
+        const updateRecords = () => {
+            // console.log({curDate :curDate,scoreDict : scoreDict, records: recordDict[curDate]});
+            Axios.post("http://localhost:8000/updatedrecords", {curDate :curDate,scoreDict : scoreDict, records: recordDict[curDate]}).then(
+                () => { console.log({curDate :curDate,scoreDict : scoreDict, records: recordDict[curDate]})
+            });
+          };
+   
     const current_week = '21/04/2021';
-
-    // const date_list = ['21/04/2021','22/04/2021','23/04/2021','24/04/2021','25/04/2021','26/04/2021'];
 
     return(
         <div className="page-rect">
@@ -166,12 +139,12 @@ function Record() {
                     </div>
 
                     {/* Rows */}
-                    <div className="rows">{Rowmaker(currentDetails,xyz,setxyz,curDate)}</div>
+                    <div className="rows">{Rowmaker(currentDetails,recordDict,setRecordDict,curDate)}</div>
                     <div className="empty-div"></div>
 
                     {/* SAVE BUTTON */}
-                    <div className="record-save-btn">
-                        <h4 className="h4 record-save-text" style={{userSelect:'none'}} >Save</h4>
+                    <div className="record-save-btn"   onClick={updateRecords} >
+                        <h4 className="h4 record-save-text" style={{userSelect:'none'}}  >Save</h4>
                     </div>
                 </div>
                 {/* onClick={somefunc(detailsState)} */}

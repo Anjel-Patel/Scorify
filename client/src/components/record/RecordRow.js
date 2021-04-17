@@ -13,23 +13,25 @@ function keepCloning(objectpassed) {
     return temporarystorage;
   };
 
-function attendanceLogger(e,value, details,date,empID, setDetails,setEditMode) {
+ const attendanceLogger = (e,value, details,date,empID, setDetails,setEditMode) => {
     let temp= keepCloning(details);
-    if(value===0 && e.target.getAttribute('name')==='present'){
+    if(value===0){
+        
         temp[date][empID]['overtimeHours']='0';
         temp[date][empID]['attendance']=1;
         setEditMode(1);
         setDetails(temp);
     }
-    else if(value===1 && e.target.getAttribute('name')==='absent')
+    else
     {   
+        
         temp[date][empID]['overtimeHours']='-';
         temp[date][empID]['attendance']=0;
         setEditMode(0);
         setDetails(temp);
     }
 };
-function logger(e, details,date,empID, setDetails)
+ const overtimeLogger=(e, details,date,empID, setDetails) =>
 {    let temp= keepCloning(details);
     temp[date][empID]['overtimeHours']=e.target.value;
     setDetails(temp);
@@ -47,7 +49,7 @@ function RecordRow({name,details,date,empID, role, prev_score, prev_normalHours,
             <h5 className="p1 leader-board-details" style={{left : '495px', color:'var(--neutral-500)'}}>{prev_normalHours}</h5>
             <h5 className="p1 leader-board-details" style={{left : '654px', color:'var(--neutral-500)'}}>{prev_overtimeHours}</h5>
             <h5 className="p1 leader-board-details" style={{left : '777px', color:'var(--neutral-500)'}}>{prev_score}</h5>
-            <input className="p1 leader-board-details record-field" name = 'overtimeHours' style={{left : '973px'}} value={overtimeHours} onChange={(e)=>{logger(e,details,date,empID, setDetails)}}  readOnly={editMode===0?true:false} ></input>
+            <input className="p1 leader-board-details record-field" name = 'overtimeHours' style={{left : '973px'}} value={overtimeHours} onChange={(e)=>{overtimeLogger(e,details,date,empID, setDetails)}}  readOnly={editMode===0?true:false} ></input>
             <div className="record-attendance-rect" style={{left : '1088px'}}>
                 <div id="present" className={"record-attendance-present-rect" + (attendance===1?" present-selected":"" )} name = 'present' onClick={(e)=>{attendanceLogger(e,attendance, details,date,empID, setDetails,setEditMode)}} >
                     <h5 style={{userSelect:'none'}}>P</h5>
