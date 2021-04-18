@@ -4,9 +4,10 @@ import { useState, useEffect } from 'react';
 function Revenue({hist, isLeader}){
     const [revenue, setRevenue] = useState(0);
     useEffect(() => {
-        Axios.get("http://localhost:8000/revenue").then((response) => {
+        (async () => {
+            const response= await Axios.get("http://localhost:8000/revenue");
         setRevenue((response.data).revenue);
-          });
+          })();
         },[]);
     // let revenue_amount = 25000;
     return(

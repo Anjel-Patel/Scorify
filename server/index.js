@@ -23,6 +23,17 @@ const db = mysql.createConnection({
     multipleStatements : true
   });
 
+  app.get("/nullemployee", (req, res) => {
+    db.query(` select concat(fname,' ',lname) as name from employee where projectId = 11`, (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        let arr = result.map((dict,i) => dict['name']);
+        res.send(arr);
+      }
+    });
+  });
+
   app.get("/revenue", (req, res) => {
      
     db.query(`select revenue from project where leaderid = ${eID}`, (err, result) => {
@@ -333,8 +344,6 @@ const db = mysql.createConnection({
       }
     });
   });
-
-
 
   app.get("/totalscore", (req, res) => {
     db.query(getTotalScore, (err, result) => {
