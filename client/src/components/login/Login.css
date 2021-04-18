@@ -34,7 +34,7 @@
     padding: 55px 56px;
 }
 
-.input-field {
+.input-field, .input-field-error {
     width: 495px;
     height: 50px;
     vertical-align: center;
@@ -78,4 +78,9 @@
 .input-field:focus {
     border: 1px solid transparent;
     box-shadow: 0 0 3pt 2pt var(--blue-200);
+}
+
+.input-field-error:focus{
+    border: 1px solid var(--red-500);
+    box-shadow: 0 0 3pt 2pt var(--red-200);
 }

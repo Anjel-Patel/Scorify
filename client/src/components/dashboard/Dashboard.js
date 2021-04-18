@@ -1,4 +1,6 @@
 import './Dashboard.css';
+import Deptinfo from './Deptinfo';
+import Projectinfo from './Projectinfo';
 import Teaminfo from './Teaminfo';
 import ScoreCard from './Scorecard';
 import Attendance from './Attendance';
