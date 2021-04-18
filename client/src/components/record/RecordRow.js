@@ -15,8 +15,9 @@ function keepCloning(objectpassed) {
 
  const attendanceLogger = (e,value, details,date,empID, setDetails,setEditMode) => {
     let temp= keepCloning(details);
+    // console.log(e.target.getAttribute('name'));
+    // console.log(e.target.value);
     if(value===0){
-        
         temp[date][empID]['overtimeHours']='0';
         temp[date][empID]['attendance']=1;
         setEditMode(1);    
