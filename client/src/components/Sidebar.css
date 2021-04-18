@@ -70,3 +70,7 @@
   user-select: none;
   transition: var(--speed-fast) var(--tansition-function);
 }
+
+.link-react-router-dom {
+  text-decoration: none;
+}
