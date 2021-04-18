@@ -23,12 +23,14 @@ function Dashboard({isLeader}){
         <div className="page-rect">
             <h1 className="h1 hello-text">Hello {fname}</h1>
             <div className="cards">
-                <Teaminfo/>
-                <ScoreCard hist={hist} setHist={setHist}/>
-                <Attendance hist={hist}/>
-                <Teammates/>
-                <div className="empty-div"></div>
-                <Revenue hist={hist} isLeader={isLeader}/>
+                <Deptinfo></Deptinfo>
+                <Projectinfo></Projectinfo>
+                {/* <Teaminfo/> */}
+                {/* <ScoreCard hist={hist} setHist={setHist}/> */}
+                {/* <Attendance hist={hist}/> */}
+                {/* <Teammates/> */}
+                {/* <div className="empty-div"></div> */}
+                {/* <Revenue hist={hist} isLeader={isLeader}/> */}
             </div>
         </div>
     )

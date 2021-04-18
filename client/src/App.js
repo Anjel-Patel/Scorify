@@ -9,6 +9,7 @@ import Contact from './components/contact/Contact';
 import Record from "./components/record/Record";
 import {useState} from "react";
 import {BrowserRouter as Router,Switch,Route} from 'react-router-dom';
+import Modify from './components/modify/Modify';
 
 function renderSidebar(currPage, isLeaderManager){
   return(
@@ -19,9 +20,7 @@ function renderSidebar(currPage, isLeaderManager){
 }
 
 function App() {
-  
-  // const [currPage, setPage] = useState(0);
-  const [isLeader, setLeader] = useState(1);
+  const [isLeaderManager, setLeaderManager] = useState(1);
 
   return (
     <Router>
@@ -30,14 +29,14 @@ function App() {
       {/* Page IDs start from 0. So currPage=0 if user is on dashboard, currPage=1 if user is on Leaderboard and so on */}
       {/* Page IDs are Dashboard=0, Leaderboard=1, Personal Info=2, Record Page is number 5 tho */}
       <Switch>  
-        <Route exact path= "/login" render={()=>{  return(<Login/>);} }/>   
-        <Route exact path= "/" render={()=>{  return(<div style={{display:'flex'}}><div>{renderSidebar(0, isLeader)}</div><Dashboard/></div>);} }/>   
-        <Route exact path= "/leaderboard" render={()=>{  return(<div style={{display:'flex'}}><div>{renderSidebar(1, isLeader)}</div><Leaderboard/></div>);} }/>   
-        <Route exact path= "/record" render={()=>{  return(<div style={{display:'flex'}}><div>{renderSidebar(5, isLeader)}</div><Record/></div>);} }/>   
-        <Route exact path= "/modify" render={()=>{  return(<div style={{display:'flex'}}><div>{renderSidebar(6, isLeader)}</div><PersonalInfo/></div>);} }/>   
-        <Route exact path= "/personalinfo" render={()=>{ return(<div style={{display:'flex'}}><div>{renderSidebar(2, isLeader)}</div><PersonalInfo/></div>);} }/>   
-        <Route exact path= "/about" render={()=>{ return(<div style={{display:'flex'}}><div>{renderSidebar(3, isLeader)}</div><About/></div>);} }/>   
-        <Route exact path= "/contact" render={()=>{ return(<div style={{display:'flex'}}><div>{renderSidebar(4, isLeader)}</div><Contact/></div>);} }/>   
+        <Route exact path= "/login" render={()=>{return(<Login/>);} }/>   
+        <Route exact path= "/" render={()=>{return(<div style={{display:'flex'}}><div>{renderSidebar(0, isLeaderManager)}</div><Dashboard/></div>);} }/>   
+        <Route exact path= "/leaderboard" render={()=>{return(<div style={{display:'flex'}}><div>{renderSidebar(1, isLeaderManager)}</div><Leaderboard/></div>);} }/>   
+        <Route exact path= "/record" render={()=>{return(<div style={{display:'flex'}}><div>{renderSidebar(5, isLeaderManager)}</div><Record isLeaderManager={isLeaderManager}/></div>);} }/>   
+        <Route exact path= "/modify" render={()=>{return(<div style={{display:'flex'}}><div>{renderSidebar(6, isLeaderManager)}</div><Modify/></div>);} }/>   
+        <Route exact path= "/personalinfo" render={()=>{return(<div style={{display:'flex'}}><div>{renderSidebar(2, isLeaderManager)}</div><PersonalInfo/></div>);} }/>   
+        <Route exact path= "/about" render={()=>{return(<div style={{display:'flex'}}><div>{renderSidebar(3, isLeaderManager)}</div><About/></div>);} }/>   
+        <Route exact path= "/contact" render={()=>{return(<div style={{display:'flex'}}><div>{renderSidebar(4, isLeaderManager)}</div><Contact/></div>);} }/>   
       </Switch>
     </div>
     </Router>

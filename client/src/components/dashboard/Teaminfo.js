@@ -3,7 +3,7 @@ import Axios from "axios";
 import { useState, useEffect } from 'react';
 // // These are the variables to be changed
 // let teamname = "AlphaZero";
-// let description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu mi pellentesque, pulvinar sem in, blandit tellus. Maecenas sollicitudin pulvinar maximus. Fusce facilisis felis varius nisl euismod gravida. Quisque elementum cursus nisi eget iaculis...";
+let description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu mi pellentesque, pulvinar sem in, blandit tellus. Maecenas sollicitudin pulvinar maximus. Fusce facilisis felis varius nisl euismod gravida. Quisque elementum cursus nisi eget iaculis...";
 // let teamID = "69";
 // let department = "Parks";
 
@@ -23,13 +23,14 @@ function Teaminfo()
 
             <div className="info-grid">
                 <div className="details-container">
-                    <p className="p2" style={{'color': 'var(--neutral-400)'}}>Project Name</p>
+                    <p className="p2" style={{'color': 'var(--neutral-400)', wordWrap:'normal'}}>Project Name</p>
                     <h3 className="h3">{project.ProjectName}</h3>
                 </div>
 
                 <div className="description-container">
                     <p className="p2" style={{'color': 'var(--neutral-400)'}}>Description</p>
-                    <p className="p1" style={{'color': 'var(--neutral-600)'}}>{project.ProjDesc}</p>
+                    <p className="p1" style={{'color': 'var(--neutral-600)'}}>{description}</p>
+                    {/* <p className="p1" style={{'color': 'var(--neutral-600)'}}>{project.ProjDesc}</p> */}
                 </div>
                 
                 <div className="details-container">

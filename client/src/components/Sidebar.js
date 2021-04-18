@@ -3,6 +3,7 @@ import {ReactComponent as LogoSVG} from '../assets/scorifyLogo.svg';
 import {ReactComponent as DashboardSVG} from "../assets/dashboard.svg";
 import {ReactComponent as LeaderboardSVG} from "../assets/leaderboard.svg";
 import {ReactComponent as RecordSVG} from "../assets/clipboard.svg";
+import {ReactComponent as ModifySVG} from "../assets/modify.svg";
 import {ReactComponent as ProfileSVG} from "../assets/profile.svg";
 import {ReactComponent as AboutSVG} from "../assets/about.svg";
 import {ReactComponent as ContactSVG} from "../assets/contact.svg";
@@ -39,6 +40,12 @@ function Sidebar({currPage, isLeader})
                     <div className={"link-container"+(currPage===5?" link-focus":"")} style={isLeader===0?{display:'none'}:{}}>
                         <RecordSVG className="link-logo"/>
                         <h4 className="h4 link-text">Record</h4>
+                    </div>
+                </Link>
+                <Link className="link-react-router-dom" to={"/modify"}>
+                    <div className={"link-container"+(currPage===6?" link-focus":"")} style={isLeader===0?{display:'none'}:{}}>
+                        <ModifySVG className="link-logo"/>
+                        <h4 className="h4 link-text">Modify</h4>
                     </div>
                 </Link>
                 <Link className="link-react-router-dom" to={"/personalinfo"}>
