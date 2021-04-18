@@ -19,7 +19,7 @@ function App() {
     // <Router>
     <div className="App">
 
-      <Login></Login>
+      {/* <Login></Login> */}
 
       {/* <Sidebar currPage={currPage} isLeader={isLeader}/> */}
       {/* ROUTER and SWITCH HERE */}
@@ -46,7 +46,7 @@ function App() {
          setPage(1);
          return(<Leaderboard/>);}}/> */}
          {/* <PersonalInfo/> */}
-      {/* <Record></Record> */}
+      <Record></Record>
       {/* <About/> */}
       {/* <Contact/> */}
     </div>

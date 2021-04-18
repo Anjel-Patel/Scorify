@@ -12,8 +12,6 @@ app.use(express.json());
 
 const queryList = require("./query");
 const { json } = require("body-parser");
-// const { default: Attendance } = require("../scorify/client/src/components/dashboard/Attendance");
-;
 const [getProjectinfo,getCurrentScore,getScoreHistory,getAbsentDays,getPresentDays,getTeamMates,getTotalScore,getPersonalInfo,getStats,getPhoneNumers,getLeaderboard,getFullName,getDepartment,getCurrentRecordMembers,getCurrentRecordLeaders,getDateLeader,
   getLUWeekNoLeader,getLUWeekNoManager,getDateManager] = queryList(eID);
 
@@ -33,10 +31,11 @@ const db = mysql.createConnection({
     const empIDlist = Object.keys(scoreDict);
     for (empID of empIDlist)
     {
-      if(records[empID]['Attendance']===0)
-      { console.log('1');
+      console.log(records[empID]['attendance']);
+      if(records[empID]['attendance']===0)
+      { 
         db.query(
-          "INSERT INTO absences (empid, date,) VALUES (?, ?) on duplicate key update empid = ?, date = ?",
+          "INSERT INTO absences (empid, date) VALUES (?, ?) on duplicate key update empid = ?, date = ?",
           [empID,selectedDate,empID,selectedDate],
           (err, result) => {
             if (err) {
@@ -59,7 +58,7 @@ const db = mysql.createConnection({
           );
       }
       else
-      { console.log('2');
+      { 
         if(records[empID]['overtimeHours'] !=='0' && records[empID]['overtimeHours'] !=='-')
         {
           const overtime = parseInt(records[empID]['overtimeHours']);
@@ -144,8 +143,6 @@ const db = mysql.createConnection({
     });     
   
   });
-
-  
 
   app.get("/currentrecords", (req, res) => {
     db.query(`select roleEmployee(${eID}) as role`, (err, res1) => {

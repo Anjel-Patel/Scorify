@@ -89,7 +89,7 @@ function Record() {
         const updateRecords = () => {
             // console.log({curDate :curDate,scoreDict : scoreDict, records: recordDict[curDate]});
             Axios.post("http://localhost:8000/updatedrecords", {curDate :curDate,scoreDict : scoreDict, records: recordDict[curDate]}).then(
-                () => { console.log({curDate :curDate,scoreDict : scoreDict, records: recordDict[curDate], rstate : 0 })
+                () => { console.log({curDate :curDate,scoreDict : scoreDict, records: recordDict[curDate], rstate : 0 })  //0 for manager 1 for leader
             });
           };
    
