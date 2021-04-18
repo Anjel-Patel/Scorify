@@ -19,7 +19,7 @@ function keepCloning(objectpassed) {
         
         temp[date][empID]['overtimeHours']='0';
         temp[date][empID]['attendance']=1;
-        setEditMode(1);
+        setEditMode(1);    
         setDetails(temp);
     }
     else

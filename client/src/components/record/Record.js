@@ -13,7 +13,7 @@ import {ReactComponent as InfoSVG} from "../../assets/info.svg";
 
 
 
-function Rowmaker(currentDetails,recordDict,setRecordDict,curDate) {
+function Rowmaker(currentDetails,recordDict,setRecordDict,curDate,role) {
     //Loops through the details array
     if( typeof(recordDict[curDate]) !== 'undefined')
     {return currentDetails.map((info, i) => (
@@ -23,7 +23,7 @@ function Rowmaker(currentDetails,recordDict,setRecordDict,curDate) {
         details = {recordDict}
         date = {curDate}
         empID={info.empID}
-        role= {'Member'}
+        role= {role}
         prev_score={info.score} 
         prev_normalHours={info.normalhours} 
         prev_overtimeHours={info.overtime} 
@@ -55,8 +55,10 @@ function Record() {
     const [scoreDict,setScoreDict] = useState([]);
     var dict ={};
     var sdict = {};
+    var role = 'Member';//will change to leader for manager based on routing and record prop
     useEffect(() => {
-        Axios.get("http://localhost:8000/currentrecords").then((response) => {
+ 
+        Axios.get('http://localhost:8000/currentrecords').then((response) => {
             const [res1,res2]=(response.data).split("   ",2);
             // console.log(response.data);
             const cd = JSON.parse(res1);
@@ -87,7 +89,7 @@ function Record() {
         const updateRecords = () => {
             // console.log({curDate :curDate,scoreDict : scoreDict, records: recordDict[curDate]});
             Axios.post("http://localhost:8000/updatedrecords", {curDate :curDate,scoreDict : scoreDict, records: recordDict[curDate]}).then(
-                () => { console.log({curDate :curDate,scoreDict : scoreDict, records: recordDict[curDate]})
+                () => { console.log({curDate :curDate,scoreDict : scoreDict, records: recordDict[curDate], rstate : 0 })
             });
           };
    
@@ -139,7 +141,7 @@ function Record() {
                     </div>
 
                     {/* Rows */}
-                    <div className="rows">{Rowmaker(currentDetails,recordDict,setRecordDict,curDate)}</div>
+                    <div className="rows">{Rowmaker(currentDetails,recordDict,setRecordDict,curDate,role)}</div>
                     <div className="empty-div"></div>
 
                     {/* SAVE BUTTON */}
