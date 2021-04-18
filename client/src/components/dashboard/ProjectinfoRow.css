@@ -1,0 +1,13 @@
+.row-rect {
+    height: 56px;
+    background: var(--neutral-100);
+    position: relative;
+    border-radius: 12px;
+    margin: 8px 24px;
+}
+
+.details {
+    position: absolute;
+    margin-top: 14px;
+    color: var(--neutral-800);
+}
