@@ -10,10 +10,10 @@ import Record from "./components/record/Record";
 import {useState} from "react";
 import {BrowserRouter as Router,Switch,Route} from 'react-router-dom';
 
-function renderSidebar(currPage, isLeader){
+function renderSidebar(currPage, isLeaderManager){
   return(
     <div>
-      <Sidebar currPage={currPage} isLeader={isLeader}/>
+      <Sidebar currPage={currPage} isLeaderManager={isLeaderManager}/>
     </div>
   );
 }
