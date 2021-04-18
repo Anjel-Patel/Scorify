@@ -53,13 +53,12 @@ function Record() {
     const [curDate,setCurDate] = useState(''); 
     const [recordDict,setRecordDict] = useState({});
     const [scoreDict,setScoreDict] = useState([]);
-    var dict ={};
-    var sdict = {};
+    const [name,setName] = useState('');
     var role = 'Member';//will change to leader for manager based on routing and record prop
     useEffect(() => {
  
         Axios.get('http://localhost:8000/currentrecords').then((response) => {
-            const [res1,res2]=(response.data).split("   ",2);
+            const [res1,res2,res3]=(response.data).split("   ",3);
             // console.log(response.data);
             const cd = JSON.parse(res1);
             setCurrentDetails(cd);
@@ -67,17 +66,19 @@ function Record() {
             setDates(d);
             // console.log(JSON.parse(res2)[0]);
             setCurDate(d[0]);
-            
-                for(let i=0;i<7;i++)
-                {   if(i!==4){//nosunday
-                    var e = {};
-                    for(let j=0;j<cd.length;j++)
-                        e[cd[j].empID] ={ attendance: 1, overtimeHours : '0'};
-                    dict[d[i]]=e;
-                    }
-                };
-                for(let i=0;i<cd.length;i++)
-                    sdict[cd[i].empID] ='-';
+            setName((JSON.parse(res3)).fname);
+            var sdict = {};
+            var dict ={};
+            for(let i=0;i<7;i++)
+            {   if(i!==4){//nosunday
+                var e = {};
+                for(let j=0;j<cd.length;j++)
+                    e[cd[j].empID] ={ attendance: 1, overtimeHours : '0'};
+                dict[d[i]]=e;
+                }
+            };
+            for(let i=0;i<cd.length;i++)
+                sdict[cd[i].empID] ='-';
             setRecordDict(dict);
 
             setScoreDict(sdict);
@@ -97,7 +98,7 @@ function Record() {
 
     return(
         <div className="page-rect">
-            <h1 className="h1 hello-text">Hello {"Ramirez"}</h1>
+            <h1 className="h1 hello-text">Hello {name}</h1>
 
             {/* LEFT SIDE */}
             <div className="record-sat-wrapper">

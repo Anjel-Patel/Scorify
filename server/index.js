@@ -6,14 +6,14 @@ const http = require('http');
 const moment = require("moment");
 // import moment from 'moment';
 const port = process.env.PORT || 8000
-const eID = 1001;
+const eID = 1002;
 app.use(cors());
 app.use(express.json());
 
 const queryList = require("./query");
-const { json } = require("body-parser");
+// const { json } = require("body-parser");
 const [getProjectinfo,getCurrentScore,getScoreHistory,getAbsentDays,getPresentDays,getTeamMates,getTotalScore,getPersonalInfo,getStats,getPhoneNumers,getLeaderboard,getFullName,getDepartment,getCurrentRecordMembers,getCurrentRecordLeaders,getDateLeader,
-  getLUWeekNoLeader,getLUWeekNoManager,getDateManager] = queryList(eID);
+  getLUWeekNoLeader,getLUWeekNoManager,getDateManager,getDeptInfo,getProjDept] = queryList(eID);
 
 const db = mysql.createConnection({
     user: "root",
@@ -22,6 +22,36 @@ const db = mysql.createConnection({
     database: "scorify",
     multipleStatements : true
   });
+
+  app.get("/revenue", (req, res) => {
+     
+    db.query(`select revenue from project where leaderid = ${eID}`, (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result[0]);
+      }
+    });
+  });
+
+  app.get("/deptdashboard", (req, res) => {
+    db.query(getDeptInfo, (err, res1) => {
+      if (err) {
+        console.log(err);
+      } else {
+          res.write(JSON.stringify(res1[0]));
+        }
+      });
+        db.query(getProjDept, (err, res2) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.write("   "+JSON.stringify(res2),() =>{
+            res.end();
+        });
+        }
+      });
+    });
 
   app.post("/updatedrecords", (req, res) => {
     
@@ -173,7 +203,16 @@ const db = mysql.createConnection({
             let d = moment(dob, "DD/MM/YY").add(i,'days');
             dates.push(moment(d).format("DD/MM/YY"));
           }
-          res.write("   "+JSON.stringify(dates),() =>{
+          res.write("   "+JSON.stringify(dates));
+        }
+      });
+
+      db.query(`select fname from employee where empid= ${eID}`, (err, result) => {
+        if (err) {
+          console.log(err);
+        } else {
+
+          res.write("   "+JSON.stringify(result[0]),() =>{
             res.end();
         });
         }
@@ -216,7 +255,8 @@ const db = mysql.createConnection({
     
     const {infohalf :{fullName, empID, emailID, DateOfBirth, Sex ,address}, phno} = req.body;
     const [first,last]=fullName.split(" ",2);
-    const dob =moment(DateOfBirth).format("YYYY-MM-DD");
+    const dob =moment(DateOfBirth,['DD-MM-YY','DD-MM-YYYY','DD/MM/YY','DD/MM/YYYY']).format("YYYY-MM-DD");
+    // console.log(dob);
     const s = Sex.charAt(0).toUpperCase();
     db.query(
       "UPDATE employee SET FName = ?,LName = ?, emailID = ?, DateOfBirth = ?, Sex = ?, address = ? WHERE empID = ?",
@@ -264,7 +304,6 @@ const db = mysql.createConnection({
     });
   });
 
-  
   app.get("/personalinfo", (req, res) => {
     db.query(getPersonalInfo, (err, result) => {
       if (err) {
@@ -294,6 +333,8 @@ const db = mysql.createConnection({
       }
     });
   });
+
+
 
   app.get("/totalscore", (req, res) => {
     db.query(getTotalScore, (err, result) => {

@@ -75,7 +75,7 @@ WHERE
             FROM
                 phone_number p
             WHERE
-                p.empID = e.empID) AS phno,
+                p.empID = e.empID limit 1) AS phno,
         e.emailID AS email,
         roleEmployee(e.empID) AS role,
         (SELECT 
@@ -263,6 +263,68 @@ FROM
     const getLUWeekNoLeader = `select max(WeekNo) as weekno from weekly_score where empid = ${eID}`;
     const getLUWeekNoManager =`select currentweekno as weekno from department where managerid = ${eID}`;
     const getDateManager = `select distinct date from weekly_score where weekno = (select currentweekno from department where managerid = ${eID}) `
-    return [getProjectinfo,getCurrentScore,getScoreHistory,getAbsentDays,getPresentDays,getTeamMates,getTotalScore,getPersonalInfo,getStats,getPhoneNumers,getLeaderboard,getFullName,getDepartment,getCurrentRecordMembers,getCurrentRecordLeaders,getDateLeader,getLUWeekNoLeader,getLUWeekNoManager,getDateManager];
+    
+    const getDeptInfo = `SELECT 
+            (select concat(fname,' ',lname) from employee where empid = ${eID}) as name,d.deptname as deptName,
+            d.deptid as deptId,
+            d.location,
+            (SELECT 
+                    SUM(p.revenue)
+                FROM
+                    project p
+                WHERE
+                    p.DeptID = d.deptid) AS totalRevenue,
+            (SELECT 
+                    COUNT(e.empid)
+                FROM
+                    employee e
+                WHERE
+                    e.deptid = d.deptid) AS totalemployees,
+            (SELECT 
+                    COUNT(p.projectid)
+                FROM
+                    project p
+                WHERE
+                    p.DeptID = d.deptid) AS totalProjects
+        FROM
+            department d
+        WHERE
+            d.managerid = ${eID}`;
+    
+    const getProjDept = `SELECT 
+    projectname,
+    (SELECT 
+            CONCAT(fname, ' ', lname)
+        FROM
+            employee
+        WHERE
+            empid = leaderid) AS fullName,
+    (SELECT 
+            number
+        FROM
+            phone_number
+        WHERE
+            empid = leaderid
+        LIMIT 1) AS phonuNumber,
+    (SELECT 
+            emailid
+        FROM
+            employee
+        WHERE
+            empid = leaderid) AS email,
+    revenue
+FROM
+    project
+WHERE
+    DeptID = (SELECT 
+            deptid
+        FROM
+            department
+        WHERE
+            managerid = ${eID})`;
+
+    
+    
+    return [getProjectinfo,getCurrentScore,getScoreHistory,getAbsentDays,getPresentDays,getTeamMates,getTotalScore,getPersonalInfo,getStats,getPhoneNumers,getLeaderboard,getFullName,getDepartment,getCurrentRecordMembers,getCurrentRecordLeaders,getDateLeader,getLUWeekNoLeader,getLUWeekNoManager,getDateManager,getDeptInfo,getProjDept];
 }
  module.exports= queryList;
