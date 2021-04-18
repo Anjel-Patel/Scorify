@@ -1,48 +1,99 @@
 import "./Record.css";
 import RecordRow from  "./RecordRow";
-import {useState} from "react";
+import Axios from "axios";
+import { useState, useEffect } from 'react';
 import {ReactComponent as InfoSVG} from "../../assets/info.svg";
 
-function somefunc(detailsState){
-    console.log(detailsState[0].name);
+
+ const logger=(e,scoreDict,setScoreDict) => {
+    let temp = {...scoreDict};
+    temp[e.target.name]=e.target.value;
+    setScoreDict(temp);
 }
 
-function Rowmaker(detailsState, setDetails) {
+
+
+function Rowmaker(currentDetails,recordDict,setRecordDict,curDate,role) {
     //Loops through the details array
-    return detailsState.map((info, i) => (
-        <RecordRow name= {info.name}
+    if( typeof(recordDict[curDate]) !== 'undefined')
+    {return currentDetails.map((info, i) => (
+        
+        <RecordRow name= {info.fullname}
         key={i}
-        role= {info.role}
-        prev_score={info.prev_score} 
-        prev_normalHours={info.prev_normalHours} 
-        prev_overtimeHours={info.prev_overtimeHours} 
-        attendance={info.attendance} 
-        overtimeHours={(info.overtimeHours>=0 && info.attendance===1)?info.overtimeHours:"-"}
-        setDetails={setDetails}/>
-    ));
-}
-
-function SatRowmaker(details) {
-    return details.map((info, i) => (
-        <div className="sat-details-wrapper" style={{marginBottom:'12px'}}>
-            <input className="h5 record-field" value={info.satisfaction} style={{textAlign:"center"}}></input>
+        details = {recordDict}
+        date = {curDate}
+        empID={info.empID}
+        role= {role}
+        prev_score={info.score} 
+        prev_normalHours={info.normalhours} 
+        prev_overtimeHours={info.overtime} 
+        attendance={recordDict[curDate][info.empID]['attendance']} 
+        overtimeHours={recordDict[curDate][info.empID]['overtimeHours']}
+        setDetails={setRecordDict}
+        />
+    ));}
+};
+function SatRowmaker(scoreDict,setScoreDict) {
+    if( typeof(scoreDict) !== 'undefined')
+    {
+    const empID = Object.keys(scoreDict);
+    return empID.map((id, i) => (
+        <div key = {i} className="sat-details-wrapper" style={{marginBottom:'12px'}}>
+            <input key = {id} className="h5 record-field" name = {id} value={scoreDict[id]}  onChange={(e)=>{logger(e,scoreDict,setScoreDict)}} style={{textAlign:"center"}}></input>
         </div>
     ));
 }
+};
+
+
 function Record() {
 
-    const details = [
-        {name : 'Kelvin Gupta', role : 'Member', prev_score: 400, prev_normalHours: 30, prev_overtimeHours: 10, overtimeHours: 2, attendance: 1, satisfaction: 7},
-        {name : 'Jonas Sharma', role : 'Member', prev_score: 375, prev_normalHours: 28, prev_overtimeHours: 10, overtimeHours: 4, attendance: 0, satisfaction: 9},
-        {name : 'Ligma Sinha', role : 'Member', prev_score: 300, prev_normalHours: 25, prev_overtimeHours: 8, overtimeHours: -1, attendance: 0, satisfaction: 4},
-        {name : 'Ramirez Shah', role : 'Leader', prev_score: 280, prev_normalHours: 22, prev_overtimeHours: 9, overtimeHours: 1, attendance: 1, satisfaction: 7},
-        {name : 'Raju Sebastain', role : 'Member', prev_score: 250, prev_normalHours: 20, prev_overtimeHours: 5, overtimeHours: -1, attendance: 0, satisfaction: 6},
-    ];
+    const [currentDetails, setCurrentDetails] = useState([]);
+    const [dates,setDates] = useState([]);
+    const [curDate,setCurDate] = useState(''); 
+    const [recordDict,setRecordDict] = useState({});
+    const [scoreDict,setScoreDict] = useState([]);
+    var dict ={};
+    var sdict = {};
+    var role = 'Member';//will change to leader for manager based on routing and record prop
+    useEffect(() => {
+ 
+        Axios.get('http://localhost:8000/currentrecords').then((response) => {
+            const [res1,res2]=(response.data).split("   ",2);
+            // console.log(response.data);
+            const cd = JSON.parse(res1);
+            setCurrentDetails(cd);
+            const d =JSON.parse(res2);
+            setDates(d);
+            // console.log(JSON.parse(res2)[0]);
+            setCurDate(d[0]);
+            
+                for(let i=0;i<7;i++)
+                {   if(i!==4){//nosunday
+                    var e = {};
+                    for(let j=0;j<cd.length;j++)
+                        e[cd[j].empID] ={ attendance: 1, overtimeHours : '0'};
+                    dict[d[i]]=e;
+                    }
+                };
+                for(let i=0;i<cd.length;i++)
+                    sdict[cd[i].empID] ='-';
+            setRecordDict(dict);
 
-    const [detailsState, setDetails] = useState(details);
+            setScoreDict(sdict);
+            
+          });
+        },[]);
+
+    
+        const updateRecords = () => {
+            // console.log({curDate :curDate,scoreDict : scoreDict, records: recordDict[curDate]});
+            Axios.post("http://localhost:8000/updatedrecords", {curDate :curDate,scoreDict : scoreDict, records: recordDict[curDate]}).then(
+                () => { console.log({curDate :curDate,scoreDict : scoreDict, records: recordDict[curDate], rstate : 0 })
+            });
+          };
+   
     const current_week = '21/04/2021';
-
-    const date_list = ['21/04/2021','22/04/2021','23/04/2021','24/04/2021','25/04/2021','26/04/2021'];
 
     return(
         <div className="page-rect">
@@ -61,14 +112,16 @@ function Record() {
 
                     {/* Main Header */}
                     <div className="main-header-wrapper">
-                        <select classname="h5 date-dropdown" name="date-dropdown" id="date-dropdown" onChange={(e)=>{console.log(e)}}>
+                        <select className="h5 date-dropdown" name="date-dropdown" id="date-dropdown" onChange={(e)=>{setCurDate(e.target.value)}}>
                             <optgroup className="optgroup h5">
-                                <option value={date_list[0]}>{date_list[0]}</option>
-                                <option value={date_list[1]}>{date_list[1]}</option>
-                                <option value={date_list[2]}>{date_list[2]}</option>
-                                <option value={date_list[3]}>{date_list[3]}</option>
-                                <option value={date_list[4]}>{date_list[4]}</option>
-                                <option value={date_list[5]}>{date_list[5]}</option>
+                                <option value={dates[0]}>{dates[0]}</option>
+                                <option value={dates[1]}>{dates[1]}</option>
+                                <option value={dates[2]}>{dates[2]}</option>
+                                <option value={dates[3]}>{dates[3]}</option>
+                                {/* <option value={dates[4]}>{dates[4]}</option> */}
+                                <option value={dates[5]}>{dates[5]}</option>
+                                <option value={dates[6]}>{dates[6]}</option>
+
                             </optgroup>
                         </select>
                         <h4 className="h4" style={{color:'var(--neutral-400)', marginLeft:'302px'}}>Performance last week</h4>
@@ -88,15 +141,15 @@ function Record() {
                     </div>
 
                     {/* Rows */}
-                    <div className="rows">{Rowmaker(detailsState, setDetails)}</div>
+                    <div className="rows">{Rowmaker(currentDetails,recordDict,setRecordDict,curDate,role)}</div>
                     <div className="empty-div"></div>
 
                     {/* SAVE BUTTON */}
-                    <div className="record-save-btn">
-                        <h4 className="h4 record-save-text" style={{userSelect:'none'}} onClick={somefunc(detailsState)}>Save</h4>
+                    <div className="record-save-btn"   onClick={updateRecords} >
+                        <h4 className="h4 record-save-text" style={{userSelect:'none'}}  >Save</h4>
                     </div>
                 </div>
-
+                {/* onClick={somefunc(detailsState)} */}
                 {/* RIGHT SIDE */}
                 <div className="sat-wrapper">
                     <h4 className="h4" style={{marginTop:'24px'}}>Current Week</h4>
@@ -105,7 +158,7 @@ function Record() {
                         <h5 className="h5 sat-header">Satisfaction</h5>
                         <InfoSVG className="info-svg"></InfoSVG>
                     </div>
-                    <div style={{marginTop:'28px', display:'flex', flexDirection:'column'}}>{SatRowmaker(details)}</div>
+                    <div style={{marginTop:'28px', display:'flex', flexDirection:'column'}}>{SatRowmaker(scoreDict,setScoreDict)}</div>
                 </div>
             </div>
         </div>
