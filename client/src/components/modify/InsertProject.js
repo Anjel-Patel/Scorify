@@ -133,14 +133,14 @@ function InsertProject({emptyEmployee,add,setAdd}) {
                     <div className="select-employee">   
                         <p className="p1" style={{color:'var(--neutral-400)'}}>Select Employee</p>
                         <div className="title-seperator" style={{margin:'8px 0px'}}></div>
-                        <select name="dropdown" id="modify-dropdown-1" style={{alignSelf:'center', marginTop:'16px'}}  onChange ={(e) => setEmployee(e.target.value)>
+                        <select name="dropdown" id="modify-dropdown-1" style={{alignSelf:'center', marginTop:'16px'}}  onChange ={(e) => setEmployee(e.target.value)}>
                             <optgroup id="optgroup-1">
                                 <option key = {-1} value={''} >{''}</option>
                                 {Dropdownmaker2(emptyEmployee,leader)}
                             </optgroup>
                         </select>
                         <div className="empty-div"></div>
-                        <div className="add-employee-to-project-btn" onClick = {}>
+                        <div className="add-employee-to-project-btn" >
                             <PlusSVG></PlusSVG>
                             <h5 className="h5" style={{marginLeft:'16px'}}>Add to project</h5>
                         </div>

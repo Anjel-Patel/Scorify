@@ -23,10 +23,14 @@ const db = mysql.createConnection({
     multipleStatements : true
   });
 
+  // app.post("/authenticate", (req, res) => {
+  //   var eID=req.body.eID;
+  //   var password=req.body.password;
+  
 
 
   app.put("/insertemployee", (req, res) => {
-    const {infohalf :{firstName,lastName,emailId, DateOfBirth, Sex ,address,projectName}, phno} = req.body;
+    const {infohalf :{firstName,lastName,emailId, DateOfBirth, Sex ,address,projectName}} = req.body;
     deptId=21;  
     const dob =moment(DateOfBirth,['DD-MM-YY','DD-MM-YYYY','DD/MM/YY','DD/MM/YYYY']).format("YYYY-MM-DD");
     const s = Sex.charAt(0).toUpperCase();

@@ -81,14 +81,14 @@ function InsertEmployee({allProjects,add,setAdd})
                         </optgroup>
                     </select>
                 </div>
-                <div className="field-wrapper">
+                {/* <div className="field-wrapper">
                     <p className="p1">Ph No.</p>
                     <input type="text" className="modify-input-field" name = 'phone 0' onChange={logger} />
                 </div>
                 <div className="field-wrapper">
                     <p className="p1">Alternative Ph No.</p>
                     <input type="text" className="modify-input-field" name = 'phone 1' onChange={logger} />
-                </div>
+                </div> */}
                 <div className="field-wrapper">
                     <p className="p1">Address</p>
                     <textarea rows={4} className="address p1 address-text field" name = 'address'  style={{border:'1px solid var(--neutral-300)',

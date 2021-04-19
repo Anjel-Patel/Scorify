@@ -25,7 +25,7 @@ function Modify() {
             <h1 className="h1 hello-text">Hello {FName}</h1>
             <div className="modify-wrapper">
                 <InsertEmployee  allProjects = {allProjects} add={add} setAdd= {setAdd} />
-                <InsertProject  emptyEmployee= {nullEmployee} add={add} setAdd= {setAdd} />
+                {/* <InsertProject  emptyEmployee= {nullEmployee} add={add} setAdd= {setAdd} /> */}
             </div>
         </div>
     );
