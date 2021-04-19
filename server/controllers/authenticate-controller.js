@@ -60,8 +60,8 @@ module.exports.authenticate=function(req,res){
       });
     return eID;
 }
-app.listen(port, () => {
+/*app.listen(port, () => {
     console.log("Server is running on 8000");
   //   const attendance_perc = absent ;
   // console.log(attendance_perc);
-  });
+  });*/
