@@ -32,7 +32,7 @@ function Contact() {
             </div>
             <p className="p1 dev-location">From BITS Pilani Hyderabad Campus</p>
             <div></div>
-            <ContactPeopleSVG classname="contact-people-svg"/>
+            <ContactPeopleSVG className="contact-people-svg"/>
         </div>
     );
 }

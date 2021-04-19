@@ -13,7 +13,7 @@ import {ReactComponent as InfoSVG} from "../../assets/info.svg";
 
 
 
-function Rowmaker(currentDetails,recordDict,setRecordDict,curDate,role) {
+function Rowmaker(currentDetails,recordDict,setRecordDict,curDate,Role) {
     //Loops through the details array
     if( typeof(recordDict[curDate]) !== 'undefined')
     {return currentDetails.map((info, i) => (
@@ -23,7 +23,7 @@ function Rowmaker(currentDetails,recordDict,setRecordDict,curDate,role) {
         details = {recordDict}
         date = {curDate}
         empID={info.empID}
-        role= {role}
+        role= {Role}
         prev_score={info.score} 
         prev_normalHours={info.normalhours} 
         prev_overtimeHours={info.overtime} 
@@ -46,20 +46,19 @@ function SatRowmaker(scoreDict,setScoreDict) {
 };
 
 
-function Record() {
+function Record({role}) {
 
     const [currentDetails, setCurrentDetails] = useState([]);
     const [dates,setDates] = useState([]);
     const [curDate,setCurDate] = useState(''); 
     const [recordDict,setRecordDict] = useState({});
     const [scoreDict,setScoreDict] = useState([]);
-    var dict ={};
-    var sdict = {};
-    var role = 'Member';//will change to leader for manager based on routing and record prop
+    const [name,setName] = useState('');
+    var Role = role===1?'Member':'Leader';//will change to leader for manager based on routing and record prop
     useEffect(() => {
  
         Axios.get('http://localhost:8000/currentrecords').then((response) => {
-            const [res1,res2]=(response.data).split("   ",2);
+            const [res1,res2,res3]=(response.data).split("   ",3);
             // console.log(response.data);
             const cd = JSON.parse(res1);
             setCurrentDetails(cd);
@@ -67,17 +66,19 @@ function Record() {
             setDates(d);
             // console.log(JSON.parse(res2)[0]);
             setCurDate(d[0]);
-            
-                for(let i=0;i<7;i++)
-                {   if(i!==4){//nosunday
-                    var e = {};
-                    for(let j=0;j<cd.length;j++)
-                        e[cd[j].empID] ={ attendance: 1, overtimeHours : '0'};
-                    dict[d[i]]=e;
-                    }
-                };
-                for(let i=0;i<cd.length;i++)
-                    sdict[cd[i].empID] ='-';
+            setName((JSON.parse(res3)).fname);
+            var sdict = {};
+            var dict ={};
+            for(let i=0;i<7;i++)
+            {   if(i!==4){//nosunday
+                var e = {};
+                for(let j=0;j<cd.length;j++)
+                    e[cd[j].empID] ={ attendance: 1, overtimeHours : '0'};
+                dict[d[i]]=e;
+                }
+            };
+            for(let i=0;i<cd.length;i++)
+                sdict[cd[i].empID] ='-';
             setRecordDict(dict);
 
             setScoreDict(sdict);
@@ -88,16 +89,17 @@ function Record() {
     
         const updateRecords = () => {
             // console.log({curDate :curDate,scoreDict : scoreDict, records: recordDict[curDate]});
-            Axios.post("http://localhost:8000/updatedrecords", {curDate :curDate,scoreDict : scoreDict, records: recordDict[curDate]}).then(
-                () => { console.log({curDate :curDate,scoreDict : scoreDict, records: recordDict[curDate], rstate : 0 })  //0 for manager 1 for leader
-            });
+            Axios.post("http://localhost:8000/updatedrecords", {curDate :curDate,scoreDict : scoreDict, records: recordDict[curDate], rstate : role})
+            // .then(
+            //     () => { console.log({curDate :curDate,scoreDict : scoreDict, records: recordDict[curDate], rstate : 0 })  //2 for manager 1 for leader
+            // });
           };
    
-    const current_week = '21/04/2021';
+    const current_week = '20/04/2021';
 
     return(
         <div className="page-rect">
-            <h1 className="h1 hello-text">Hello {"Ramirez"}</h1>
+            <h1 className="h1 hello-text">Hello {name}</h1>
 
             {/* LEFT SIDE */}
             <div className="record-sat-wrapper">
@@ -121,7 +123,6 @@ function Record() {
                                 {/* <option value={dates[4]}>{dates[4]}</option> */}
                                 <option value={dates[5]}>{dates[5]}</option>
                                 <option value={dates[6]}>{dates[6]}</option>
-
                             </optgroup>
                         </select>
                         <h4 className="h4" style={{color:'var(--neutral-400)', marginLeft:'302px'}}>Performance last week</h4>
@@ -141,7 +142,7 @@ function Record() {
                     </div>
 
                     {/* Rows */}
-                    <div className="rows">{Rowmaker(currentDetails,recordDict,setRecordDict,curDate,role)}</div>
+                    <div className="rows">{Rowmaker(currentDetails,recordDict,setRecordDict,curDate,Role)}</div>
                     <div className="empty-div"></div>
 
                     {/* SAVE BUTTON */}
