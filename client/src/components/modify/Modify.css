@@ -1,5 +1,5 @@
 .modify-wrapper {
-    width: 1480px;
+    width:fit-content;
     height: 856px;
     display: flex;
     flex-direction: row;

@@ -20,7 +20,7 @@ function renderSidebar(currPage, role){
 }
 
 function App() {
-  const [role, setRole] = useState(0);
+  const [role, setRole] = useState(2);
 
   return (
     <Router>

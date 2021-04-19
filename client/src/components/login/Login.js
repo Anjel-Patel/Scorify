@@ -6,7 +6,11 @@ import { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Link } from "react-router-dom";
 const regexEmail = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
-const regexPassword = /"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"/;
+const regexPassword = /^[\S]{6,10}$/;
+/*const ConditionalLink = ({ children, to, condition }) => (!!condition && to)
+      ? <Link to={to}>{children}</Link>
+      : <>{children}</>;*/
+
 /*const ConditionalLink = ({ children, to, condition }) => (!!condition && to)
       ? <Link to={to}>{children}</Link>
       : <>{children}</>;*/
@@ -26,13 +30,10 @@ function Login({ setRole }) {
       console.log(response);
     });
   };
-
-  /*Axios.get("http://localhost:8000/role",{
-       
-    }).then((result) => {
-        setRole(Number(result));
-    });*/
-  function Validate(e, p, i) {
+  Axios.get("http://localhost:8000/role").then((result) => {
+    setRole(parseInt(result.data));
+  });
+  function Validate(e, i) {
     switch (i) {
       case "email":
         if (regexEmail.test(e)) {
@@ -40,19 +41,14 @@ function Login({ setRole }) {
         } else {
           setIsValid1(1);
         }
-        break;
       case "password":
-        if (regexPassword.test(p)) {
-          etIsValid2(0);
+        if (regexPassword.test(e)) {
+          setIsValid2(0);
         } else {
           setIsValid2(1);
         }
-        break;
     }
   }
-  const errorColor = {
-    color: "red",
-  };
 
   return (
     <div className="login-page-rect">
@@ -68,11 +64,10 @@ function Login({ setRole }) {
             type="int"
             onChange={(e) => {
               seteid(e.target.value);
-              Validate(eID, password, e.target.id);
+              Validate(e.target.value, e.target.id);
             }}
-            className={"p1 input-field" + (isError ? "-error" : "")}
+            className={"p1 input-field" + (isValid1 === 1 ? "-error" : "")}
             id="email"
-            style={isValid1 === 1 ? errorColor : {}}
           />
         </div>
         <div style={{ marginBottom: "24px" }}>
@@ -81,10 +76,9 @@ function Login({ setRole }) {
             type="password"
             onChange={(e) => {
               setpassword(e.target.value);
-              Validate(eID, password, e.target.id);
+              Validate(e.target.value, e.target.id);
             }}
-            className={"p1 input-field" + (isError ? "-error" : "")}
-            style={isValid1 === 1 ? errorColor : {}}
+            className={"p1 input-field" + (isValid2 === 1 ? "-error" : "")}
             id="password"
           />
         </div>
@@ -92,7 +86,7 @@ function Login({ setRole }) {
           Forgot Password?
         </h6>
         <div className="empty-div"></div>
-        <Link className="link-react-router-dom" to={"/dashboard"}>
+        <Link className="link-react-router-dom" to={"/"}>
           <div className="login-btn" onClick={log}>
             <h5 className="h5">Sign in</h5>
           </div>
