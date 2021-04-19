@@ -47,6 +47,9 @@ function SatRowmaker(scoreDict,setScoreDict) {
 
 
 function Record({role}) {
+    // for frontend👇
+    const [saveanim, setsaveanim] = useState(0);
+    // for frontend👆
 
     const [currentDetails, setCurrentDetails] = useState([]);
     const [dates,setDates] = useState([]);
@@ -88,6 +91,7 @@ function Record({role}) {
 
     
         const updateRecords = () => {
+            setsaveanim(1);
             // console.log({curDate :curDate,scoreDict : scoreDict, records: recordDict[curDate]});
             Axios.post("http://localhost:8000/updatedrecords", {curDate :curDate,scoreDict : scoreDict, records: recordDict[curDate], rstate : role})
             // .then(
@@ -146,7 +150,7 @@ function Record({role}) {
                     <div className="empty-div"></div>
 
                     {/* SAVE BUTTON */}
-                    <div className="record-save-btn"   onClick={updateRecords} >
+                    <div className="record-save-btn" onClick={updateRecords} saveanim={saveanim} onAnimationEnd={() => setsaveanim(0)}>
                         <h4 className="h4 record-save-text" style={{userSelect:'none'}}  >Save</h4>
                     </div>
                 </div>
