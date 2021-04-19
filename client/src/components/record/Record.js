@@ -5,23 +5,22 @@ import { useState, useEffect } from "react";
 import { ReactComponent as InfoSVG } from "../../assets/info.svg";
 const regex = /^(1[0-0]|[1-9])$|^-$/;
 
-
-function Rowmaker(currentDetails,recordDict,setRecordDict,curDate,Role) {
-    //Loops through the details array
-    if( typeof(recordDict[curDate]) !== 'undefined')
-    {return currentDetails.map((info, i) => (
-        
-        <RecordRow name= {info.fullname}
+function Rowmaker(currentDetails, recordDict, setRecordDict, curDate, Role) {
+  //Loops through the details array
+  if (typeof recordDict[curDate] !== "undefined") {
+    return currentDetails.map((info, i) => (
+      <RecordRow
+        name={info.fullname}
         key={i}
         details={recordDict}
         date={curDate}
         empID={info.empID}
-        role= {Role}
-        prev_score={info.score} 
-        prev_normalHours={info.normalhours} 
-        prev_overtimeHours={info.overtime} 
-        attendance={recordDict[curDate][info.empID]['attendance']} 
-        overtimeHours={recordDict[curDate][info.empID]['overtimeHours']}
+        role={Role}
+        prev_score={info.score}
+        prev_normalHours={info.normalhours}
+        prev_overtimeHours={info.overtime}
+        attendance={recordDict[curDate][info.empID]["attendance"]}
+        overtimeHours={recordDict[curDate][info.empID]["overtimeHours"]}
         setDetails={setRecordDict}
       />
     ));
@@ -33,21 +32,20 @@ const errorColor = {
   textAlign: "center",
 };
 
-function Record({role}) {
-
-    const [currentDetails, setCurrentDetails] = useState([]);
-    const [dates,setDates] = useState([]);
-    const [curDate,setCurDate] = useState(''); 
-    const [recordDict,setRecordDict] = useState({});
-    const [scoreDict,setScoreDict] = useState([]);
-    const [name,setName] = useState('');
+function Record({ role }) {
+  const [currentDetails, setCurrentDetails] = useState([]);
+  const [dates, setDates] = useState([]);
+  const [curDate, setCurDate] = useState("");
+  const [recordDict, setRecordDict] = useState({});
+  const [scoreDict, setScoreDict] = useState([]);
+  const [name, setName] = useState("");
   const [isValid1, setIsValid1] = useState(0);
   const [editMode, setEditMode] = useState(0);
 
-  var Role = role===1?'Member':'Leader';//will change to leader for manager based on routing and record prop
+  var Role = role === 1 ? "Member" : "Leader"; //will change to leader for manager based on routing and record prop
   useEffect(() => {
     Axios.get("http://localhost:8000/currentrecords").then((response) => {
-      const [res1, res2] = response.data.split("   ", 2);
+      const [res1, res2, res3] = response.data.split("   ", 3);
       // console.log(response.data);
       const cd = JSON.parse(res1);
       setCurrentDetails(cd);
@@ -55,6 +53,9 @@ function Record({role}) {
       setDates(d);
       // console.log(JSON.parse(res2)[0]);
       setCurDate(d[0]);
+      setName(JSON.parse(res3).fname);
+      var sdict = {};
+      var dict = {};
 
       for (let i = 0; i < 7; i++) {
         if (i !== 4) {
@@ -79,7 +80,7 @@ function Record({role}) {
       curDate: curDate,
       scoreDict: scoreDict,
       records: recordDict[curDate],
-      rstate: role
+      rstate: role,
       //}).then(() => {
       //   console.log({
       //     curDate: curDate,
@@ -133,7 +134,7 @@ function Record({role}) {
     } else return false;
   }
 
-  const current_week = '20/04/2021';
+  const current_week = "20/04/2021";
 
   return (
     <div className="page-rect">
