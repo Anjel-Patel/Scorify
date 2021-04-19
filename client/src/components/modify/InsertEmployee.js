@@ -40,6 +40,7 @@ function InsertEmployee({allprojects,add,setAdd})
                     <p className="p1">Project</p>
                     <select className="h5 modify-dropdown" id="modify-dropdown-1">
                         <optgroup className="optgroup" id="optgroup-1">
+                            <option value=""></option>
                             {Dropdownmaker(projects)}
                         </optgroup>
                     </select>
