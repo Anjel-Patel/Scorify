@@ -94,33 +94,11 @@ const db = mysql.createConnection({
     });
   });
 
-<<<<<<< HEAD
   // app.post("/authenticate", (req, res) => {
   //   var eID=req.body.eID;
   //   var password=req.body.password;
 
 
-=======
-  // const [getProjectinfo,getCurrentScore,getScoreHistory,getAbsentDays,getPresentDays,getTeamMates,getTotalScore,getPersonalInfo,getStats,getPhoneNumers,getLeaderboard,getFullName,getDepartment,getCurrentRecordMembers,getCurrentRecordLeaders,getDateLeader,
-  // //   getLUWeekNoLeader,getLUWeekNoManager,getDateManager,getDeptInfo,getProjDept] = queryList(arr[0]);
-  // app.get("/role", (req, res) => {
-  //   db.query(`select roleEmployee(${eID}) as role`, (err, res1) => {
-  //     if (err) {
-  //       console.log(err);
-  //     } else {
-  //       if(res1[0].role==='Member'){      
-  //           res.send("0");
-  //       }
-  //       if(res1[0].role==='Leader'){      
-  //           res.send("1");
-  //       }
-  //       if(res1[0].role==='Manager'){     
-  //           res.send("2");
-  //       }   
-  // }
-  // });
-  // });
->>>>>>> origin/main
 
   app.put("/insertemployee", (req, res) => {
     const {infohalf :{firstName,lastName,emailId, DateOfBirth, Sex ,address,projectName}} = req.body;
