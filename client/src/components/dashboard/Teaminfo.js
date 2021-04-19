@@ -23,7 +23,7 @@ function Teaminfo()
 
             <div className="info-grid">
                 <div className="details-container">
-                    <p className="p2" style={{'color': 'var(--neutral-400)'}}>Project Name</p>
+                    <p className="p2" style={{'color': 'var(--neutral-400)', wordWrap:'normal'}}>Project Name</p>
                     <h3 className="h3">{project.ProjectName}</h3>
                 </div>
 

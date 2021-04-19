@@ -6,12 +6,12 @@ const http = require("http");
 const moment = require("moment");
 // import moment from 'moment';
 const port = process.env.PORT || 8000;
-const eID = 1002;
+const eID = 1003;
 app.use(cors());
 app.use(express.json());
 
 const queryList = require("./query");
-const { json } = require("body-parser");
+// const { json } = require("body-parser");
 const [
   getProjectinfo,
   getCurrentScore,
@@ -32,6 +32,8 @@ const [
   getLUWeekNoLeader,
   getLUWeekNoManager,
   getDateManager,
+  getDeptInfo,
+  getProjDept,
 ] = queryList(eID);
 
 const db = mysql.createConnection({
@@ -40,6 +42,102 @@ const db = mysql.createConnection({
   password: "password",
   database: "scorify",
   multipleStatements: true,
+});
+
+// app.post("/insertscore", (req, res) => {
+//   const {} = req.body;
+
+//   if()
+//   db.query("INSERT INTO employee (fname,lname,dateofbirth,sex,address,emailid,password,deptid) VALUES (?, ?, ?, ?, ?,? ,?, ?) ",
+//       [fname,lname,dateofbirth,sex,address,emailId,password,deptId],
+//       (err, result) => {
+//         if (err)
+//           console.log(err);
+//       }
+//     );
+
+//   db.query("INSERT INTO employee (fname,lname,dateofbirth,sex,address,emailid,password,projectID,deptid) VALUES (?, ?, ?, ?, ?,? ,?, ?) ",
+//       [fname,lname,dateofbirth,sex,address,emailId,password,projectId,deptId],
+//       (err, result) => {
+//         if (err)
+//           console.log(err);
+//       }
+//     );
+//   });
+
+app.get("/data", (req, res) => {
+  db.query(
+    ` select concat(fname,' ',lname) as name from employee where projectId is null`,
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        let arr = result.map((dict, i) => dict["name"]);
+        res.write(JSON.stringify(arr));
+      }
+    }
+  );
+  db.query(
+    ` select projectname as projectName from project where deptid =(select deptid from department where managerid = ${eID})`,
+    (err, result2) => {
+      if (err) {
+        console.log(err);
+      } else {
+        let arr = result2.map((dict, i) => dict["projectName"]);
+        res.write("   " + JSON.stringify(arr));
+      }
+    }
+  );
+
+  db.query(`select fname from employee where empid= ${eID}`, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.write("   " + JSON.stringify(result[0]), () => {
+        res.end();
+      });
+    }
+  });
+});
+
+app.get("/revenue", (req, res) => {
+  db.query(
+    `select revenue from project where leaderid = ${eID}`,
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result[0]);
+      }
+    }
+  );
+});
+
+app.get("/deptdashboard", (req, res) => {
+  db.query(getDeptInfo, (err, res1) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.write(JSON.stringify(res1[0]));
+    }
+  });
+  db.query(getProjDept, (err, res2) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.write("   " + JSON.stringify(res2));
+    }
+  });
+
+  db.query(`select fname from employee where empid= ${eID}`, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.write("   " + JSON.stringify(result[0]), () => {
+        res.end();
+      });
+    }
+  });
 });
 
 app.post("/updatedrecords", (req, res) => {
@@ -191,11 +289,22 @@ app.get("/currentrecords", (req, res) => {
             let d = moment(dob, "DD/MM/YY").add(i, "days");
             dates.push(moment(d).format("DD/MM/YY"));
           }
-          res.write("   " + JSON.stringify(dates), () => {
-            res.end();
-          });
+          res.write("   " + JSON.stringify(dates));
         }
       });
+
+      db.query(
+        `select fname from employee where empid= ${eID}`,
+        (err, result) => {
+          if (err) {
+            console.log(err);
+          } else {
+            res.write("   " + JSON.stringify(result[0]), () => {
+              res.end();
+            });
+          }
+        }
+      );
     }
   });
 });
@@ -234,7 +343,13 @@ app.put("/updatedinfo", (req, res) => {
     phno,
   } = req.body;
   const [first, last] = fullName.split(" ", 2);
-  const dob = moment(DateOfBirth).format("YYYY-MM-DD");
+  const dob = moment(DateOfBirth, [
+    "DD-MM-YY",
+    "DD-MM-YYYY",
+    "DD/MM/YY",
+    "DD/MM/YYYY",
+  ]).format("YYYY-MM-DD");
+  // console.log(dob);
   const s = Sex.charAt(0).toUpperCase();
   db.query(
     "UPDATE employee SET FName = ?,LName = ?, emailID = ?, DateOfBirth = ?, Sex = ?, address = ? WHERE empID = ?",

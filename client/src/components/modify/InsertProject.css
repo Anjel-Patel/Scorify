@@ -1,0 +1,67 @@
+.add-members-wrapper {
+    margin-left: 24px;
+}
+
+.add-members-box {
+    width: 672px;
+    height: 298px;
+    border: 1px solid var(--neutral-300);
+    border-radius: 8px;
+    background: var(--white);
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+}
+
+.select-employee, .selected-employee {
+    width: 256px;
+    height: inherit;
+    padding: 16px;
+    border-right: 1px dashed var(--neutral-300);
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+}
+
+.selected-employee {
+    width: 416px;
+}
+
+.proj-emp-row {
+    width: auto;
+    margin: 8px 24px;
+    margin-left: 12px;
+    height: 36px;
+    background: var(--neutral-200);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px 16px;
+}
+
+.cross-svg {
+    color: var(--red-500);
+    cursor: pointer;
+}
+
+.add-employee-to-project-btn {
+    padding: 0px 16px;
+    align-self: center;
+    justify-self: flex-end;
+    width: 207px;
+    height: 50px;
+    border: 1px solid transparent;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    color: var(--green-500);
+    background: var(--green-200);
+    transition: var(--speed-fast) var(--timing-function) 50ms;
+}
+
+.add-employee-to-project-btn:hover {
+    cursor: pointer;
+    border: 1px solid var(--green-500);
+    transform: translateY(-1px);
+}

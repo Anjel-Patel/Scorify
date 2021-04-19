@@ -18,6 +18,7 @@ function Attendance({hist})
         setPresent(obj.present);
           });
         },[]); 
+        
     return(
         <div className="attendance-wrapper">
             <div className={"attendance-rect"+(hist===1?" low":"")}>

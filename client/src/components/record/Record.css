@@ -114,6 +114,7 @@ optgroup {
 
 .record-save-btn:hover {
   cursor: pointer;
+  transform: translateY(-1px);
   color: var(--neutral-600);
   border-color: var(--neutral-600);
 }
