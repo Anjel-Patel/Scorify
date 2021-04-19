@@ -9,6 +9,7 @@ const regexName = /^[a-zA-Z]{2,40}\s[a-zA-Z]{2,40}$/;
 const regexEmail = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
 const regexDob = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
 const regexGender = /^male$|^female$/;
+const regexPhone = /\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/;
 
 const crossStyle = {
   color: "var(--red-500)",
@@ -60,6 +61,18 @@ function Personalinfo() {
     projectName: "",
     DeptName: "",
   };
+  let errorText = {
+    nameError: "",
+    emailError: "",
+    dobError: "",
+    phoneNumbersError: "",
+    addressError: "",
+    genderError: "",
+  };
+  const errorColor = {
+    color: "red",
+  };
+
   let phoneDetails = [];
   const [info, setInfo] = useState(details);
   const [totalNormal, setTotalNormal] = useState(0);
@@ -67,6 +80,12 @@ function Personalinfo() {
   const [totalScore, setTotalScore] = useState(0);
   const [attendance, setAttendance] = useState([]);
   const [phoneNumbers, setPhoneNumers] = useState([]);
+  const [errorState, setError] = useState(errorText);
+  const [isValid1, setIsValid1] = useState(0);
+  const [isValid2, setIsValid2] = useState(0);
+  const [isValid3, setIsValid3] = useState(0);
+  const [isValid4, setIsValid4] = useState(0);
+  const [isValid5, setIsValid5] = useState(0);
 
   const updateInfo = () => {
     setEditMode(0);
@@ -113,10 +132,12 @@ function Personalinfo() {
       phoneDetails = [...phoneNumbers];
       let index = parseInt(e.target.name.charAt(6));
       phoneDetails[index] = e.target.value;
+      Validate(e.target.value, e.target.name);
       setPhoneNumers([...phoneDetails]);
     } else {
       details = { ...info };
       details[e.target.name] = e.target.value;
+      Validate(e.target.value, e.target.name);
       setInfo({ ...details });
     }
     // console.log(e.target);
@@ -125,6 +146,88 @@ function Personalinfo() {
 
     // setInfo({...info, e.target.value });
     // // console.log(e);
+  }
+
+  function Validate(e, i) {
+    switch (i) {
+      case "fullName":
+        if (regexName.test(e)) {
+          setIsValid1(0);
+          return false;
+        } else {
+          setIsValid1(1);
+          errorText.nameError = "asa";
+          setError({ ...details, ...details.nameError });
+          return true;
+        }
+      case "emailID":
+        if (regexEmail.test(e)) {
+          setIsValid2(0);
+          return false;
+        } else {
+          setIsValid2(1);
+          errorText.emailError = "asa";
+          setError({ ...details, ...details.emailError });
+          return true;
+        }
+      case "DateOfBirth":
+        if (regexDob.test(e)) {
+          setIsValid3(0);
+          return false;
+        } else {
+          setIsValid3(1);
+          errorText.dobError = "asa";
+          setError({ ...details, ...details.dobError });
+          return true;
+        }
+      case "Sex":
+        if (regexGender.test(e)) {
+          setIsValid4(0);
+          return false;
+        } else {
+          setIsValid4(1);
+          errorText.genderError = "asa";
+          setError({ ...details, ...details.genderError });
+          return true;
+        }
+      //case "address":
+      //if (regexAddress.test(e)) {
+      //  return false;
+      //} else {
+      //  details.addressError = "asa";
+      // setDetails({ ...details, ...details.addressError });
+      //return true;
+      //}
+    }
+    if (i.startsWith("phone")) {
+      if (regexPhone.test(e)) {
+        setIsValid5(0);
+      } else {
+        setIsValid5(1);
+      }
+    }
+  }
+  function Valid() {
+    if (isValid1 === 1) {
+      return true;
+    } else if (isValid2 === 1) {
+      return true;
+    } else if (isValid3 === 1) {
+      return true;
+    } else if (isValid4 === 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  function Valid5() {
+    {
+      if (isValid5 === 1) {
+        return "red";
+      } else {
+        return "black";
+      }
+    }
   }
 
   return (
@@ -140,13 +243,20 @@ function Personalinfo() {
         {/* LEFT SIDE */}
 
         <div className="left-side" style={editMode === 1 ? editableStyle : {}}>
-          <input
-            className="name h1 field-name"
-            name="fullName"
-            value={info.fullName}
-            onChange={logger}
-            readOnly={editMode === 0 ? true : false}
-          ></input>
+          <div>
+            <input
+              className="name h1 field-name"
+              name="fullName"
+              value={info.fullName}
+              style={isValid1 === 1 ? errorColor : {}}
+              onChange={logger}
+              readOnly={editMode === 0 ? true : false}
+            ></input>
+            <div style={{ fontSize: 12, color: "red" }}>
+              {errorState.nameError}
+            </div>
+          </div>
+
           <div className="detail-grid">
             <div className="id detail-div">
               <p className="p1 detail-title">ID</p>
@@ -158,37 +268,58 @@ function Personalinfo() {
             </div>
             <div>
               <p className="p1 detail-title">Email</p>
-              <input
-                className="email h3 field"
-                name="emailID"
-                value={info.emailID}
-                onChange={logger}
-                readOnly={editMode === 0 ? true : false}
-              ></input>
+              <div>
+                <input
+                  className="email h3 field"
+                  name="emailID"
+                  value={info.emailID}
+                  style={isValid2 === 1 ? errorColor : {}}
+                  onChange={logger}
+                  readOnly={editMode === 0 ? true : false}
+                ></input>
+                <div style={{ fontSize: 12, color: "red" }}>
+                  {errorState.emailError}
+                </div>
+              </div>
             </div>
             <div>
               <p className="p1 detail-title">DOB</p>
-              <input
-                className="dob h3 field"
-                name="DateOfBirth"
-                value={info.DateOfBirth}
-                onChange={logger}
-                readOnly={editMode === 0 ? true : false}
-              ></input>
+
+              <div>
+                <input
+                  className="dob h3 field"
+                  name="DateOfBirth"
+                  value={info.DateOfBirth}
+                  style={isValid3 === 1 ? errorColor : {}}
+                  onChange={logger}
+                  readOnly={editMode === 0 ? true : false}
+                ></input>
+                <div style={{ fontSize: 12, color: "red" }}>
+                  {errorState.dobError}
+                </div>
+              </div>
             </div>
             <div>
               <p className="p1 detail-title">Phone Number</p>
-              <div>{PhoneNumberGenerator(phoneNumbers, editMode, logger)}</div>
+              <div style={{ color: Valid5() }}>
+                {PhoneNumberGenerator(phoneNumbers, editMode, logger)}
+              </div>
             </div>
             <div>
               <p className="p1 detail-title">Gender</p>
-              <input
-                className="gender h3 field"
-                name="Sex"
-                value={info.Sex}
-                onChange={logger}
-                readOnly={editMode === 0 ? true : false}
-              ></input>
+              <div>
+                <input
+                  className="gender h3 field"
+                  name="Sex"
+                  value={info.Sex}
+                  style={isValid4 === 1 ? errorColor : {}}
+                  onChange={logger}
+                  readOnly={editMode === 0 ? true : false}
+                ></input>
+                <div style={{ fontSize: 12, color: "red" }}>
+                  {errorState.genderError}
+                </div>
+              </div>
             </div>
           </div>
           <div className="address">
@@ -278,12 +409,13 @@ function Personalinfo() {
             </div>
 
             {/* Save button */}
-            <div
+            <button
               className="save-btn"
               style={
                 editMode === 0 ? { display: "none", cursor: "default" } : {}
               }
               onClick={updateInfo}
+              disabled={Valid()}
             >
               <svg
                 className="arrow"
@@ -312,8 +444,10 @@ function Personalinfo() {
                   />
                 </g>
               </svg>
-              <h4 className="h4 save-text">Save</h4>
-            </div>
+              <h4 className="h4 save-text" disabled>
+                Save
+              </h4>
+            </button>
           </div>
         </div>
       </div>
