@@ -21,10 +21,12 @@ function Sidebar({currPage, role})
     return(
         <div className="bar-rect">
             <div className="scorify-box">
-                <div className="scorify-container">
-                    <LogoSVG className="logo-svg"/>
-                    <h3 className="h3 scorify">scorify.</h3>
-                </div>
+                <Link className="link-react-router-dom" to={"/login"}>
+                    <div className="scorify-container">
+                        <LogoSVG className="logo-svg"/>
+                        <h3 className="h3 scorify">scorify.</h3>
+                    </div>
+                </Link>
             </div>
             {/* ROUTER CAN BE USED HERE */}
             <div className="link-box">
