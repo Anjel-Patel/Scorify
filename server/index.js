@@ -6,13 +6,14 @@ const http = require('http');
 const moment = require("moment");
 // import moment from 'moment';
 const port = process.env.PORT || 8000
-const eID = 1001;
+const eID = 1002;
 app.use(cors());
 app.use(express.json());
 
 const queryList = require("./query");
-// const { json } = require("body-parser");
-const [getProjectinfo,getCurrentScore,getScoreHistory,getAbsentDays,getPresentDays,getTeamMates,getTotalScore,getPersonalInfo,getStats,getPhoneNumers,getLeaderboard,getFullName,getDepartment,getCurrentRecordMembers,getCurrentRecordLeaders,getDateLeader,
+const { copyFileSync } = require("fs");
+// // const { json } = require("body-parser");
+var [getProjectinfo,getCurrentScore,getScoreHistory,getAbsentDays,getPresentDays,getTeamMates,getTotalScore,getPersonalInfo,getStats,getPhoneNumers,getLeaderboard,getFullName,getDepartment,getCurrentRecordMembers,getCurrentRecordLeaders,getDateLeader,
   getLUWeekNoLeader,getLUWeekNoManager,getDateManager,getDeptInfo,getProjDept] = queryList(eID);
 
 const db = mysql.createConnection({
@@ -22,12 +23,104 @@ const db = mysql.createConnection({
     database: "scorify",
     multipleStatements : true
   });
+ var arr=[];
+  app.post("/authenticate", (req, res) => {
+    var eid=parseInt(req.body.eID);
+    console.log(req.body.eid);
+    console.log(eid);
+    arr.push[eid];
+    var password=req.body.password;
 
+    db.query(`SELECT password FROM employee WHERE EmpID = ${eid}`,[eid], function (error, results) {
+      if (error) {
+          res.send({
+            status:false,
+            message:'there are some error with query'
+            })
+      }else{
+        console.log(results);
+        console.log(typeof(password));
+        console.log(typeof(results[0].password));
+        console.log(password);
+        console.log(results[0].password);
+        if(results.length >0){
+            if(password===results[0].password){
+              // var role =0; 
+              db.query(`select roleEmployee(${eid}) as role`, (err, res1) => {
+                  if (err) {
+                    console.log(err);
+                  } else {
+                    console.log(res1[0].role);
+                    if(res1[0].role==='Member'){      
+                      res.send({
+                        status:1,
+                        message:"successfully authenticated",
+                        role : 0
+                    });
+                    }
+                    else if(res1[0].role==='Leader'){      
+                      res.send({
+                        status:1,
+                        message:"successfully authenticated",
+                        role : 1
+                    });
+                    }
+                    else{     
+                      res.send({
+                        status:1,
+                        message:"successfully authenticated",
+                        role : 2
+                    });
+                    }   
+              }
+              });
+               [getProjectinfo,getCurrentScore,getScoreHistory,getAbsentDays,getPresentDays,getTeamMates,getTotalScore,getPersonalInfo,getStats,getPhoneNumers,getLeaderboard,getFullName,getDepartment,getCurrentRecordMembers,getCurrentRecordLeaders,getDateLeader,
+                getLUWeekNoLeader,getLUWeekNoManager,getDateManager,getDeptInfo,getProjDept] = queryList(eid);
+                
+            }else{
+                res.send({
+                  status:0,
+                  message:"eid and password does not match"
+                 });
+            }   
+        }
+        else{
+          res.send({
+              status:-1,    
+            message:"eid does not exits"
+          });
+        }
+      }
+    });
+  });
+
+<<<<<<< HEAD
   // app.post("/authenticate", (req, res) => {
   //   var eID=req.body.eID;
   //   var password=req.body.password;
 
 
+=======
+  // const [getProjectinfo,getCurrentScore,getScoreHistory,getAbsentDays,getPresentDays,getTeamMates,getTotalScore,getPersonalInfo,getStats,getPhoneNumers,getLeaderboard,getFullName,getDepartment,getCurrentRecordMembers,getCurrentRecordLeaders,getDateLeader,
+  // //   getLUWeekNoLeader,getLUWeekNoManager,getDateManager,getDeptInfo,getProjDept] = queryList(arr[0]);
+  // app.get("/role", (req, res) => {
+  //   db.query(`select roleEmployee(${eID}) as role`, (err, res1) => {
+  //     if (err) {
+  //       console.log(err);
+  //     } else {
+  //       if(res1[0].role==='Member'){      
+  //           res.send("0");
+  //       }
+  //       if(res1[0].role==='Leader'){      
+  //           res.send("1");
+  //       }
+  //       if(res1[0].role==='Manager'){     
+  //           res.send("2");
+  //       }   
+  // }
+  // });
+  // });
+>>>>>>> origin/main
 
   app.put("/insertemployee", (req, res) => {
     const {infohalf :{firstName,lastName,emailId, DateOfBirth, Sex ,address,projectName}} = req.body;

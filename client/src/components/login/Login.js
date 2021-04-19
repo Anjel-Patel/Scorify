@@ -25,15 +25,18 @@ function Login({ setRole }) {
   const [isValid2, setIsValid2] = useState(0);
   const log = () => {
     Axios.post("http://localhost:8000/authenticate", {
-      eID: eID,
-      password: password,
-    }).then((response) => {
-      console.log(response);
-    });
-  };
-  Axios.get("http://localhost:8000/role").then((result) => {
-    setRole(parseInt(result.data));
-  });
+eID: eID,
+password: password, 
+}).then((response) => {
+ temp = response.data.role;
+ setError(response.data.status);
+ setRole(temp);
+ console.log(response);
+});
+};
+//   Axios.get("http://localhost:8000/role").then((result) => {
+//     setRole(parseInt(result.data));
+//   });
   function Validate(e, i) {
     switch (i) {
       case "email":
@@ -95,7 +98,7 @@ function Login({ setRole }) {
           Forgot Password?
         </h6>
         <div className="empty-div"></div>
-        <Link className="link-react-router-dom" to={isError?"/":"/login"}  >
+        <Link className="link-react-router-dom" to={isError?"/dashboard":"/"}  >
           <div className="login-btn" onClick={log}>
             <h5 className="h5">Sign in</h5>
           </div>
