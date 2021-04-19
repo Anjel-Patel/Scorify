@@ -95,7 +95,8 @@ function InsertEmployee({allProjects,add,setAdd})
                 borderRadius:'8px',
                 width:'672px',
                 marginTop:'8px',
-                backgroundColor: 'var(--white)'}}  onChange={logger} ></textarea>
+                backgroundColor: 'var(--white)',
+                padding:'16px'}}  onChange={logger} ></textarea>
                 </div>
             </div>
             <div className="empty-div" style={{flex:1}}></div>
