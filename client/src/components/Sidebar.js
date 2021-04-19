@@ -11,7 +11,12 @@ import { Link } from "react-router-dom";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import {useState} from "react";
 
-function Sidebar({currPage, isLeader})
+
+
+// style={role===0?{display:'none'}:{}}
+// style={role===0?{display:'none'}:{}}
+
+function Sidebar({currPage, role})
 {
     return(
         <div className="bar-rect">
@@ -36,18 +41,18 @@ function Sidebar({currPage, isLeader})
                         <h4 className="h4 link-text">Leaderboard</h4>
                     </div>
                 </Link>
-                <Link className="link-react-router-dom" to={"/record"}>
-                    <div className={"link-container"+(currPage===5?" link-focus":"")} style={isLeader===0?{display:'none'}:{}}>
+                {role!==0 && <Link className="link-react-router-dom" to={"/record"}>
+                    <div className={"link-container"+(currPage===5?" link-focus":"")}>
                         <RecordSVG className="link-logo"/>
                         <h4 className="h4 link-text">Record</h4>
                     </div>
-                </Link>
-                <Link className="link-react-router-dom" to={"/modify"}>
-                    <div className={"link-container"+(currPage===6?" link-focus":"")} style={isLeader===0?{display:'none'}:{}}>
+                </Link>}
+               {role===2 && <Link className="link-react-router-dom" to={"/modify"}>
+                    <div className={"link-container"+(currPage===6?" link-focus":"")} >
                         <ModifySVG className="link-logo"/>
                         <h4 className="h4 link-text">Modify</h4>
                     </div>
-                </Link>
+                </Link>}
                 <Link className="link-react-router-dom" to={"/personalinfo"}>
                     <div className={"link-container"+(currPage===2?" link-focus":"")}>
                         <ProfileSVG className="link-logo"/>

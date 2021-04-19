@@ -6,7 +6,7 @@ const http = require('http');
 const moment = require("moment");
 // import moment from 'moment';
 const port = process.env.PORT || 8000
-const eID = 1002;
+const eID = 1003;
 app.use(cors());
 app.use(express.json());
 
@@ -22,6 +22,30 @@ const db = mysql.createConnection({
     database: "scorify",
     multipleStatements : true
   });
+
+
+
+  // app.post("/insertscore", (req, res) => {
+  //   const {} = req.body;
+    
+    
+  //   if()
+  //   db.query("INSERT INTO employee (fname,lname,dateofbirth,sex,address,emailid,password,deptid) VALUES (?, ?, ?, ?, ?,? ,?, ?) ",
+  //       [fname,lname,dateofbirth,sex,address,emailId,password,deptId],
+  //       (err, result) => {
+  //         if (err) 
+  //           console.log(err);
+  //       }
+  //     );
+    
+  //   db.query("INSERT INTO employee (fname,lname,dateofbirth,sex,address,emailid,password,projectID,deptid) VALUES (?, ?, ?, ?, ?,? ,?, ?) ",
+  //       [fname,lname,dateofbirth,sex,address,emailId,password,projectId,deptId],
+  //       (err, result) => {
+  //         if (err) 
+  //           console.log(err);
+  //       }
+  //     );
+  //   });
 
   app.get("/nullemployee", (req, res) => {
     db.query(` select concat(fname,' ',lname) as name from employee where projectId = 11`, (err, result) => {
@@ -57,11 +81,21 @@ const db = mysql.createConnection({
         if (err) {
           console.log(err);
         } else {
-          res.write("   "+JSON.stringify(res2),() =>{
+          res.write("   "+JSON.stringify(res2));
+        }
+      });
+
+      db.query(`select fname from employee where empid= ${eID}`, (err, result) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.write("   "+JSON.stringify(result[0]),() =>{
             res.end();
         });
         }
       });
+
+
     });
 
   app.post("/updatedrecords", (req, res) => {

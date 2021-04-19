@@ -9,28 +9,46 @@ import Revenue from './Revenue';
 import Axios from "axios";
 import { useState, useEffect } from 'react';
 
-function Dashboard({isLeader}){
+function Dashboard({role}){
     const [hist, setHist] = useState(0);
-    const [name, setName] = useState('');
+    const [FName, setFName] = useState('');
+    const [deptInfo, setDeptInfo] = useState({});
+     const  [projInfo, setProjInfo] = useState([]);
+    //  let state1 = 0;
+    //  let state2 = 1;
     useEffect(() => {
-        Axios.get("http://localhost:8000/leaderboard").then((response) => {
+        if(role===0 || role===1 )
+        {Axios.get("http://localhost:8000/leaderboard").then((response) => {
         const res3 =((response.data).split("   ",3))[2];
-        setName((JSON.parse(res3)).FullName);
+        let fullName = (JSON.parse(res3)).FullName;
+        setFName(((fullName).split(" ",2))[0]);
+
           });
-        },[]); 
-    var fname=((name).split(" ",2))[0];
+        }
+        else{
+            Axios.get("http://localhost:8000/deptdashboard").then((response) => {
+        const [res1,res2,res3] =((response.data).split("   ",3));
+        setDeptInfo(JSON.parse(res1));
+        setProjInfo(JSON.parse(res2));    
+        setFName((JSON.parse(res3)).fname);
+        });
+
+    }
+        
+    },[]); 
+    // var fname=;
     return(
         <div className="page-rect">
-            <h1 className="h1 hello-text">Hello {fname}</h1>
+            <h1 className="h1 hello-text">Hello {FName}</h1>
             <div className="cards">
-                <Deptinfo></Deptinfo>
-                <Projectinfo></Projectinfo>
-                {/* <Teaminfo/> */}
-                {/* <ScoreCard hist={hist} setHist={setHist}/> */}
-                {/* <Attendance hist={hist}/> */}
-                {/* <Teammates/> */}
+               {role===2 && <Deptinfo details = {deptInfo}/>}
+                { role ===2 && <Projectinfo  details = {projInfo}/>}
+                {role !==2 && <Teaminfo />}
+               { role!==2 && <ScoreCard hist={hist} setHist={setHist}/>}
+                {role!==2 && <Attendance hist={hist}/>}
+                {role!==2 && <Teammates/>}
                 {/* <div className="empty-div"></div> */}
-                {/* <Revenue hist={hist} isLeader={isLeader}/> */}
+                {role === 1 && <Revenue hist={hist} role={role}/>}
             </div>
         </div>
     )

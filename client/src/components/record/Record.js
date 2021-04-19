@@ -13,7 +13,7 @@ import {ReactComponent as InfoSVG} from "../../assets/info.svg";
 
 
 
-function Rowmaker(currentDetails,recordDict,setRecordDict,curDate,role) {
+function Rowmaker(currentDetails,recordDict,setRecordDict,curDate,Role) {
     //Loops through the details array
     if( typeof(recordDict[curDate]) !== 'undefined')
     {return currentDetails.map((info, i) => (
@@ -23,7 +23,7 @@ function Rowmaker(currentDetails,recordDict,setRecordDict,curDate,role) {
         details = {recordDict}
         date = {curDate}
         empID={info.empID}
-        role= {role}
+        role= {Role}
         prev_score={info.score} 
         prev_normalHours={info.normalhours} 
         prev_overtimeHours={info.overtime} 
@@ -46,7 +46,7 @@ function SatRowmaker(scoreDict,setScoreDict) {
 };
 
 
-function Record() {
+function Record({role}) {
 
     const [currentDetails, setCurrentDetails] = useState([]);
     const [dates,setDates] = useState([]);
@@ -54,7 +54,7 @@ function Record() {
     const [recordDict,setRecordDict] = useState({});
     const [scoreDict,setScoreDict] = useState([]);
     const [name,setName] = useState('');
-    var role = 'Member';//will change to leader for manager based on routing and record prop
+    var Role = role===1?'Member':'Leader';//will change to leader for manager based on routing and record prop
     useEffect(() => {
  
         Axios.get('http://localhost:8000/currentrecords').then((response) => {
@@ -89,9 +89,10 @@ function Record() {
     
         const updateRecords = () => {
             // console.log({curDate :curDate,scoreDict : scoreDict, records: recordDict[curDate]});
-            Axios.post("http://localhost:8000/updatedrecords", {curDate :curDate,scoreDict : scoreDict, records: recordDict[curDate]}).then(
-                () => { console.log({curDate :curDate,scoreDict : scoreDict, records: recordDict[curDate], rstate : 0 })  //0 for manager 1 for leader
-            });
+            Axios.post("http://localhost:8000/updatedrecords", {curDate :curDate,scoreDict : scoreDict, records: recordDict[curDate], rstate : role})
+            // .then(
+            //     () => { console.log({curDate :curDate,scoreDict : scoreDict, records: recordDict[curDate], rstate : 0 })  //2 for manager 1 for leader
+            // });
           };
    
     const current_week = '21/04/2021';
@@ -142,7 +143,7 @@ function Record() {
                     </div>
 
                     {/* Rows */}
-                    <div className="rows">{Rowmaker(currentDetails,recordDict,setRecordDict,curDate,role)}</div>
+                    <div className="rows">{Rowmaker(currentDetails,recordDict,setRecordDict,curDate,Role)}</div>
                     <div className="empty-div"></div>
 
                     {/* SAVE BUTTON */}

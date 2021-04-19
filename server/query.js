@@ -265,7 +265,7 @@ FROM
     const getDateManager = `select distinct date from weekly_score where weekno = (select currentweekno from department where managerid = ${eID}) `
     
     const getDeptInfo = `SELECT 
-            (select concat(fname,' ',lname) from employee where empid = ${eID}) as name,d.deptname as deptName,
+            d.deptname as deptName,
             d.deptid as deptId,
             d.location,
             (SELECT 
@@ -292,7 +292,7 @@ FROM
             d.managerid = ${eID}`;
     
     const getProjDept = `SELECT 
-    projectname,
+    projectName,
     (SELECT 
             CONCAT(fname, ' ', lname)
         FROM
@@ -305,7 +305,7 @@ FROM
             phone_number
         WHERE
             empid = leaderid
-        LIMIT 1) AS phonuNumber,
+        LIMIT 1) AS phoneNumber,
     (SELECT 
             emailid
         FROM

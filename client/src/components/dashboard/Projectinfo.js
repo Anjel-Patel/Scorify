@@ -6,18 +6,18 @@ import moment from 'moment';
 function Rowmaker(details) {
     //Loops through the details array
     return details.map((info, i) => (
-        <ProjectinfoRow key = {i} name= {info.name} leader= {info.leader} phno= {info.phno} email= {info.email} revenue= {info.revenue}/>
+        <ProjectinfoRow key = {i} name= {info.projectName} leader= {info.fullName} phno= {info.phoneNumber} email= {info.email} revenue= {info.revenue}/>
     ));
 }
 
-function Projectinfo() {
+function Projectinfo({details}) {
 
-    const details = [
-        {name : 'AlphaZero', phno : '+91-9929296988', email : 'alexp98@gmail.com', leader : 'Alex Prajapati', revenue: 25000},
-        {name : 'Delta', phno : '+91-9939480129', email : 'ramuog07@gmail.com', leader : 'Ramu Gates', revenue: 35200},
-        {name : 'Gamma', phno : '+91-9939278107', email : 'moroy666@gmail.com', leader : 'Mohammed Roy', revenue: 50000}
-    ];
-
+    // const details = [
+    //     {name : 'AlphaZero', phno : '+91-9929296988', email : 'alexp98@gmail.com', leader : 'Alex Prajapati', revenue: 25000},
+    //     {name : 'Delta', phno : '+91-9939480129', email : 'ramuog07@gmail.com', leader : 'Ramu Gates', revenue: 35200},
+    //     {name : 'Gamma', phno : '+91-9939278107', email : 'moroy666@gmail.com', leader : 'Mohammed Roy', revenue: 50000}
+    // ];
+    // console.log(details);
     return(
         <div className="project-rect">
             <h5 className="h5 title">Projects</h5>
