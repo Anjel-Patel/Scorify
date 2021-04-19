@@ -95,7 +95,7 @@ function Record({role}) {
             // });
           };
    
-    const current_week = '21/04/2021';
+    const current_week = '20/04/2021';
 
     return(
         <div className="page-rect">

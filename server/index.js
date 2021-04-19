@@ -47,15 +47,35 @@ const db = mysql.createConnection({
   //     );
   //   });
 
-  app.get("/nullemployee", (req, res) => {
-    db.query(` select concat(fname,' ',lname) as name from employee where projectId = 11`, (err, result) => {
+  app.get("/data", (req, res) => {
+    db.query(` select concat(fname,' ',lname) as name from employee where projectId is null`, (err, result) => {
       if (err) {
         console.log(err);
       } else {
         let arr = result.map((dict,i) => dict['name']);
-        res.send(arr);
+        res.write(JSON.stringify(arr));
       }
     });
+    db.query(` select projectname as projectName from project where deptid =(select deptid from department where managerid = ${eID})`, (err, result2) => {
+      if (err) {
+        console.log(err);
+      } else {
+        let arr = result2.map((dict,i) => dict['projectName']);
+        res.write("   "+JSON.stringify(arr));
+      }
+    });
+
+    db.query(`select fname from employee where empid= ${eID}`, (err, result) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.write("   "+JSON.stringify(result[0]),() =>{
+            res.end();
+        });
+        }
+      });
+
+
   });
 
   app.get("/revenue", (req, res) => {

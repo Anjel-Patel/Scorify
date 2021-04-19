@@ -1,13 +1,36 @@
 import "./InsertEmployee.css";
-
+import Axios from "axios";
+import { useState, useEffect } from 'react';
 function Dropdownmaker(options) {
     return options.map((opt) => (
         <option value={opt}>{opt}</option>
     ));
 }
 
-function InsertEmployee() {
+function InsertEmployee({allprojects,add,setAdd}) 
+{
     const projects = ['AlphaZero', 'Gamma', 'Delta']
+    const [pstate, setPstate] = useState({});
+    let details = {
+        fullName: '',
+        empID: 0,
+        emailID: '',
+        DateOfBirth: '',
+        // phoneNumbers: [],
+        Sex: '',
+        address: '',
+        projectName: '',
+        DeptName: ''
+    }   
+    const [info, setInfo] = useState(details);
+    const [phoneNumbers, setPhoneNumers] = useState([]);//work in progress
+    useEffect(() => {
+        var pdict = {};
+            for(let i=0;i<allprojects.length;i++)
+                pdict[allprojects[i]]=0;
+            setPstate(pdict);
+        },[]); 
+    
     return(
         <div className="emp-wrapper">
             <h5 className="h5 title">Insert Employee</h5>
