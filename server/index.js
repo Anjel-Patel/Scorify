@@ -6,7 +6,7 @@ const http = require('http');
 const moment = require("moment");
 // import moment from 'moment';
 const port = process.env.PORT || 8000
-const eID = 1003;
+const eID = 1001;
 app.use(cors());
 app.use(express.json());
 
@@ -25,30 +25,44 @@ const db = mysql.createConnection({
 
 
 
-  // app.post("/insertscore", (req, res) => {
-  //   const {} = req.body;
+  app.put("/insertemployee", (req, res) => {
+    const {infohalf :{firstName,lastName,emailId, DateOfBirth, Sex ,address,projectName}, phno} = req.body;
+    deptId=21;  
+    const dob =moment(DateOfBirth,['DD-MM-YY','DD-MM-YYYY','DD/MM/YY','DD/MM/YYYY']).format("YYYY-MM-DD");
+    const s = Sex.charAt(0).toUpperCase();
     
-    
-  //   if()
-  //   db.query("INSERT INTO employee (fname,lname,dateofbirth,sex,address,emailid,password,deptid) VALUES (?, ?, ?, ?, ?,? ,?, ?) ",
-  //       [fname,lname,dateofbirth,sex,address,emailId,password,deptId],
-  //       (err, result) => {
-  //         if (err) 
-  //           console.log(err);
-  //       }
-  //     );
-    
-  //   db.query("INSERT INTO employee (fname,lname,dateofbirth,sex,address,emailid,password,projectID,deptid) VALUES (?, ?, ?, ?, ?,? ,?, ?) ",
-  //       [fname,lname,dateofbirth,sex,address,emailId,password,projectId,deptId],
-  //       (err, result) => {
-  //         if (err) 
-  //           console.log(err);
-  //       }
-  //     );
-  //   });
+    if(projectName.length === 0){
+      db.query("INSERT INTO employee (fname,lname,dateofbirth,sex,address,emailid,password,deptid) VALUES (?, ?, ?, ?, ?,? ,?, ?) ",
+        [firstName,lastName,dob,s,address,emailId,101000,deptId],
+        (err, result) => {
+          if (err) 
+            console.log(err);
+        }
+      );}
+    else
+    {
+      db.query(`select projectid  as id from project where projectname = ${projectName}`,(err,result) =>
+      {
+          if (err) {
+            console.log(err);
+          } else {
+            let projectId=result[0].id;
+            
+            db.query("INSERT INTO employee (fname,lname,dateofbirth,sex,address,emailid,password,projectID,deptid) VALUES (?, ?, ?, ?, ?,? ,?, ?) ",
+          [fname,lname,dob,s,address,emailId,101000,projectId,deptId],
+          (err, result) => {
+            if (err) 
+              console.log(err);
+            }
+          );
+        }
+      });
+    }
+
+  }); 
 
   app.get("/data", (req, res) => {
-    db.query(` select concat(fname,' ',lname) as name from employee where projectId is null`, (err, result) => {
+    db.query(`select concat(fname,' ',lname) as name from employee where projectId is null and deptid = (select deptid from department where managerId = ${eID}) and empid not in (select managerid from department);`, (err, result) => {
       if (err) {
         console.log(err);
       } else {
@@ -206,7 +220,7 @@ const db = mysql.createConnection({
         const weekNo= parseInt(result[0].weekno)+1;
         for(empID of empIDlist)
         {
-         if(scoreDict[empID]!=='-'){
+         if(scoreDict[empID]!=='-' && scoreDict[empID]!=='0'){
             const score = parseInt(scoreDict[empID]);
             db.query(
               "INSERT INTO weekly_score (EmpID, weekno,Satisfaction_Score) VALUES (?, ?, ?) on duplicate key update Satisfaction_Score = ?",

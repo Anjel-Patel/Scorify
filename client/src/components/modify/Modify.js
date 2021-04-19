@@ -6,23 +6,26 @@ import { useState, useEffect } from 'react';
 function Modify() {
     const [FName, setFName] = useState('');
     const [allProjects, setAllprojects] = useState([]);
-    const [emptyEmployee,setEmptyEmployee] = useState([]);
+    const [nullEmployee,setNullEmployee] = useState([]);
     const [add,setAdd] = useState(0);
     useEffect(() => {
-        Axios.get("http://localhost:8000/data").then((response) => {
+        
+        (async () => {
+        const response= await Axios.get("http://localhost:8000/data")
         const [res1,res2,res3]=(response.data).split("   ",3);
-        allProjects(JSON.parse(res2));
-        setEmptyEmployee(JSON.parse(res1));
+        setAllprojects(JSON.parse(res2));
+        setNullEmployee(JSON.parse(res1));
         setFName((JSON.parse(res3)).fname);   
-          });
+          })();
+
         },[add]); 
     // const fname = "Ramirez";
     return(
         <div classname="page-rect">
-            <h1 className="h1 hello-text">Hello {Fname}</h1>
+            <h1 className="h1 hello-text">Hello {FName}</h1>
             <div className="modify-wrapper">
                 <InsertEmployee  allProjects = {allProjects} add={add} setAdd= {setAdd} />
-                <InsertProject/>
+                <InsertProject  emptyEmployee= {nullEmployee} add={add} setAdd= {setAdd} />
             </div>
         </div>
     );
