@@ -1,0 +1,12 @@
+.modify-wrapper {
+    width: 1480px;
+    height: 856px;
+    display: flex;
+    flex-direction: row;
+    margin-top: 56px;
+    margin-left: 48px;
+    box-shadow: var(--shadow-default);
+    border-radius: 12px;
+    background: var(--neutral-50);
+}
+
