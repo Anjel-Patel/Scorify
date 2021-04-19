@@ -17,6 +17,7 @@ function Dashboard({role}){
     //  let state1 = 0;
     //  let state2 = 1;
     useEffect(() => {
+        console.log(role);
         if(role===0 || role===1 )
         {Axios.get("http://localhost:8000/leaderboard").then((response) => {
         const res3 =((response.data).split("   ",3))[2];

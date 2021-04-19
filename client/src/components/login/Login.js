@@ -16,18 +16,22 @@ function Login({setRole})
     const [eID, seteid]=useState("");
     const [password, setpassword]= useState("");
     const [isError, setError] = useState(1);
+    var temp;
     const log = () => {
         
     Axios.post("http://localhost:8000/authenticate", {
            eID: eID,
            password: password, 
         }).then((response) => {
+            temp = response.data.role;
+            setError(response.data.status);
+            setRole(temp);
             console.log(response);
         });
     };
-    Axios.get("http://localhost:8000/role").then((result) => {
-        setRole(parseInt(result.data));
-    });
+    // Axios.get("http://localhost:8000/role").then((result) => {
+    //     setRole(parseInt(result.data));
+    // });
 
     return(
        <div className="login-page-rect">
@@ -55,7 +59,7 @@ function Login({setRole})
                 </div>
                 <h6 className="h6 forgot-pass" style={{display:'none'}} >Forgot Password?</h6>
                 <div className="empty-div"></div>
-                <Link className="link-react-router-dom" to={"/"}  >
+                <Link className="link-react-router-dom" to={"/dashboard"}  >
                     <div className="login-btn" onClick={log}>
                         <h5 className="h5">Sign in</h5>
                     </div>
