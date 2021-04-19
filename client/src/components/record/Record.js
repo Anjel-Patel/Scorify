@@ -123,7 +123,6 @@ function Record({role}) {
                                 {/* <option value={dates[4]}>{dates[4]}</option> */}
                                 <option value={dates[5]}>{dates[5]}</option>
                                 <option value={dates[6]}>{dates[6]}</option>
-
                             </optgroup>
                         </select>
                         <h4 className="h4" style={{color:'var(--neutral-400)', marginLeft:'302px'}}>Performance last week</h4>
