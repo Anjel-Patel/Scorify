@@ -2,11 +2,16 @@ const express = require("express");
 const app = express();
 const mysql = require("mysql");
 const cors = require("cors");
-const http = require('http'); 
+const http = require('http');
+var bodyParser=require('body-parser');
+const bcrypt = require('bcrypt'); 
 const moment = require("moment");
 // import moment from 'moment';
 const port = process.env.PORT || 8000
-const eID = 1001;
+
+var authenticateController=require('./controllers/authenticate-controller');
+var eID = authenticateController.authenticate;
+
 app.use(cors());
 app.use(express.json());
 
@@ -22,6 +27,10 @@ const db = mysql.createConnection({
     database: "scorify",
     multipleStatements : true
   });
+
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
+app.post('/authenticate',authenticateController.authenticate);
 
   app.post("/updatedrecords", (req, res) => {
     

@@ -19,7 +19,8 @@ function renderSidebar(currPage, isLeader){
 }
 
 function App() {
-  
+
+  const [Role, setRole] = useState(0);
   const [currPage, setPage] = useState(0);
   const [isLeader, setLeader] = useState(0);
 
@@ -30,7 +31,7 @@ function App() {
       {/* Page IDs start from 0. So currPage=0 if user is on dashboard, currPage=1 if user is on Leaderboard and so on */}
       {/* Page IDs are Dashboard=0, Leaderboard=1, Personal Info=2, Record Page is number 5 tho */}
       <Switch>  
-        <Route exact path= "/login" render={()=>{ setPage(-1); return(<Login/>);} }/>   
+        <Route exact path= "/login" render={()=>{ setPage(-1); return(<div>(<Login setRole={setRole}/></div>);}}/>   
         <Route exact path= "/" render={()=>{ setPage(0); return(<div style={{display:'flex'}}><div>{renderSidebar(currPage, isLeader)}</div><Dashboard/></div>);} }/>   
         <Route exact path= "/leaderboard" render={()=>{ setPage(1); return(<div style={{display:'flex'}}><div>{renderSidebar(currPage, isLeader)}</div><Leaderboard/></div>);} }/>   
         <Route exact path= "/record" render={()=>{ setPage(5); return(<div style={{display:'flex'}}><div>{renderSidebar(currPage, isLeader)}</div><Record/></div>);} }/>   
