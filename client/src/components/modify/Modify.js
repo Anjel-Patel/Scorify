@@ -19,7 +19,7 @@ function Modify() {
     // const fname = "Ramirez";
     return(
         <div classname="page-rect">
-            <h1 className="h1 hello-text">Hello {Fname}</h1>
+            <h1 className="h1 hello-text">Hello {FName}</h1>
             <div className="modify-wrapper">
                 <InsertEmployee  allProjects = {allProjects} add={add} setAdd= {setAdd} />
                 <InsertProject/>
