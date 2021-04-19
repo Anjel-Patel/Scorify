@@ -25,12 +25,12 @@ function Login({setRole})
             console.log(response);
         });
     };
-
-    Axios.get("http://localhost:8000/role",{
+   
+    /*Axios.get("http://localhost:8000/role",{
        
     }).then((result) => {
-        ;
-    });
+        setRole(Number(result));
+    });*/
 
     return(
        <div className="login-page-rect">
@@ -58,7 +58,7 @@ function Login({setRole})
                 </div>
                 <h6 className="h6 forgot-pass" style={{display:'none'}} >Forgot Password?</h6>
                 <div className="empty-div"></div>
-                <Link className="link-react-router-dom" to={"/"}  >
+                <Link className="link-react-router-dom" to={"/dashboard"}  >
                     <div className="login-btn" onClick={log}>
                         <h5 className="h5">Sign in</h5>
                     </div>

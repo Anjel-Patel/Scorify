@@ -8,35 +8,56 @@ const bcrypt = require('bcrypt');
 const moment = require("moment");
 // import moment from 'moment';
 const port = process.env.PORT || 8000
-<<<<<<< HEAD
 
-var authenticateController=require('./controllers/authenticate-controller');
-var eID = authenticateController.authenticate;
+const eID = 1002;
+// const a = require("./controllers/authenticate-controller");
+// var eID = authenticateController.authenticate;
 
-=======
-const eID = 1003;
->>>>>>> b9ca753f4ce445240357832c34509d2fd5a898c2
+
 app.use(cors());
 app.use(express.json());
 
-const queryList = require("./query");
-// const { json } = require("body-parser");
-const [getProjectinfo,getCurrentScore,getScoreHistory,getAbsentDays,getPresentDays,getTeamMates,getTotalScore,getPersonalInfo,getStats,getPhoneNumers,getLeaderboard,getFullName,getDepartment,getCurrentRecordMembers,getCurrentRecordLeaders,getDateLeader,
-  getLUWeekNoLeader,getLUWeekNoManager,getDateManager,getDeptInfo,getProjDept] = queryList(eID);
-
 const db = mysql.createConnection({
-    user: "root",
-    host: "localhost",
-    password: "password",
-    database: "scorify",
-    multipleStatements : true
-  });
+  user: "root",
+  host: "localhost",
+  password: "password",
+  database: "scorify",
+  multipleStatements : true
+});
 
-<<<<<<< HEAD
+var authenticateController=require('./controllers/authenticate-controller');
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.post('/authenticate',authenticateController.authenticate);
-=======
+// const eID = authenticateController.eID;
+// console.log(eID);
+
+const queryList = require("./query");
+const { json } = require("body-parser");
+const [getProjectinfo,getCurrentScore,getScoreHistory,getAbsentDays,getPresentDays,getTeamMates,getTotalScore,getPersonalInfo,getStats,getPhoneNumers,getLeaderboard,getFullName,getDepartment,getCurrentRecordMembers,getCurrentRecordLeaders,getDateLeader,
+  getLUWeekNoLeader,getLUWeekNoManager,getDateManager,getDeptInfo,getProjDept] = queryList(eID);
+
+
+// console.log(authenticateController.eID);
+
+
+app.get("/role", (req, res) => {
+  db.query(`select roleEmployee(${eID}) as role`, (err, res1) => {
+    if (err) {
+      console.log(err);
+    } else {
+      if(res1[0].role==='Member'){      
+          res.send("0");
+      }
+      if(res1[0].role==='Leader'){      
+          res.send("1");
+      }
+      if(res1[0].role==='Manager'){     
+          res.send("2");
+      }   
+}
+});
+});
 
 
   // app.post("/insertscore", (req, res) => {
@@ -131,7 +152,6 @@ app.post('/authenticate',authenticateController.authenticate);
 
 
     });
->>>>>>> b9ca753f4ce445240357832c34509d2fd5a898c2
 
   app.post("/updatedrecords", (req, res) => {
     
