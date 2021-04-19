@@ -118,3 +118,19 @@ optgroup {
   color: var(--neutral-600);
   border-color: var(--neutral-600);
 }
+
+.record-save-btn[saveanim='1'] {
+  animation: glow 500ms 4;
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 0pt 0pt var(--blue-200);
+  } 
+  50% {
+    box-shadow: 0 0 5pt 4pt var(--blue-200);
+  }
+  100% {
+    box-shadow: 0 0 0pt 0pt var(--blue-200)
+  }
+}

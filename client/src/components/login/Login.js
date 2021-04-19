@@ -1,8 +1,9 @@
-import "./Login.css";
-import { ReactComponent as LogoSVG } from "../../assets/scorifyLogo.svg";
-import Axios from "axios";
-import { ReactComponent as InfoSVG } from "../../assets/info.svg";
-import { useState } from "react";
+import './Login.css';
+import {ReactComponent as LogoSVG} from '../../assets/scorifyLogo.svg';
+import {ReactComponent as ErrorSVG} from '../../assets/error-octagon.svg';
+import Axios from 'axios';
+import {ReactComponent as InfoSVG} from '../../assets/info.svg';
+import { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Link } from "react-router-dom";
 const regexEmail = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
@@ -11,15 +12,15 @@ const regexPassword = /^[\S]{6,10}$/;
       ? <Link to={to}>{children}</Link>
       : <>{children}</>;*/
 
-/*const ConditionalLink = ({ children, to, condition }) => (!!condition && to)
+const ConditionalLink = ({ children, to, condition }) => (!!condition && to)
       ? <Link to={to}>{children}</Link>
-      : <>{children}</>;*/
+      : <>{children}</>;
 
 function Login({ setRole }) {
   const [isValid, setValid] = useState(false);
   const [eID, seteid] = useState("");
   const [password, setpassword] = useState("");
-  const [isError, setError] = useState(1);
+  const [isError, setError] = useState(2); //Initially undefined(2). Called isError but its the opposite. isError = 1 when credentials match
   const [isValid1, setIsValid1] = useState(0);
   const [isValid2, setIsValid2] = useState(0);
   const log = () => {
@@ -59,7 +60,11 @@ function Login({ setRole }) {
       </h1>
       <div className="login-card">
         <div style={{ marginBottom: "32px" }}>
-          <p className="p1">Employee ID</p>
+        <div className="text-wrapper">
+                        <p className="p1">Employee ID</p>
+                        <ErrorSVG className="error-svg" style={isError===-1?{opacity:'100%'}:{opacity:'0%'}}></ErrorSVG>
+                        <p className="p2 error-text" style={isError===-1?{opacity:'100%'}:{opacity:'0%'}}>You might have entered a wrong ID.</p>
+                    </div>
           <input
             type="int"
             onChange={(e) => {
@@ -71,7 +76,11 @@ function Login({ setRole }) {
           />
         </div>
         <div style={{ marginBottom: "24px" }}>
-          <p className="p1">Password</p>
+        <div className="text-wrapper">
+                        <p className="p1">Password</p>
+                        <ErrorSVG className="error-svg" style={isError===0?{opacity:'100%'}:{opacity:'0%'}}></ErrorSVG>
+                        <p className="p2 error-text" style={isError===0?{opacity:'100%'}:{opacity:'0%'}}>You might have entered a wrong password.</p>
+                    </div>
           <input
             type="password"
             onChange={(e) => {
@@ -86,7 +95,7 @@ function Login({ setRole }) {
           Forgot Password?
         </h6>
         <div className="empty-div"></div>
-        <Link className="link-react-router-dom" to={"/"}>
+        <Link className="link-react-router-dom" to={isError?"/":"/login"}  >
           <div className="login-btn" onClick={log}>
             <h5 className="h5">Sign in</h5>
           </div>

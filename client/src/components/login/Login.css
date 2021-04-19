@@ -48,6 +48,22 @@
     transition: var(--speed-slow) var(--timing-function);
 }
 
+.text-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.error-text, .error-svg {
+    margin-left: 8px;
+    margin-right: 4px;
+    color: var(--red-500);
+    transition: var(--speed-slow) var(--timing-function) var(--delay);
+}
+
+.error-text {
+    margin: 0px;
+}
+
 .forgot-pass {
     color: var(--blue-600);
     align-self: flex-end;
