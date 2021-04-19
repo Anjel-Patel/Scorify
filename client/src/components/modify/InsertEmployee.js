@@ -1,5 +1,6 @@
 import "./InsertEmployee.css";
 
+
 function Dropdownmaker(options) {
     return options.map((opt) => (
         <option value={opt}>{opt}</option>
@@ -47,11 +48,20 @@ function InsertEmployee() {
                     </select>
                 </div>
                 <div className="field-wrapper">
+                    <p className="p1">Ph No.</p>
+                    <input type="text" className="modify-input-field"/>
+                </div>
+                <div className="field-wrapper">
+                    <p className="p1">Alternative Ph No.</p>
+                    <input type="text" className="modify-input-field"/>
+                </div>
+                <div className="field-wrapper">
                     <p className="p1">Address</p>
                     <textarea rows={4} className="address p1 address-text field" style={{border:'1px solid var(--neutral-300)',
                 borderRadius:'8px',
                 width:'672px',
-                marginTop:'8px'}}></textarea>
+                marginTop:'8px',
+                backgroundColor: 'var(--white)'}}></textarea>
                 </div>
             </div>
             <div className="empty-div" style={{flex:1}}></div>
