@@ -45,7 +45,6 @@ const db = mysql.createConnection({
         console.log(results[0].password);
         if(results.length >0){
             if(password===results[0].password){
-              // var role =0; 
               db.query(`select roleEmployee(${eid}) as role`, (err, res1) => {
                   if (err) {
                     console.log(err);
@@ -75,7 +74,7 @@ const db = mysql.createConnection({
               }
               });
                [getProjectinfo,getCurrentScore,getScoreHistory,getAbsentDays,getPresentDays,getTeamMates,getTotalScore,getPersonalInfo,getStats,getPhoneNumers,getLeaderboard,getFullName,getDepartment,getCurrentRecordMembers,getCurrentRecordLeaders,getDateLeader,
-                getLUWeekNoLeader,getLUWeekNoManager,getDateManager,getDeptInfo,getProjDept] = queryList(eid);
+                getLUWeekNoLeader,getLUWeekNoManager,getDateManager,getDeptInfo,getProjDept,abc] = queryList(eid);
                 
             }else{
                 res.send({
@@ -92,6 +91,10 @@ const db = mysql.createConnection({
         }
       }
     });
+
+
+
+
   });
 
   // const [getProjectinfo,getCurrentScore,getScoreHistory,getAbsentDays,getPresentDays,getTeamMates,getTotalScore,getPersonalInfo,getStats,getPhoneNumers,getLeaderboard,getFullName,getDepartment,getCurrentRecordMembers,getCurrentRecordLeaders,getDateLeader,
@@ -300,13 +303,15 @@ const db = mysql.createConnection({
       }
     }
     let query = rstate===1?getLUWeekNoLeader: getLUWeekNoManager;
-    db.query(query, (err, result) => {
-      if (err) {
-        console.log(err);
-      } 
-      else {
+    // db.query(query, (err, result) => {
+    //   if (err) {
+    //     console.log(err);
+    //   } 
+    //   else {
         // console.log(result[0].weekNo);
-        const weekNo= parseInt(result[0].weekno)+1;
+
+        // const weekNo= parseInt(result[0].weekno)+1;
+            const weekNo = 3;
         for(empID of empIDlist)
         {
          if(scoreDict[empID]!=='-' && scoreDict[empID]!=='0'){
@@ -337,8 +342,8 @@ const db = mysql.createConnection({
               );
             }
         }
-      }
-    });     
+    //   }
+    // });     
   
   });
 

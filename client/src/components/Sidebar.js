@@ -21,7 +21,7 @@ function Sidebar({currPage, role})
     return(
         <div className="bar-rect">
             <div className="scorify-box">
-                <Link className="link-react-router-dom" to={"/login"}>
+                <Link className="link-react-router-dom" to={"/"}>
                     <div className="scorify-container">
                         <LogoSVG className="logo-svg"/>
                         <h3 className="h3 scorify">scorify.</h3>
@@ -31,7 +31,7 @@ function Sidebar({currPage, role})
             {/* ROUTER CAN BE USED HERE */}
             <div className="link-box">
                 {/* "link-focus" needs to be concatenated at the end of the link of the page user is on. Example given here. */}
-                <Link className="link-react-router-dom" to={"/"}>
+                <Link className="link-react-router-dom" to={"/dashboard"}>
                     <div className={"link-container"+(currPage===0?" link-focus":"")}> 
                         <DashboardSVG className="link-logo"/>
                         <h4 className="h4 link-text">Dashboard</h4>

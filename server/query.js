@@ -323,6 +323,8 @@ WHERE
         WHERE
             managerid = ${eID})`;
 
+
+            
     
     
     return [getProjectinfo,getCurrentScore,getScoreHistory,getAbsentDays,getPresentDays,getTeamMates,getTotalScore,getPersonalInfo,getStats,getPhoneNumers,getLeaderboard,getFullName,getDepartment,getCurrentRecordMembers,getCurrentRecordLeaders,getDateLeader,getLUWeekNoLeader,getLUWeekNoManager,getDateManager,getDeptInfo,getProjDept];

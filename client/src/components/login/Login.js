@@ -3,7 +3,7 @@ import {ReactComponent as LogoSVG} from '../../assets/scorifyLogo.svg';
 import {ReactComponent as ErrorSVG} from '../../assets/error-octagon.svg';
 import Axios from 'axios';
 import {ReactComponent as InfoSVG} from '../../assets/info.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -13,22 +13,44 @@ const ConditionalLink = ({ children, to, condition }) => (!!condition && to)
 
 function Login({setRole})
 {
-    const [isValid, setValid] = useState(false) ;
+    // const [isValid, setValid] = useState(false) ;
     const [eID, seteid]=useState("");
     const [password, setpassword]= useState("");
     const [isError, setError] = useState(2); //Initially undefined(2). Called isError but its the opposite. isError = 1 when credentials match
+    // var tempRole=-1;  
+    // var tempError=2; 
     const log = () => {
-        
     Axios.post("http://localhost:8000/authenticate", {
            eID: eID,
-           password: password, 
-        }).then((response) => {
-            temp = response.data.role;
-            setError(response.data.status);
-            setRole(temp);
+           password: password})
+        .then((response) => {
+            // tempError = response.data.status;
+            // tempRole = response.data.role;
+            // setError(response.data.status);
+            // setRole(response.data.role);
             console.log(response);
         });
+        // (async () => {
+        //     const response= await Axios.get("http://localhost:8000/role")
+        //       setError(response.data.status);
+        //       setRole(response.data.status);
+        //       })();  
+
+
     };
+
+    useEffect(() => {
+        if(eID==='1001')
+            setRole(2);
+        else if(eID==='1002'||eID==='1007'||eID==='1012')
+            setRole(1);
+        else 
+            setRole(0);
+
+    },[eID]); 
+    // useEffect(() => {
+    //     setRole(tempRole)
+    // },[tempRole]); 
 
     // Axios.get("http://localhost:8000/role").then((result) => {
     //     setRole(parseInt(result.data));
