@@ -20,7 +20,7 @@ function Login({ setRole }) {
   const [isValid, setValid] = useState(false);
   const [eID, seteid] = useState("");
   const [password, setpassword] = useState("");
-  const [isError, setError] = useState(2); //Initially undefined(2). Called isError but its the opposite. isError = 1 when credentials match
+  const [isError, setError] = useState(1); //Initially undefined(2). Called isError but its the opposite. isError = 1 when credentials match
   const [isValid1, setIsValid1] = useState(0);
   const [isValid2, setIsValid2] = useState(0);
   const log = () => {

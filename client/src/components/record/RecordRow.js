@@ -1,4 +1,4 @@
-import Attendance from "../dashboard/Attendance";
+// import Attendance from "../dashboard/Attendance";
 import "./RecordRow.css";
 import { useState } from "react";
 const regexOvertime = /^[012345]$/;
@@ -63,7 +63,7 @@ function RecordRow({
   const [isValid1, setIsValid1] = useState(0);
 
   function Validate(e, i) {
-    if (i == "overtimeHours") {
+    if (i === "overtimeHours") {
       if (regexOvertime.test(e)) {
         setIsValid1(0);
       } else {
