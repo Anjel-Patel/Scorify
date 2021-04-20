@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const mysql = require("mysql");
 const cors = require("cors");
-const http = require('http'); 
+const http = require('http');
 const moment = require("moment");
 // import moment from 'moment';
 const port = process.env.PORT || 8000
@@ -97,37 +97,23 @@ const db = mysql.createConnection({
 
   });
 
-  // const [getProjectinfo,getCurrentScore,getScoreHistory,getAbsentDays,getPresentDays,getTeamMates,getTotalScore,getPersonalInfo,getStats,getPhoneNumers,getLeaderboard,getFullName,getDepartment,getCurrentRecordMembers,getCurrentRecordLeaders,getDateLeader,
-  // //   getLUWeekNoLeader,getLUWeekNoManager,getDateManager,getDeptInfo,getProjDept] = queryList(arr[0]);
-  // app.get("/role", (req, res) => {
-  //   db.query(`select roleEmployee(${eID}) as role`, (err, res1) => {
-  //     if (err) {
-  //       console.log(err);
-  //     } else {
-  //       if(res1[0].role==='Member'){      
-  //           res.send("0");
-  //       }
-  //       if(res1[0].role==='Leader'){      
-  //           res.send("1");
-  //       }
-  //       if(res1[0].role==='Manager'){     
-  //           res.send("2");
-  //       }   
-  // }
-  // });
-  // });
+  // app.post("/authenticate", (req, res) => {
+  //   var eID=req.body.eID;
+  //   var password=req.body.password;
+
+
 
   app.put("/insertemployee", (req, res) => {
     const {infohalf :{firstName,lastName,emailId, DateOfBirth, Sex ,address,projectName}} = req.body;
-    deptId=21;  
+    deptId=21;
     const dob =moment(DateOfBirth,['DD-MM-YY','DD-MM-YYYY','DD/MM/YY','DD/MM/YYYY']).format("YYYY-MM-DD");
     const s = Sex.charAt(0).toUpperCase();
-    
+
     if(projectName.length === 0){
       db.query("INSERT INTO employee (fname,lname,dateofbirth,sex,address,emailid,password,deptid) VALUES (?, ?, ?, ?, ?,? ,?, ?) ",
         [firstName,lastName,dob,s,address,emailId,101000,deptId],
         (err, result) => {
-          if (err) 
+          if (err)
             console.log(err);
         }
       );}
@@ -139,11 +125,11 @@ const db = mysql.createConnection({
             console.log(err);
           } else {
             let projectId=result[0].id;
-            
+
             db.query("INSERT INTO employee (fname,lname,dateofbirth,sex,address,emailid,password,projectID,deptid) VALUES (?, ?, ?, ?, ?,? ,?, ?) ",
           [fname,lname,dob,s,address,emailId,101000,projectId,deptId],
           (err, result) => {
-            if (err) 
+            if (err)
               console.log(err);
             }
           );
@@ -151,7 +137,7 @@ const db = mysql.createConnection({
       });
     }
 
-  }); 
+  });
 
   app.get("/data", (req, res) => {
     db.query(`select concat(fname,' ',lname) as name from employee where projectId is null and deptid = (select deptid from department where managerId = ${eID}) and empid not in (select managerid from department);`, (err, result) => {
@@ -185,7 +171,7 @@ const db = mysql.createConnection({
   });
 
   app.get("/revenue", (req, res) => {
-     
+
     db.query(`select revenue from project where leaderid = ${eID}`, (err, result) => {
       if (err) {
         console.log(err);
@@ -225,7 +211,7 @@ const db = mysql.createConnection({
     });
 
   app.post("/updatedrecords", (req, res) => {
-    
+
     const {curDate, scoreDict, records, rstate} = req.body;//rstate for manager/leader
     const selectedDate =moment(curDate,"DD/MM/YY").format("YYYY-MM-DD");
     // console.log(selectedDate);
@@ -234,7 +220,7 @@ const db = mysql.createConnection({
     {
       console.log(records[empID]['attendance']);
       if(records[empID]['attendance']===0)
-      { 
+      {
         db.query(
           "INSERT INTO absences (empid, date) VALUES (?, ?) on duplicate key update empid = ?, date = ?",
           [empID,selectedDate,empID,selectedDate],
@@ -259,7 +245,7 @@ const db = mysql.createConnection({
           );
       }
       else
-      { 
+      {
         if(records[empID]['overtimeHours'] !=='0' && records[empID]['overtimeHours'] !=='-')
         {
           const overtime = parseInt(records[empID]['overtimeHours']);
@@ -352,9 +338,9 @@ const db = mysql.createConnection({
       if (err) {
         console.log(err);
       } else {
-        
-        let query1 = res1[0].role=='Leader' ? getCurrentRecordMembers: getCurrentRecordLeaders;  
-        let query2 = res1[0].role=='Leader' ? getDateLeader: getDateManager;  
+
+        let query1 = res1[0].role=='Leader' ? getCurrentRecordMembers: getCurrentRecordLeaders;
+        let query2 = res1[0].role=='Leader' ? getDateLeader: getDateManager;
         db.query(query1, (err, result) => {
         if (err) {
           console.log(err);
@@ -390,11 +376,11 @@ const db = mysql.createConnection({
         });
         }
       });
-    
+
     }});
 
   });
-  
+
   app.get("/leaderboard", (req, res) => {
     db.query(getLeaderboard, (err, result) => {
       if (err) {
@@ -425,7 +411,7 @@ const db = mysql.createConnection({
   });
 
   app.put("/updatedinfo", (req, res) => {
-    
+
     const {infohalf :{fullName, empID, emailID, DateOfBirth, Sex ,address}, phno} = req.body;
     const [first,last]=fullName.split(" ",2);
     const dob =moment(DateOfBirth,['DD-MM-YY','DD-MM-YYYY','DD/MM/YY','DD/MM/YYYY']).format("YYYY-MM-DD");
@@ -486,7 +472,7 @@ const db = mysql.createConnection({
       }
     });
   });
-  
+
   app.get("/stats", (req, res) => {
     db.query(getStats, (err, result) => {
       if (err) {
@@ -516,7 +502,7 @@ const db = mysql.createConnection({
       }
     });
   });
-  
+
   app.get("/attendance", (req, res) => {
     db.query(getAbsentDays, (err, result) => {
       if (err) {
@@ -537,7 +523,7 @@ const db = mysql.createConnection({
 
       });
   });
-  
+
   app.get("/scorehistory", (req, res) => {
     db.query(getScoreHistory, (err, result) => {
       if (err) {
@@ -549,7 +535,7 @@ const db = mysql.createConnection({
   });
 
 app.get("/currentscore", (req, res) => {
-    
+
     db.query(getCurrentScore, (err, result) => {
       if (err) {
         console.log(err);
@@ -558,9 +544,9 @@ app.get("/currentscore", (req, res) => {
       }
     });
   });
-  
+
 app.get("/projectinfo", (req, res) => {
-     
+
     db.query(getProjectinfo, (err, result) => {
       if (err) {
         console.log(err);
